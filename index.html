@@ -1,196 +1,379 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Higher Value Teknical Services Ltd</title>
-<style>
-body{font-family:Arial, sans-serif;margin:0;background:#f4f6f8;color:#333}
-header{background:#0a3d62;color:white;padding:20px}
-nav{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:auto}
-nav ul{list-style:none;display:flex;gap:20px;margin:0;padding:0}
-nav a{color:white;text-decoration:none;font-weight:bold}
-.hero{background:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e') center/cover;height:450px;display:flex;align-items:center;justify-content:center;color:white;text-align:center}
-.hero div{background:rgba(0,0,0,0.55);padding:30px;border-radius:12px}
-.hero h1{font-size:48px;margin:0}
-.hero p{margin-top:10px}
-.section{padding:70px 20px;max-width:1200px;margin:auto}
-.services,.projects,.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}
-.card{background:white;padding:25px;border-radius:12px;box-shadow:0 6px 14px rgba(0,0,0,0.1)}
-.card img{width:100%;border-radius:10px}
-.card h3{margin-top:10px}
-.values{display:flex;flex-wrap:wrap;gap:20px}
-.value{flex:1 1 220px;background:#fff;padding:20px;border-radius:12px;box-shadow:0 6px 14px rgba(0,0,0,0.1)}
-.cta{background:#0a3d62;color:white;text-align:center;padding:60px 20px}
-.contact{background:#06283d;color:white}
-.contact p{margin:6px 0}
-button{background:#f39c12;border:none;padding:12px 22px;color:white;font-weight:bold;border-radius:6px;cursor:pointer}
-footer{text-align:center;padding:20px;background:#041c2c;color:white}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f4ef">
+  <meta name="description" content="Explore the Higher Value Teknical Reliability Desk demo for industrial maintenance planning, built with fictional sample data.">
+  <title>Higher Value Teknical | Industrial Reliability, Made Clearer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #17231f;
+      --muted: #66736d;
+      --paper: #f5f4ef;
+      --white: #fff;
+      --green: #176b52;
+      --green-dark: #104b3d;
+      --lime: #d5ed81;
+      --line: #dfe4dc;
+      --orange: #e77a48;
+      --display: "Space Grotesk", sans-serif;
+      --body: "DM Sans", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 var(--body); }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    .wrap { width: min(1160px, calc(100% - 48px)); margin-inline: auto; }
+    .site-header { position: relative; z-index: 2; border-bottom: 1px solid var(--line); }
+    .nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; text-decoration: none; font: 700 16px/1.1 var(--display); }
+    .brand-mark { width: 34px; height: 34px; display: grid; place-items: center; background: var(--green); color: var(--lime); font: 700 15px var(--display); }
+    .nav-links { display: flex; align-items: center; gap: 25px; }
+    .nav-links a { text-decoration: none; color: #46564f; font-size: 13px; font-weight: 600; }
+    .nav-links a:hover, .text-link:hover { color: var(--green); }
+    .button { min-height: 46px; padding: 0 19px; display: inline-flex; justify-content: center; align-items: center; gap: 10px; background: var(--green); color: white; text-decoration: none; border: 1px solid var(--green); font-size: 13px; font-weight: 700; transition: background .18s ease, transform .18s ease; }
+    .button:hover { background: var(--green-dark); transform: translateY(-2px); }
+    .button.light { color: var(--ink); background: var(--white); border-color: var(--white); }
+    .button.light:hover { background: var(--lime); }
+    .hero { padding: 64px 0 76px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1fr .92fr; gap: 62px; align-items: center; }
+    .eyebrow { margin: 0 0 18px; display: flex; align-items: center; gap: 10px; color: var(--green); font-size: 11px; font-weight: 700; letter-spacing: 0; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--orange); }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: var(--display); letter-spacing: 0; }
+    h1 { max-width: 620px; margin-bottom: 20px; font-size: clamp(42px, 5.6vw, 68px); line-height: 1.02; }
+    .hero-copy { max-width: 570px; margin-bottom: 28px; color: #4f5d56; font-size: 17px; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 13px; }
+    .text-link { color: var(--green); font-size: 13px; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+    .hero-note { margin: 27px 0 0; display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 12px; }
+    .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+    .hero-visual { position: relative; min-height: 440px; }
+    .hero-photo { position: absolute; inset: 0 0 56px 37px; width: calc(100% - 37px); height: calc(100% - 56px); object-fit: cover; }
+    .hero-visual::after { position: absolute; inset: 16px 16px 72px 53px; border: 1px solid rgba(255,255,255,.55); content: ""; pointer-events: none; }
+    .product-window { position: absolute; left: 0; bottom: 0; width: min(370px, 92%); padding: 19px; background: var(--white); border: 1px solid var(--line); box-shadow: 0 16px 50px rgba(23,35,31,.16); }
+    .window-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 17px; }
+    .window-name { font: 700 13px var(--display); }
+    .preview-tag { padding: 4px 7px; background: #f0f5de; color: var(--green-dark); font-size: 9px; font-weight: 700; text-transform: uppercase; }
+    .asset-row { padding: 12px 0; display: grid; grid-template-columns: 1fr auto; gap: 5px 12px; border-top: 1px solid var(--line); }
+    .asset-row strong { font-size: 12px; }
+    .asset-row small { color: var(--muted); font-size: 10px; }
+    .risk { grid-row: span 2; align-self: center; padding: 5px 8px; background: #fff0e7; color: #9e4a22; font-size: 10px; font-weight: 700; }
+    .preview-caption { margin: 12px 0 0; color: var(--muted); font-size: 10px; }
+    .trust-strip { border-block: 1px solid var(--line); background: #eeeee7; }
+    .trust-inner { min-height: 83px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .trust-lead { max-width: 260px; margin: 0; font-size: 12px; font-weight: 700; }
+    .trust-item { display: flex; align-items: center; gap: 10px; color: #58665f; font-size: 12px; font-weight: 600; }
+    .trust-icon { width: 27px; height: 27px; display: grid; place-items: center; background: var(--white); color: var(--green); font: 700 12px var(--display); }
+    .demo-section { background: #e8ede5; }
+    .demo-section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 25px; }
+    .demo-section-head .section-head { margin: 0; }
+    .demo-frame { display: block; width: 100%; height: 700px; border: 1px solid #cbd5ca; background: var(--paper); }
+    .demo-caption { margin: 12px 0 0; color: var(--muted); font-size: 11px; }
+    .section { padding: 92px 0; }
+    .section-head { max-width: 700px; margin-bottom: 42px; }
+    .section-head h2 { margin-bottom: 13px; font-size: clamp(31px, 4vw, 46px); line-height: 1.08; }
+    .section-head p { margin-bottom: 0; color: var(--muted); }
+    .problem { display: grid; grid-template-columns: .8fr 1.2fr; gap: 90px; align-items: start; }
+    .problem .section-head { position: sticky; top: 32px; }
+    .problem-list { border-top: 1px solid var(--line); }
+    .problem-item { padding: 23px 0; display: grid; grid-template-columns: 38px 1fr; gap: 16px; border-bottom: 1px solid var(--line); }
+    .problem-no { color: var(--orange); font: 700 13px var(--display); }
+    .problem-item h3 { margin-bottom: 6px; font-size: 17px; }
+    .problem-item p { margin: 0; color: var(--muted); font-size: 14px; }
+    .solution-band { background: var(--green-dark); color: white; }
+    .solution-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 65px; align-items: center; }
+    .solution-band .eyebrow { color: var(--lime); }
+    .solution-band h2 { margin-bottom: 17px; font-size: clamp(32px, 4vw, 48px); line-height: 1.06; }
+    .solution-copy { color: #d1dfd8; }
+    .benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 0 25px; border-top: 1px solid rgba(255,255,255,.22); }
+    .benefit { padding: 18px 0; display: flex; gap: 12px; border-bottom: 1px solid rgba(255,255,255,.22); font-size: 13px; }
+    .benefit b { color: var(--lime); font: 700 14px var(--display); }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .feature { min-height: 190px; padding: 23px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .feature-index { color: var(--orange); font: 700 12px var(--display); }
+    .feature h3 { margin: 20px 0 7px; font-size: 17px; }
+    .feature p { margin: 0; color: var(--muted); font-size: 13px; }
+    .ai-section { background: #e8ede5; }
+    .ai-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 76px; align-items: start; }
+    .ai-grid .section-head { margin: 0; }
+    .ai-list { border-top: 1px solid #cbd5ca; }
+    .ai-row { padding: 18px 0; display: grid; grid-template-columns: 150px 1fr; gap: 18px; border-bottom: 1px solid #cbd5ca; }
+    .ai-row strong { color: var(--green-dark); font: 700 12px var(--display); }
+    .ai-row p { margin: 0; color: #516059; font-size: 13px; }
+    .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; counter-reset: step; }
+    .step { padding-top: 15px; border-top: 2px solid var(--green); counter-increment: step; }
+    .step::before { content: "0" counter(step); color: var(--orange); font: 700 12px var(--display); }
+    .step h3 { margin: 15px 0 6px; font-size: 16px; }
+    .step p { margin: 0; color: var(--muted); font-size: 13px; }
+    .infra { background: #f0eee8; }
+    .infra-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+    .infra-panel { padding-top: 18px; border-top: 2px solid var(--green); }
+    .infra-panel h3 { margin-bottom: 12px; font-size: 21px; }
+    .infra-panel p { color: var(--muted); font-size: 14px; }
+    .infra-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 17px; }
+    .infra-tags span { padding: 6px 9px; border: 1px solid #cbd2c9; color: #42544b; font-size: 10px; font-weight: 700; }
+    .market-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+    .market-copy { max-width: 460px; color: var(--muted); }
+    .market-data { border-top: 1px solid var(--line); }
+    .market-line { padding: 15px 0; display: grid; grid-template-columns: 130px 1fr; gap: 15px; border-bottom: 1px solid var(--line); font-size: 13px; }
+    .market-line strong { color: var(--green-dark); }
+    .stage { padding: 27px; background: var(--lime); }
+    .stage-label { margin-bottom: 10px; color: var(--green-dark); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+    .stage h3 { margin-bottom: 7px; font-size: 22px; }
+    .stage p { margin: 0; color: #425344; font-size: 13px; }
+    .roadmap { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
+    .milestone { padding: 20px 18px 0 0; }
+    .milestone time { color: var(--orange); font: 700 11px var(--display); }
+    .milestone h3 { margin: 11px 0 6px; font-size: 15px; }
+    .milestone p { margin: 0; color: var(--muted); font-size: 12px; }
+    .team-section { background: #e8ede5; }
+    .team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: #cbd5ca; border: 1px solid #cbd5ca; }
+    .person { min-height: 180px; padding: 24px; background: #e8ede5; }
+    .person-role { margin-bottom: 8px; color: var(--green); font-size: 10px; font-weight: 700; text-transform: uppercase; }
+    .person h3 { margin-bottom: 8px; font-size: 19px; }
+    .person p { max-width: 430px; margin: 0; color: var(--muted); font-size: 13px; }
+    .contact-band { padding: 70px 0; background: var(--green); color: white; }
+    .contact-inner { display: flex; align-items: center; justify-content: space-between; gap: 35px; }
+    .contact-inner h2 { max-width: 590px; margin-bottom: 9px; font-size: clamp(30px, 4vw, 44px); line-height: 1.08; }
+    .contact-inner p { margin: 0; color: #d7e7df; font-size: 14px; }
+    footer { padding: 32px 0; background: #17231f; color: #c9d3cd; }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 30px; }
+    .footer-brand { color: white; }
+    .footer-meta { max-width: 300px; margin: 14px 0 0; color: #aab9b1; font-size: 11px; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 18px; }
+    .footer-links a { color: #e0e6e2; font-size: 12px; text-decoration: none; }
+    .footer-bottom { margin-top: 27px; padding-top: 18px; display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid #3b4942; color: #aab9b1; font-size: 10px; }
+    @media (max-width: 800px) {
+      .nav { padding-block: 15px; align-items: flex-start; }
+      .nav-links { justify-content: flex-end; flex-wrap: wrap; gap: 10px 16px; }
+      .nav-links a { font-size: 11px; }
+      .nav > .button { display: none; }
+      .hero-grid, .problem, .solution-grid, .ai-grid, .market-grid { grid-template-columns: 1fr; gap: 38px; }
+      .hero { padding-top: 52px; }
+      .hero-visual { min-height: 390px; }
+      .demo-section-head { align-items: flex-start; flex-direction: column; }
+      .demo-frame { height: 760px; }
+      .problem .section-head { position: static; }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .how-grid { grid-template-columns: repeat(2, 1fr); row-gap: 30px; }
+      .section { padding: 70px 0; }
+    }
+    @media (max-width: 540px) {
+      .wrap { width: min(100% - 34px, 1160px); }
+      .nav { display: block; }
+      .brand { margin-bottom: 14px; }
+      .nav-links { justify-content: flex-start; gap: 8px 15px; }
+      .hero { padding: 43px 0 54px; }
+      h1 { font-size: 43px; }
+      .hero-copy { font-size: 15px; }
+      .hero-visual { min-height: 330px; }
+      .hero-photo { inset: 0 0 44px 20px; width: calc(100% - 20px); height: calc(100% - 44px); }
+      .hero-visual::after { inset: 10px 10px 58px 30px; }
+      .product-window { width: 94%; padding: 14px; }
+      .trust-inner { padding-block: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+      .trust-lead { grid-column: 1 / -1; }
+      .trust-item { font-size: 10px; }
+      .section { padding: 57px 0; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .feature { min-height: 0; }
+      .benefits, .infra-columns, .team-grid { grid-template-columns: 1fr; }
+      .ai-row { grid-template-columns: 1fr; gap: 5px; }
+      .how-grid { gap: 27px 16px; }
+      .roadmap { grid-template-columns: 1fr 1fr; }
+      .milestone { padding-bottom: 20px; }
+      .market-line { grid-template-columns: 105px 1fr; }
+      .contact-inner, .footer-top, .footer-bottom { align-items: flex-start; flex-direction: column; }
+      .contact-inner .button { width: 100%; }
+      .footer-links { gap: 13px; }
+      .demo-frame { height: 820px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
 </head>
 <body>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">HV</span><span>HIGHER VALUE<br>TEKNICAL</span></a>
+      <div class="nav-links">
+        <a href="demo.html">Product demo</a><a href="#product">Product</a><a href="#technology">AI technology</a><a href="#market">Market</a><a href="#team">Team</a>
+      </div>
+      <a class="button" href="demo.html">Try the demo <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
 
-<header>
-<nav>
-<h2>Higher Value Teknical Services Ltd</h2>
-<ul>
-<li><a href="#about">About</a></li>
-<li><a href="#services">Services</a></li>
-<li><a href="#projects">Projects</a></li>
-<li><a href="#team">Team</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
-</nav>
-</header>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-grid wrap">
+        <div>
+          <p class="eyebrow">Industrial reliability, made clearer</p>
+          <h1>Turn maintenance history into the next right action.</h1>
+          <p class="hero-copy">Explore Reliability Desk, an interactive maintenance-planning demo for industrial operators. Review sample assets, inspect maintenance signals and organize follow-ups in a focused workspace.</p>
+          <div class="hero-actions"><a class="button" href="demo.html">Explore the product demo <span aria-hidden="true">↗</span></a><a class="text-link" href="mailto:info@highervalueteknical.com?subject=Pilot%20discussion">Discuss a pilot</a></div>
+          <p class="hero-note"><span class="status-dot" aria-hidden="true"></span>Interactive demo available · production AI product in development</p>
+        </div>
+        <div class="hero-visual" aria-label="Illustrative industrial maintenance product preview">
+          <img class="hero-photo" src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=1100&q=85" alt="Technician inspecting industrial equipment in a plant" fetchpriority="high">
+          <div class="product-window">
+            <div class="window-top"><span class="window-name">Asset watch / concept preview</span><span class="preview-tag">Illustrative UI</span></div>
+            <div class="asset-row"><strong>Pump train P-04</strong><span class="risk">Review</span><small>Work orders + inspection notes</small></div>
+            <div class="asset-row"><strong>Compressor C-12</strong><span class="risk">Monitor</span><small>Condition signals + service history</small></div>
+            <p class="preview-caption">Example interface only. No live equipment data is shown.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section class="hero">
-<div>
-<h1>Engineering • Maintenance • Construction</h1>
-<p>Reliable Technical Solutions for Industrial & Infrastructure Projects</p>
-<button>Request a Quote</button>
-</div>
-</section>
+    <div class="trust-strip"><div class="trust-inner wrap">
+      <p class="trust-lead">Built around the realities of industrial maintenance in Nigeria.</p>
+      <div class="trust-item"><span class="trust-icon">01</span>Plant and facilities teams</div>
+      <div class="trust-item"><span class="trust-icon">02</span>Maintenance and reliability leads</div>
+      <div class="trust-item"><span class="trust-icon">03</span>Asset-intensive operators</div>
+    </div></div>
 
-<section id="about" class="section">
-<h2>About Our Company</h2>
-<p>Higher Value Teknical Services Ltd is a professional engineering maintenance and construction company delivering reliable technical solutions to industrial facilities, oil & gas companies, and infrastructure projects. Our company focuses on quality service delivery, safety compliance, and modern engineering practices.</p>
-<p>With experienced engineers, technicians, and project managers, we support mechanical works, shutdown maintenance, fabrication, installation, and general construction projects across Nigeria.</p>
-</section>
+    <section class="demo-section section" id="demo">
+      <div class="wrap">
+        <div class="demo-section-head">
+          <div class="section-head"><p class="eyebrow">Try Reliability Desk</p><h2>Work with the demo, right here.</h2><p>Search fictional equipment, filter the queue, review example evidence, add local notes and export sample records.</p></div>
+          <a class="button" href="demo.html">Open full-screen demo <span aria-hidden="true">↗</span></a>
+        </div>
+        <iframe class="demo-frame" src="demo.html" title="Interactive Reliability Desk maintenance planning demo" loading="lazy"></iframe>
+        <p class="demo-caption">All records and example scores are fictional. The demo uses local rule-based sample logic, not a live AI model or operational equipment data.</p>
+      </div>
+    </section>
 
-<section id="services" class="section">
-<h2>Our Services</h2>
-<div class="services">
-<div class="card">
-<img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758">
-<h3>Industrial Maintenance</h3>
-<p>Preventive and corrective maintenance of plant equipment and industrial facilities.</p>
-</div>
+    <section class="section" id="problem">
+      <div class="problem wrap">
+        <div class="section-head"><p class="eyebrow">The operating problem</p><h2>When the warning is buried, downtime gets expensive.</h2><p>Maintenance teams often have the clues, but they are spread across logs, inspections, spreadsheets and people’s memory.</p></div>
+        <div class="problem-list">
+          <article class="problem-item"><span class="problem-no">01</span><div><h3>Unplanned interruptions</h3><p>Equipment failures can stop production, disrupt service commitments and force urgent parts or labor decisions.</p></div></article>
+          <article class="problem-item"><span class="problem-no">02</span><div><h3>Fragmented maintenance records</h3><p>Work orders and inspection notes are difficult to compare when they live in disconnected formats and systems.</p></div></article>
+          <article class="problem-item"><span class="problem-no">03</span><div><h3>Reactive prioritization</h3><p>Teams need a practical way to decide which asset deserves attention first, without replacing the judgment of experienced technicians.</p></div></article>
+        </div>
+      </div>
+    </section>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1581093588401-12c6b52b9e9b">
-<h3>Mechanical Installation</h3>
-<p>Installation of pumps, rotating equipment, pipelines, valves, and mechanical systems.</p>
-</div>
+    <section class="solution-band section" id="product">
+      <div class="solution-grid wrap">
+        <div><p class="eyebrow">The product direction</p><h2>From scattered records to a focused maintenance queue.</h2><p class="solution-copy">The available demo shows how an asset queue, example maintenance signals and human-reviewed follow-ups could work together. A production product with customer data, validated AI and operational integrations remains in development.</p><a class="button light" href="demo.html">Explore Reliability Desk <span aria-hidden="true">↗</span></a></div>
+        <div class="benefits">
+          <div class="benefit"><b>+</b><span>Bring work history and inspection findings together</span></div>
+          <div class="benefit"><b>+</b><span>Flag asset patterns that merit a closer look</span></div>
+          <div class="benefit"><b>+</b><span>Prioritize maintenance planning with clearer context</span></div>
+          <div class="benefit"><b>+</b><span>Keep technicians in control of recommendations</span></div>
+        </div>
+      </div>
+    </section>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1531058020387-3be344556be6">
-<h3>Fabrication & Welding</h3>
-<p>Structural fabrication, coded welding, equipment modification and repair.</p>
-</div>
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head"><p class="eyebrow">Product capabilities</p><h2>A practical loop for reliability teams.</h2><p>The demo already supports the sample workflow below. Production data connections, validated AI analysis and live operational use are not yet available.</p></div>
+        <div class="feature-grid">
+          <article class="feature"><span class="feature-index">01 / INGEST</span><h3>Maintenance record intake</h3><p>Structure work orders, technician notes and inspection documents for consistent asset histories.</p></article>
+          <article class="feature"><span class="feature-index">02 / DETECT</span><h3>Recurring fault signals</h3><p>Identify repeated failure descriptions and changes in condition indicators for human review.</p></article>
+          <article class="feature"><span class="feature-index">03 / PRIORITIZE</span><h3>Risk-aware work queue</h3><p>Combine asset context, recurrence and available operating signals into explainable review priorities.</p></article>
+          <article class="feature"><span class="feature-index">04 / PLAN</span><h3>Inspection recommendations</h3><p>Suggest follow-up checks and planning prompts that a qualified maintenance lead can approve.</p></article>
+          <article class="feature"><span class="feature-index">05 / LEARN</span><h3>Feedback from the field</h3><p>Capture whether recommendations were useful and improve the workflow with pilot-team feedback.</p></article>
+          <article class="feature"><span class="feature-index">06 / REPORT</span><h3>Readable asset summaries</h3><p>Generate concise summaries of recent work, recurring issues and open questions for shift handovers.</p></article>
+        </div>
+      </div>
+    </section>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd">
-<h3>Construction Services</h3>
-<p>Industrial buildings, steel structures, and infrastructure development.</p>
-</div>
+    <section class="ai-section section" id="technology">
+      <div class="ai-grid wrap">
+        <div class="section-head"><p class="eyebrow">AI technology</p><h2>Useful signals, not a black box.</h2><p>AI is intended to help maintenance teams find patterns across records and telemetry. Model choices and performance targets will be validated with pilot data before any operational claims are made.</p></div>
+        <div class="ai-list">
+          <div class="ai-row"><strong>Data inputs</strong><p>Planned inputs include work orders, inspection notes, asset metadata and condition or operating time-series where customers can provide them.</p></div>
+          <div class="ai-row"><strong>What it may detect</strong><p>Repeated fault descriptions, unusual changes in sensor patterns and assets whose maintenance history warrants review.</p></div>
+          <div class="ai-row"><strong>Methods under evaluation</strong><p>Natural-language processing for maintenance text, anomaly detection and time-series analysis. Specific model architectures remain subject to data quality and pilot validation.</p></div>
+          <div class="ai-row"><strong>Human oversight</strong><p>Recommendations are intended as decision support. Technicians and reliability leads remain responsible for inspections, work authorization and safety decisions.</p></div>
+        </div>
+      </div>
+    </section>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1581092918484-8313c5fdd0d1">
-<h3>Shutdown & Turnaround</h3>
-<p>Plant shutdown maintenance for oil & gas, refineries, and power plants.</p>
-</div>
+    <section class="section" id="how">
+      <div class="wrap">
+        <div class="section-head"><p class="eyebrow">How it is intended to work</p><h2>Start with the records teams already have.</h2></div>
+        <div class="how-grid">
+          <article class="step"><h3>Connect a pilot dataset</h3><p>Agree on a narrow asset group and review available records, access permissions and data quality.</p></article>
+          <article class="step"><h3>Build a usable asset history</h3><p>Normalize equipment identifiers, service events and inspection findings into a common timeline.</p></article>
+          <article class="step"><h3>Surface patterns for review</h3><p>Apply validated analysis to highlight repeat issues and unusual signals with supporting evidence.</p></article>
+          <article class="step"><h3>Measure and refine</h3><p>Review outputs with maintenance staff and track agreed pilot measures before considering expansion.</p></article>
+        </div>
+      </div>
+    </section>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1590650153855-d9e808231d41">
-<h3>Technical Manpower Supply</h3>
-<p>Provision of welders, riggers, pipe fitters, mechanical craftsmen, and supervisors.</p>
-</div>
-</div>
-</section>
+    <section class="infra section" id="infrastructure">
+      <div class="wrap">
+        <div class="section-head"><p class="eyebrow">Technology & infrastructure</p><h2>Cloud and accelerated computing, applied where they help.</h2><p>Infrastructure choices are planned, not yet deployed. The pilot architecture will be sized around data sensitivity, latency, workload and customer requirements.</p></div>
+        <div class="infra-columns">
+          <article class="infra-panel"><h3>Planned AWS foundation</h3><p>AWS services are being evaluated for encrypted object storage, managed relational data, API hosting, identity controls, monitoring and model integration. Amazon S3, RDS, ECS or Lambda, CloudFront, Bedrock and CloudWatch are candidate services, subject to architecture and security review.</p><div class="infra-tags"><span>S3 / secure files</span><span>RDS / asset records</span><span>ECS or Lambda / APIs</span><span>CloudWatch / monitoring</span></div></article>
+          <article class="infra-panel"><h3>Planned NVIDIA evaluation</h3><p>GPU acceleration may support experimentation on larger maintenance datasets and faster model inference if pilot workloads justify it. CUDA, TensorRT and Triton Inference Server are candidates for optimizing validated models; smaller workloads may run efficiently without dedicated GPUs.</p><div class="infra-tags"><span>CUDA / model development</span><span>TensorRT / inference optimization</span><span>Triton / model serving</span><span>Scale only when needed</span></div></article>
+        </div>
+      </div>
+    </section>
 
-<section id="projects" class="section">
-<h2>Selected Projects</h2>
-<div class="projects">
-<div class="card">
-<img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231">
-<h3>NLNG Shutdown Maintenance</h3>
-<p>Mechanical maintenance support and equipment servicing during plant shutdown.</p>
-</div>
+    <section class="section" id="market">
+      <div class="market-grid wrap">
+        <div><div class="section-head"><p class="eyebrow">Market opportunity</p><h2>For teams responsible for uptime and equipment health.</h2></div><p class="market-copy">The initial customer focus is industrial plants, oil and gas operators, and facilities teams in Nigeria that manage recurring maintenance work. Expansion to other markets would follow validated pilots, local partnerships and operational readiness. No market-size figures are published until independently verified.</p></div>
+        <div class="market-data">
+          <div class="market-line"><strong>Primary users</strong><span>Maintenance managers, reliability engineers and plant operations leads</span></div>
+          <div class="market-line"><strong>Initial market</strong><span>Nigeria; other African markets are a later possibility</span></div>
+          <div class="market-line"><strong>Revenue model</strong><span>Planned site subscription with optional onboarding and usage-based AI processing</span></div>
+          <div class="market-line"><strong>Go-to-market</strong><span>Discovery conversations followed by scoped operator pilots</span></div>
+        </div>
+      </div>
+    </section>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1581093588401-12c6b52b9e9b">
-<h3>Pipeline Installation</h3>
-<p>Installation and welding of industrial pipelines for production facilities.</p>
-</div>
+    <section class="section" style="padding-top:0">
+      <div class="wrap market-grid">
+        <div class="stage"><p class="stage-label">Current product status</p><h3>Interactive demo available</h3><p>The browser demo uses fictional records and rule-based sample priorities. Production AI, customer data connections, verified pilots and deployments are not claimed; the next step is validating the workflow with prospective operators.</p></div>
+        <div class="section-head" style="margin:0"><p class="eyebrow">Why now</p><h2>Industrial teams need to make more of the data they already collect.</h2><p>Digital maintenance records and connected equipment are producing more operational information, but useful decisions still depend on bringing the pieces together. A carefully validated AI workflow can help teams focus attention without removing people from the loop.</p></div>
+      </div>
+    </section>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5">
-<h3>Steel Structure Fabrication</h3>
-<p>Fabrication and installation of heavy structural steel components.</p>
-</div>
-</div>
-</section>
+    <section class="section" style="background:#fff">
+      <div class="wrap">
+        <div class="section-head"><p class="eyebrow">Roadmap</p><h2>Validate the workflow before scaling the technology.</h2></div>
+        <div class="roadmap">
+          <article class="milestone"><time>PHASE 01</time><h3>Operator discovery</h3><p>Confirm the highest-cost maintenance workflow and data access constraints.</p></article>
+          <article class="milestone"><time>PHASE 02</time><h3>MVP workflow</h3><p>Prototype asset histories, maintenance search and a review queue.</p></article>
+          <article class="milestone"><time>PHASE 03</time><h3>Scoped pilot</h3><p>Test analysis with consenting operators and human-reviewed outputs.</p></article>
+          <article class="milestone"><time>PHASE 04</time><h3>Measured deployment</h3><p>Harden security and scale cloud or GPU workloads only after validation.</p></article>
+        </div>
+      </div>
+    </section>
 
-<section class="section">
-<h2>Our Core Values</h2>
-<div class="values">
-<div class="value"><h3>Safety</h3><p>Safety is our top priority in every project and operation.</p></div>
-<div class="value"><h3>Quality</h3><p>We deliver high standard engineering services and durable solutions.</p></div>
-<div class="value"><h3>Integrity</h3><p>Honest and transparent business relationships with clients.</p></div>
-<div class="value"><h3>Innovation</h3><p>Modern engineering solutions to meet evolving industry needs.</p></div>
-</div>
-</section>
+    <section class="team-section section" id="team">
+      <div class="wrap">
+        <div class="section-head"><p class="eyebrow">The people behind the work</p><h2>Engineering experience, close to the operating floor.</h2><p>Company leadership and operational roles listed from current company information. Software and data-science team credentials will be published when confirmed.</p></div>
+        <div class="team-grid">
+          <article class="person"><p class="person-role">Founder / Chief Executive Officer</p><h3>Gbenga Fasasi</h3><p>Company leadership, strategic direction and business development at Higher Value Teknical Services Ltd.</p></article>
+          <article class="person"><p class="person-role">Managing Director</p><h3>Joseph Fasasi</h3><p>Oversees day-to-day operations, project delivery and coordination of technical teams.</p></article>
+          <article class="person"><p class="person-role">Technical operations</p><h3>Field technical team</h3><p>Site supervisors and skilled trades support maintenance, installation, fabrication and construction work.</p></article>
+          <article class="person"><p class="person-role">Product development</p><h3>Technical hiring planned</h3><p>A named software engineering and AI development team should be added here once roles and biographies are confirmed.</p></article>
+        </div>
+      </div>
+    </section>
 
-<section id="team" class="section">
-<h2>Our Professional Team</h2>
-<div class="team">
-<div class="card">
-<img src="https://images.unsplash.com/photo-1560250097-0b93528c311a">
-<h3>Gbenga Fasasi – Chief Executive Officer (CEO)</h3>
-<p>Founder and Chief Executive Officer of Higher Value Teknical Services Ltd, responsible for strategic leadership, business development, and company growth.</p>
-</div>
+    <section class="contact-band" id="contact"><div class="contact-inner wrap">
+      <div><p class="eyebrow" style="color:var(--lime)">Start a conversation</p><h2>Help us shape a maintenance workflow worth building.</h2><p>For pilot discussions, operational discovery or company enquiries, contact the team directly.</p></div>
+      <a class="button light" href="mailto:info@highervalueteknical.com?subject=Industrial%20maintenance%20product%20discussion">Email the team <span aria-hidden="true">↗</span></a>
+    </div></section>
+  </main>
 
-<div class="card">
-<img src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1">
-<h3>Joseph Fasasi – Managing Director</h3>
-<p>Oversees daily operations, project execution, technical teams, and client service delivery across all engineering and construction projects.</p>
-</div>
-
-<div class="card">
-<img src="https://images.unsplash.com/photo-1581091215367-59ab6c2d2c0c">
-<h3>Technical Supervisor</h3>
-<p>Oversees field technicians and site operations.</p>
-</div>
-</div>
-</section>
-
-<section class="section">
-<h2>Our Clients</h2>
-<div class="services">
-<div class="card"><h3>Oil & Gas Companies</h3><p>Engineering and maintenance support for upstream and downstream facilities.</p></div>
-<div class="card"><h3>Construction Firms</h3><p>Structural fabrication, installation, and technical manpower supply.</p></div>
-<div class="card"><h3>Industrial Plants</h3><p>Plant maintenance, shutdown services, and equipment installation.</p></div>
-<div class="card"><h3>Infrastructure Projects</h3><p>Mechanical and structural works for large infrastructure development.</p></div>
-</div>
-</section>
-
-<section class="section">
-<h2>Careers</h2>
-<p>Higher Value Teknical Services Ltd is always looking for skilled and dedicated professionals to join our team. We welcome applications from experienced welders, pipe fitters, riggers, mechanical technicians, engineers, and safety professionals.</p>
-<p>Send your CV to: <b>careers@highervalueteknical.com</b></p>
-</section>
-
-<section class="cta">
-<h2>Need Reliable Engineering Services?</h2>
-<p>Contact Higher Value Teknical Services Ltd today for professional solutions.</p>
-<button>Contact Us</button>
-</section>
-
-<section id="contact" class="section contact">
-<h2>Contact Us</h2>
-<p>Email: info@highervalueteknical.com</p>
-<p>Phone: +2348103520082</p>
-<p>WhatsApp: +2348103520082</p>
-<p>Address: No 5 Gods Own Estate, Rumuodara, Port Harcourt, Rivers State, Nigeria</p>
-
-<iframe src="https://maps.google.com/maps?q=Rumuodara%20Port%20Harcourt&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300" style="border:0;border-radius:10px;margin-top:15px"></iframe>
-
-<button>Send Message</button>
-</section>
-
-<footer>
-<p>© 2026 Higher Value Teknical Services Ltd. All Rights Reserved.</p>
-</footer>
-
+  <footer>
+    <div class="wrap">
+      <div class="footer-top">
+        <div><a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">HV</span><span>HIGHER VALUE<br>TEKNICAL</span></a><p class="footer-meta">Higher Value Teknical Services Ltd<br>Port Harcourt, Rivers State, Nigeria<br><a href="mailto:info@highervalueteknical.com">info@highervalueteknical.com</a> · +234 810 352 0082</p></div>
+        <div class="footer-links"><a href="#product">Product</a><a href="#technology">AI technology</a><a href="privacy.html">Privacy policy</a><a href="terms.html">Terms of use</a></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 Higher Value Teknical Services Ltd</span><span>Interactive sample demo available. Production AI and planned infrastructure are not yet deployed.</span></div>
+    </div>
+  </footer>
 </body>
 </html>
