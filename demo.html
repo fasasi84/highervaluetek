@@ -29,7 +29,7 @@
     .main { min-width:0; }
     .topbar { min-height:62px; padding:0 30px; display:flex; align-items:center; justify-content:space-between; gap:20px; border-bottom:1px solid var(--line); background:rgba(255,255,255,.72); }
     .breadcrumb { color:var(--muted); font-size:11px; }
-    .top-actions { display:flex; align-items:center; gap:12px; }
+    .top-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
     .demo-label { padding:5px 8px; background:#f2e5da; color:#874724; font-size:9px; font-weight:700; text-transform:uppercase; }
     .back-link { color:var(--green); font-size:11px; font-weight:700; text-decoration:none; }
     .content { width:min(1320px,100%); margin:auto; padding:27px 30px 50px; }
@@ -95,6 +95,24 @@
     .note-entry time { display:block; margin-bottom:3px; color:var(--muted); font-size:8px; }
     .empty-state { padding:30px 15px; color:var(--muted); text-align:center; font-size:11px; }
     .method-note { margin-top:14px; color:var(--muted); font-size:9px; }
+    .event-list { margin:8px 0 0; padding:0; list-style:none; }
+    .event-item { padding:8px 0; border-top:1px solid #edf0eb; font-size:10px; }
+    .event-item strong { display:block; margin-bottom:2px; }
+    .event-item span { color:var(--muted); }
+    .event-item-head { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+    .mini-action { padding:3px 6px; border:1px solid var(--line); background:white; color:var(--muted); font-size:9px; }
+    dialog { width:min(480px,calc(100% - 28px)); max-height:calc(100% - 28px); padding:0; border:1px solid var(--line); color:var(--ink); box-shadow:0 20px 70px #17272045; }
+    dialog::backdrop { background:#17272080; }
+    .dialog-head { padding:16px 18px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line); }
+    .dialog-head h2 { margin:0; font-size:17px; }
+    .dialog-close { width:30px; height:30px; border:1px solid var(--line); background:white; color:var(--ink); font-size:16px; }
+    .form-grid { padding:17px 18px; display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+    .form-field { min-width:0; display:grid; gap:5px; }
+    .form-field.full { grid-column:1 / -1; }
+    .form-field label { color:var(--muted); font-size:10px; font-weight:700; }
+    .form-field input,.form-field select,.form-field textarea { width:100%; min-height:37px; padding:8px; border:1px solid var(--line); background:white; color:var(--ink); font-size:11px; }
+    .form-field textarea { min-height:75px; }
+    .form-actions { grid-column:1 / -1; display:flex; justify-content:flex-end; gap:8px; padding-top:5px; }
     .toast { position:fixed; right:20px; bottom:20px; z-index:5; max-width:min(340px,calc(100vw - 40px)); padding:12px 16px; background:#172720; color:white; box-shadow:0 6px 22px #17272030; font-size:11px; opacity:0; transform:translateY(8px); pointer-events:none; transition:opacity .18s,transform .18s; }
     .toast.show { opacity:1; transform:translateY(0); }
     :focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
@@ -110,18 +128,18 @@
       <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">HV</span><span>HIGHER VALUE<br>TEKNICAL</span></a>
       <div class="workspace-label">Reliability workspace</div>
       <nav><a class="side-link active" href="#assets"><span class="side-symbol" aria-hidden="true">A</span>Asset overview</a></nav>
-      <div class="side-bottom"><p>Sample workspace<br>Changes are stored in this browser only.</p><a href="index.html">Company site ↗</a></div>
+      <div class="side-bottom"><p>Local workspace<br>Changes stay in this browser.</p><a href="index.html">Company site ↗</a></div>
     </aside>
 
     <main class="main">
       <header class="topbar"><span class="breadcrumb">Demo workspace / Asset overview</span><div class="top-actions"><span class="demo-label">Sample data</span><a class="back-link" href="index.html">← Company site</a></div></header>
       <div class="content">
-        <div class="page-head"><div><p class="overline">Maintenance planning</p><h1>Asset overview</h1><p class="page-subtitle">A small operational demo using fictional assets and example maintenance records.</p></div><div class="top-actions"><button class="button" id="reset-button" type="button" title="Clear locally saved demo notes and review marks">Reset demo</button><button class="button" id="export-button" type="button" title="Download the visible demo assets as CSV">↓ Export CSV</button></div></div>
+        <div class="page-head"><div><p class="overline">Maintenance planning</p><h1>Asset overview</h1><p class="page-subtitle">Manage a local workspace. CSV requires Asset ID, Asset, Type, and Area; service date, latest signal and severity are optional.</p></div><div class="top-actions"><button class="button" id="import-button" type="button">Import CSV</button><input id="import-file" type="file" accept=".csv,text/csv" hidden><button class="button" id="backup-button" type="button">Backup JSON</button><button class="button" id="restore-button" type="button">Restore JSON</button><input id="restore-file" type="file" accept=".json,application/json" hidden><button class="button" id="reset-button" type="button" title="Clear local assets, notes, events, and review marks">Reset workspace</button><button class="button" id="export-button" type="button" title="Download visible assets as CSV">↓ Export CSV</button></div></div>
 
-        <div class="demo-banner" role="note"><span aria-hidden="true">i</span><span><strong>Interactive concept demo.</strong> All equipment, events, priority scores and recommendations below are fictional. The priority logic is transparent demo rules, not an AI model or an operational risk assessment. Notes and review status stay in this browser.</span></div>
+        <div class="demo-banner" role="note"><span aria-hidden="true">i</span><span><strong>Local-first product prototype.</strong> The six seeded assets are fictional; assets and events you add or import are stored in this browser only. Priority is an illustrative rules-based aid, not an AI model, validated risk assessment or safety decision.</span></div>
 
         <section class="metric-grid" aria-label="Sample workspace summary">
-          <article class="metric"><div class="metric-label">Assets in view</div><div class="metric-value" id="metric-total">0</div></article>
+          <article class="metric"><div class="metric-label">Assets total</div><div class="metric-value" id="metric-total">0</div></article>
           <article class="metric"><div class="metric-label">High priority</div><div class="metric-value metric-accent" id="metric-high">0</div></article>
           <article class="metric"><div class="metric-label">Open follow-ups</div><div class="metric-value" id="metric-open">0</div></article>
           <article class="metric"><div class="metric-label">Reviewed</div><div class="metric-value" id="metric-reviewed">0 <span class="metric-hint">of 0 assets</span></div></article>
@@ -129,16 +147,37 @@
 
         <section class="workspace" id="assets" aria-label="Asset list and selected asset details">
           <div class="asset-panel">
-            <div class="panel-head"><h2>Maintenance queue</h2><span class="panel-count" id="visible-count" aria-live="polite">0 assets</span></div>
+            <div class="panel-head"><h2>Maintenance queue</h2><span class="panel-count" id="visible-count" aria-live="polite">0 assets</span><button class="button primary" id="add-asset-button" type="button">+ Add asset</button></div>
             <div class="controls"><input class="search" id="asset-search" type="search" placeholder="Search assets or equipment type" aria-label="Search assets"><select class="filter" id="priority-filter" aria-label="Filter by priority"><option value="all">All priorities</option><option value="High">High priority</option><option value="Medium">Medium priority</option><option value="Low">Low priority</option></select><select class="filter" id="status-filter" aria-label="Filter by review status"><option value="all">All statuses</option><option value="open">Needs review</option><option value="reviewed">Reviewed</option></select></div>
             <div class="table-wrap"><table><thead><tr><th scope="col">Asset</th><th scope="col">Priority</th><th scope="col">Score</th><th scope="col">Last service</th></tr></thead><tbody id="asset-rows"></tbody></table></div>
           </div>
           <aside class="detail" id="asset-detail" aria-label="Selected asset details" aria-live="polite"></aside>
         </section>
-        <p class="method-note">Demo method: sample priority is a simple weighted rule based on recurrence, severity and days since service. It is illustrative only and has not been validated for real equipment.</p>
+        <p class="method-note">Scoring transparency: for assets with logged events, example score = 15 + (12 × highest recorded severity) + (8 × event count, capped at five), up to 100. Priority bands are Low below 38, Medium 38–64, High 65+. Seeded assets use illustrative example scores. This rule is not validated for real equipment.</p>
       </div>
     </main>
   </div>
+  <dialog id="asset-dialog" aria-labelledby="asset-dialog-title">
+    <form id="asset-form"><div class="dialog-head"><h2 id="asset-dialog-title">Add asset</h2><button class="dialog-close" type="button" data-close="asset-dialog" aria-label="Close">×</button></div><div class="form-grid">
+      <div class="form-field"><label for="new-asset-id">Asset ID</label><input id="new-asset-id" name="id" required maxlength="24" autocomplete="off"></div>
+      <div class="form-field"><label for="new-asset-type">Equipment type</label><input id="new-asset-type" name="type" required maxlength="40" placeholder="Pump, motor, valve"></div>
+      <div class="form-field full"><label for="new-asset-name">Asset name</label><input id="new-asset-name" name="name" required maxlength="80"></div>
+      <div class="form-field full"><label for="new-asset-area">Area / location</label><input id="new-asset-area" name="area" required maxlength="80"></div>
+      <div class="form-field"><label for="new-asset-service">Last service date</label><input id="new-asset-service" name="serviceDate" type="date" required></div>
+      <div class="form-field"><label for="new-asset-severity">Initial condition</label><select id="new-asset-severity" name="severity"><option value="1">1 · Routine</option><option value="2">2 · Minor</option><option value="3" selected>3 · Moderate</option><option value="4">4 · Serious</option><option value="5">5 · Critical</option></select></div>
+      <div class="form-field full"><label for="new-asset-issue">Condition note</label><textarea id="new-asset-issue" name="issue" maxlength="500" required></textarea></div>
+      <div class="form-actions"><button class="button" type="button" data-close="asset-dialog">Cancel</button><button class="button primary" id="asset-submit" type="submit">Save asset</button></div>
+    </div></form>
+  </dialog>
+  <dialog id="event-dialog" aria-labelledby="event-dialog-title">
+    <form id="event-form"><div class="dialog-head"><h2 id="event-dialog-title">Log maintenance event</h2><button class="dialog-close" type="button" data-close="event-dialog" aria-label="Close">×</button></div><div class="form-grid">
+      <div class="form-field"><label for="event-date">Event date</label><input id="event-date" name="date" type="date" required></div>
+      <div class="form-field"><label for="event-kind">Event type</label><select id="event-kind" name="kind"><option>Inspection</option><option>Service</option><option>Repair</option><option>Failure</option></select></div>
+      <div class="form-field full"><label for="event-severity">Observed severity</label><select id="event-severity" name="severity"><option value="1">1 · Routine</option><option value="2">2 · Minor</option><option value="3" selected>3 · Moderate</option><option value="4">4 · Serious</option><option value="5">5 · Critical</option></select></div>
+      <div class="form-field full"><label for="event-notes">Findings / work completed</label><textarea id="event-notes" name="notes" maxlength="1000" required></textarea></div>
+      <div class="form-actions"><button class="button" type="button" data-close="event-dialog">Cancel</button><button class="button primary" type="submit">Save event</button></div>
+    </div></form>
+  </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
@@ -151,17 +190,54 @@
       { id:"G-07", name:"Standby generator", area:"Power house", type:"Generator", priority:"Low", score:19, service:"5 days ago", issue:"A routine inspection is logged with no follow-up finding in the sample data.", recommendation:"Retain the existing preventive maintenance interval and verify readings at the next check.", evidence:["Sample inspection marked routine","No open sample work order","Last service recorded 5 days ago"] }
     ];
 
-    const storageKey = "hv-reliability-demo-v1";
-    const defaultState = { reviewed: [], notes: {} };
+    const storageKey = "hv-reliability-workspace-v2";
+    const defaultState = { reviewed: [], notes: {}, customAssets: [], events: [], selectedAssetId: null };
     let savedState = loadState();
-    let selectedId = assets[0].id;
+    let selectedId = savedState.selectedAssetId || assets[0].id;
     let toastTimer;
 
     function loadState() {
       try {
-        const value = JSON.parse(localStorage.getItem(storageKey));
-        return value && Array.isArray(value.reviewed) && value.notes && typeof value.notes === "object" ? value : structuredClone(defaultState);
+        const current = localStorage.getItem(storageKey);
+        const value = JSON.parse(current || localStorage.getItem("hv-reliability-demo-v1") || "null");
+        return value && Array.isArray(value.reviewed) && value.notes && typeof value.notes === "object"
+          ? { ...structuredClone(defaultState), ...value, customAssets:Array.isArray(value.customAssets) ? value.customAssets : [], events:Array.isArray(value.events) ? value.events : [] }
+          : structuredClone(defaultState);
       } catch { return structuredClone(defaultState); }
+    }
+
+    function getAssets() { return [...assets, ...savedState.customAssets]; }
+
+    function getAssetSummary(asset) {
+      const history = savedState.events.filter(event => event.assetId === asset.id).sort((left, right) => right.date.localeCompare(left.date));
+      if (!history.length) return { ...asset, lastServiceDate:asset.lastServiceDate || "" };
+      const latest = history[0];
+      const severity = Math.max(...history.map(event => Number(event.severity) || 1));
+      const score = Math.min(100, 15 + severity * 12 + Math.min(history.length, 5) * 8);
+      const priority = score >= 65 ? "High" : score >= 38 ? "Medium" : "Low";
+      const latestService = history.find(event => ["Service", "Repair"].includes(event.kind));
+      return {
+        ...asset,
+        priority,
+        score,
+        service:latestService ? formatDate(latestService.date) : asset.service,
+        lastServiceDate:latestService?.date || asset.lastServiceDate || "",
+        issue:latest.notes,
+        recommendation:`Review the ${latest.kind.toLowerCase()} finding from ${formatDate(latest.date)} with the responsible maintenance lead.`,
+        evidence:history.slice(0, 3).map(event => `${event.kind} · severity ${event.severity}/5 · ${formatDate(event.date)}`)
+      };
+    }
+
+    function formatDate(value) {
+      if (!value) return "Date not recorded";
+      const date = /^\d{4}-\d{2}-\d{2}$/.test(value) ? new Date(`${value}T00:00:00`) : new Date(value);
+      return Number.isNaN(date.valueOf()) ? String(value) : date.toLocaleDateString();
+    }
+
+    function escapeHtml(text) {
+      const node = document.createElement("span");
+      node.textContent = String(text ?? "");
+      return node.innerHTML;
     }
 
     function saveState() {
@@ -181,7 +257,7 @@
       const query = document.getElementById("asset-search").value.trim().toLowerCase();
       const priority = document.getElementById("priority-filter").value;
       const status = document.getElementById("status-filter").value;
-      return assets.filter(asset => {
+      return getAssets().map(getAssetSummary).filter(asset => {
         const matchesQuery = `${asset.id} ${asset.name} ${asset.type} ${asset.area}`.toLowerCase().includes(query);
         const matchesPriority = priority === "all" || asset.priority === priority;
         const isReviewed = savedState.reviewed.includes(asset.id);
@@ -191,10 +267,12 @@
     }
 
     function renderMetrics() {
-      document.getElementById("metric-total").textContent = assets.length;
-      document.getElementById("metric-high").textContent = assets.filter(asset => asset.priority === "High").length;
-      document.getElementById("metric-open").textContent = assets.filter(asset => !savedState.reviewed.includes(asset.id)).length;
-      document.getElementById("metric-reviewed").innerHTML = `${savedState.reviewed.length} <span class="metric-hint">of ${assets.length} assets</span>`;
+      const records = getAssets().map(getAssetSummary);
+      const reviewedCount = records.filter(asset => savedState.reviewed.includes(asset.id)).length;
+      document.getElementById("metric-total").textContent = records.length;
+      document.getElementById("metric-high").textContent = records.filter(asset => asset.priority === "High").length;
+      document.getElementById("metric-open").textContent = records.length - reviewedCount;
+      document.getElementById("metric-reviewed").innerHTML = `${reviewedCount} <span class="metric-hint">of ${records.length} assets</span>`;
     }
 
     function renderRows() {
@@ -210,15 +288,15 @@
       rows.innerHTML = filtered.map(asset => {
         const reviewed = savedState.reviewed.includes(asset.id);
         const priorityClass = asset.priority.toLowerCase();
-        return `<tr tabindex="0" role="button" aria-label="Select ${asset.name}, ${asset.priority} priority" aria-pressed="${asset.id === selectedId}" class="${asset.id === selectedId ? "selected" : ""}" data-asset="${asset.id}">
-          <td><span class="asset-name">${asset.name}</span><span class="asset-id">${asset.id} · ${asset.area}</span></td>
+        return `<tr tabindex="0" role="button" aria-label="Select ${escapeHtml(asset.name)}, ${asset.priority} priority" aria-pressed="${asset.id === selectedId}" class="${asset.id === selectedId ? "selected" : ""}" data-asset="${escapeHtml(asset.id)}">
+          <td><span class="asset-name">${escapeHtml(asset.name)}</span><span class="asset-id">${escapeHtml(asset.id)} · ${escapeHtml(asset.area)}</span></td>
           <td><span class="pill ${priorityClass}">${asset.priority}</span></td>
           <td><strong>${asset.score}</strong>${reviewed ? ' <span class="reviewed-label" title="Reviewed">✓</span>' : ""}</td>
-          <td>${asset.service}</td>
+          <td>${escapeHtml(asset.service)}</td>
         </tr>`;
       }).join("");
       rows.querySelectorAll("tr[data-asset]").forEach(row => {
-        const select = () => { selectedId = row.dataset.asset; renderRows(); renderDetail(); };
+        const select = () => { selectedId = row.dataset.asset; savedState.selectedAssetId = selectedId; saveState(); renderRows(); renderDetail(); };
         row.addEventListener("click", select);
         row.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); select(); } });
       });
@@ -226,28 +304,31 @@
     }
 
     function renderDetail() {
-      const asset = assets.find(item => item.id === selectedId);
-      if (!asset) return;
-      const reviewed = savedState.reviewed.includes(asset.id);
+      const storedAsset = getAssets().find(item => item.id === selectedId);
+      if (!storedAsset) return;
+      const asset = getAssetSummary(storedAsset);
+      const reviewed = savedState.reviewed.includes(storedAsset.id);
       const notes = savedState.notes[asset.id] || [];
-      document.getElementById("asset-detail").innerHTML = `<div class="panel-head"><h2>Asset details</h2><span class="panel-count">Sample record</span></div>
+      const history = savedState.events.filter(event => event.assetId === asset.id).sort((left, right) => right.date.localeCompare(left.date));
+      document.getElementById("asset-detail").innerHTML = `<div class="panel-head"><h2>Asset details</h2><span class="panel-count">${assets.some(item => item.id === asset.id) ? "Example record" : "Workspace record"}</span></div>
         <div class="detail-body">
-          <div class="detail-top"><div><h3>${asset.name}</h3><span class="detail-id">${asset.id} · ${asset.area}</span></div><span class="pill ${asset.priority.toLowerCase()}">${asset.priority}</span></div>
+          <div class="detail-top"><div><h3>${escapeHtml(asset.name)}</h3><span class="detail-id">${escapeHtml(asset.id)} · ${escapeHtml(asset.area)}</span></div><span class="pill ${asset.priority.toLowerCase()}">${asset.priority}</span></div>
           <div class="score-row"><span>Example priority score</span><span>Rule-based sample</span><strong>${asset.score}</strong></div>
-          <div class="detail-section"><h4>Sample signal</h4><p>${asset.issue}</p></div>
-          <div class="detail-section"><h4>Example evidence</h4><ul class="evidence">${asset.evidence.map(item => `<li>${item}</li>`).join("")}</ul></div>
-          <div class="detail-section"><h4>Suggested human review</h4><p>${asset.recommendation}</p></div>
-          <div class="detail-actions"><button class="button primary" id="review-button" type="button">${reviewed ? "✓ Reviewed" : "Mark reviewed"}</button></div>
-          <div class="notes-area"><label class="note-label" for="maintenance-note">Add a demo note</label><textarea id="maintenance-note" maxlength="500" placeholder="Record a follow-up thought for this sample asset"></textarea><button class="button" id="save-note" type="button" style="margin-top:7px">Save note locally</button><div class="note-list" aria-label="Saved demo notes">${notes.length ? [...notes].reverse().map(note => `<div class="note-entry"><time>${new Date(note.createdAt).toLocaleString()}</time>${escapeHtml(note.text)}</div>`).join("") : '<div class="panel-count">No local notes for this asset yet.</div>'}</div></div>
+          <div class="detail-section"><h4>${history.length ? "Latest maintenance finding" : "Condition note"}</h4><p>${escapeHtml(asset.issue)}</p></div>
+          <div class="detail-section"><h4>${history.length ? "Recent event evidence" : "Example evidence"}</h4><ul class="evidence">${asset.evidence.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>
+          <div class="detail-section"><h4>Suggested human review</h4><p>${escapeHtml(asset.recommendation)}</p></div>
+          <div class="detail-section"><h4>Maintenance history (${history.length})</h4>${history.length ? `<ul class="event-list">${history.map(event => `<li class="event-item"><div class="event-item-head"><strong>${escapeHtml(event.kind)} · severity ${escapeHtml(event.severity)}/5</strong><button class="mini-action" type="button" data-delete-event="${escapeHtml(event.id)}" aria-label="Delete ${escapeHtml(event.kind)} event">Remove</button></div><span>${escapeHtml(formatDate(event.date))} · ${escapeHtml(event.notes)}</span></li>`).join("")}</ul>` : '<p>No events logged for this asset.</p>'}</div>
+          <div class="detail-actions">${assets.some(item => item.id === storedAsset.id) ? "" : '<button class="button" id="edit-asset-button" type="button">Edit asset</button><button class="button" id="delete-asset-button" type="button">Delete asset</button>'}<button class="button primary" id="event-button" type="button">+ Log maintenance event</button><button class="button" id="review-button" type="button">${reviewed ? "✓ Reviewed" : "Mark reviewed"}</button></div>
+          <div class="notes-area"><label class="note-label" for="maintenance-note">Add a follow-up note</label><textarea id="maintenance-note" maxlength="500" placeholder="Record a follow-up thought for this asset"></textarea><button class="button" id="save-note" type="button" style="margin-top:7px">Save note</button><div class="note-list" aria-label="Saved follow-up notes">${notes.length ? [...notes].reverse().map(note => `<div class="note-entry"><time>${new Date(note.createdAt).toLocaleString()}</time>${escapeHtml(note.text)}</div>`).join("") : '<div class="panel-count">No notes for this asset yet.</div>'}</div></div>
         </div>`;
-      document.getElementById("review-button").addEventListener("click", () => toggleReviewed(asset.id));
+      document.getElementById("event-button").addEventListener("click", () => openEventDialog(storedAsset));
+      document.getElementById("review-button").addEventListener("click", () => toggleReviewed(storedAsset.id));
+      document.querySelectorAll("[data-delete-event]").forEach(button => button.addEventListener("click", () => deleteEvent(button.dataset.deleteEvent)));
+      if (!assets.some(item => item.id === storedAsset.id)) {
+        document.getElementById("edit-asset-button").addEventListener("click", () => openAssetDialog(storedAsset));
+        document.getElementById("delete-asset-button").addEventListener("click", () => deleteAsset(storedAsset.id));
+      }
       document.getElementById("save-note").addEventListener("click", () => addNote(asset.id));
-    }
-
-    function escapeHtml(text) {
-      const node = document.createElement("span");
-      node.textContent = text;
-      return node.innerHTML;
     }
 
     function toggleReviewed(id) {
@@ -268,31 +349,305 @@
       announce("Demo note saved in this browser.");
     }
 
+    function openEventDialog(asset) {
+      document.getElementById("event-form").dataset.assetId = asset.id;
+      document.getElementById("event-date").value = new Date().toISOString().slice(0, 10);
+      document.getElementById("event-form").reset();
+      document.getElementById("event-date").value = new Date().toISOString().slice(0, 10);
+      document.getElementById("event-dialog").showModal();
+    }
+
+    function saveAsset(form) {
+      const values = Object.fromEntries(new FormData(form).entries());
+      const id = values.id.trim();
+      const editingId = form.dataset.editingId || "";
+      if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,23}$/.test(id)) {
+        document.getElementById("new-asset-id").setCustomValidity("Use 1-24 letters, numbers, dots, underscores, or hyphens.");
+        document.getElementById("new-asset-id").reportValidity();
+        return;
+      }
+      if (getAssets().some(asset => asset.id.toLowerCase() === id.toLowerCase() && asset.id !== editingId)) {
+        document.getElementById("new-asset-id").setCustomValidity("An asset with this ID already exists.");
+        document.getElementById("new-asset-id").reportValidity();
+        return;
+      }
+      document.getElementById("new-asset-id").setCustomValidity("");
+      const severity = Number(values.severity);
+      const score = Math.min(100, 15 + severity * 12);
+      const asset = {
+        id,
+        name:values.name.trim(),
+        area:values.area.trim(),
+        type:values.type.trim(),
+        priority:score >= 65 ? "High" : score >= 38 ? "Medium" : "Low",
+        score,
+        severity,
+        service:formatDate(values.serviceDate),
+        lastServiceDate:values.serviceDate,
+        issue:values.issue.trim(),
+        recommendation:"Review the recorded condition and set a follow-up appropriate to site procedures.",
+        evidence:[`Initial condition severity ${severity}/5`, `Asset added ${formatDate(new Date().toISOString().slice(0, 10))}`]
+      };
+      if (editingId) {
+        savedState.customAssets = savedState.customAssets.map(existing => existing.id === editingId ? asset : existing);
+        if (editingId !== id) {
+          savedState.events = savedState.events.map(event => event.assetId === editingId ? { ...event, assetId:id } : event);
+          if (savedState.notes[editingId]) { savedState.notes[id] = savedState.notes[editingId]; delete savedState.notes[editingId]; }
+          savedState.reviewed = savedState.reviewed.map(reviewedId => reviewedId === editingId ? id : reviewedId);
+        }
+      } else {
+        savedState.customAssets.push(asset);
+      }
+      savedState.selectedAssetId = id;
+      delete form.dataset.editingId;
+      saveState();
+      selectedId = id;
+      form.reset();
+      document.getElementById("asset-dialog").close();
+      renderMetrics();
+      renderRows();
+      announce("Asset added to this browser workspace.");
+    }
+
+    function openAssetDialog(asset = null) {
+      const form = document.getElementById("asset-form");
+      form.reset();
+      document.getElementById("asset-dialog-title").textContent = asset ? "Edit asset" : "Add asset";
+      document.getElementById("asset-submit").textContent = asset ? "Save changes" : "Save asset";
+      if (asset) {
+        form.dataset.editingId = asset.id;
+        for (const field of ["id", "name", "type", "area", "issue"]) form.elements[field].value = asset[field] || "";
+        form.elements.serviceDate.value = asset.lastServiceDate || "";
+        form.elements.severity.value = String(asset.severity || 3);
+      } else {
+        delete form.dataset.editingId;
+        form.elements.serviceDate.value = new Date().toISOString().slice(0, 10);
+      }
+      document.getElementById("asset-dialog").showModal();
+    }
+
+    function deleteAsset(id) {
+      const asset = savedState.customAssets.find(item => item.id === id);
+      if (!asset || !window.confirm(`Delete ${asset.name} and its local events and notes?`)) return;
+      savedState.customAssets = savedState.customAssets.filter(item => item.id !== id);
+      savedState.events = savedState.events.filter(event => event.assetId !== id);
+      savedState.reviewed = savedState.reviewed.filter(item => item !== id);
+      delete savedState.notes[id];
+      savedState.selectedAssetId = assets[0].id;
+      selectedId = assets[0].id;
+      saveState();
+      renderMetrics();
+      renderRows();
+      announce("Asset and related local history deleted.");
+    }
+
+    function deleteEvent(eventId) {
+      const event = savedState.events.find(item => item.id === eventId);
+      if (!event || !window.confirm("Remove this maintenance event? Its priority score will be recalculated.")) return;
+      savedState.events = savedState.events.filter(item => item.id !== eventId);
+      savedState.reviewed = savedState.reviewed.filter(id => id !== event.assetId);
+      saveState();
+      renderMetrics();
+      renderRows();
+      announce("Maintenance event removed and sample priority recalculated.");
+    }
+
+    function saveEvent(form) {
+      const values = Object.fromEntries(new FormData(form).entries());
+      const assetId = form.dataset.assetId;
+      const asset = getAssets().find(item => item.id === assetId);
+      if (!asset) { announce("This asset is no longer available."); return; }
+      savedState.events.push({
+        id:globalThis.crypto?.randomUUID?.() || `event-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+        assetId,
+        date:values.date,
+        kind:values.kind,
+        severity:Number(values.severity),
+        notes:values.notes.trim(),
+        createdAt:new Date().toISOString()
+      });
+      savedState.reviewed = savedState.reviewed.filter(id => id !== assetId);
+      saveState();
+      form.reset();
+      document.getElementById("event-dialog").close();
+      renderMetrics();
+      renderRows();
+      announce("Maintenance event saved; sample priority recalculated.");
+    }
+
+    function parseCsv(text) {
+      const rows = [];
+      let row = [];
+      let field = "";
+      let quoted = false;
+      for (let index = 0; index < text.length; index += 1) {
+        const character = text[index];
+        if (quoted && character === '"' && text[index + 1] === '"') { field += '"'; index += 1; }
+        else if (character === '"') quoted = !quoted;
+        else if (character === "," && !quoted) { row.push(field.trim()); field = ""; }
+        else if ((character === "\n" || character === "\r") && !quoted) {
+          if (character === "\r" && text[index + 1] === "\n") index += 1;
+          row.push(field.trim());
+          if (row.some(value => value !== "")) rows.push(row);
+          row = [];
+          field = "";
+        } else field += character;
+      }
+      if (quoted) throw new Error("CSV contains an unclosed quoted field.");
+      row.push(field.trim());
+      if (row.some(value => value !== "")) rows.push(row);
+      if (rows.length < 2) throw new Error("CSV must contain a header and at least one asset row.");
+      const headers = rows[0].map(value => value.toLowerCase().replaceAll(/[^a-z0-9]/g, ""));
+      const column = (...names) => headers.findIndex(header => names.includes(header));
+      const idColumn = column("assetid", "id", "tag", "equipmentid");
+      const nameColumn = column("asset", "assetname", "name", "equipmentname");
+      const typeColumn = column("type", "equipmenttype", "assettype");
+      const areaColumn = column("area", "location", "sitearea");
+      const serviceColumn = column("lastservice", "lastservicedate", "servicedate");
+      const issueColumn = column("issue", "condition", "conditionnote", "notes", "latestsignal");
+      if ([idColumn, nameColumn, typeColumn, areaColumn].some(index => index < 0)) {
+        throw new Error("CSV needs Asset ID, Asset, Type, and Area columns.");
+      }
+      return rows.slice(1).map(values => {
+        const id = values[idColumn]?.trim();
+        const name = values[nameColumn]?.trim();
+        const type = values[typeColumn]?.trim();
+        const area = values[areaColumn]?.trim();
+        const issue = issueColumn >= 0 ? values[issueColumn]?.trim() : "Imported asset; add an inspection finding when available.";
+        const serviceDate = serviceColumn >= 0 ? values[serviceColumn]?.trim() : "";
+        if (!id || !name || !type || !area) throw new Error("Each CSV row must include an asset ID, name, type, and area.");
+        const importedSeverityColumn = column("severity", "observedseverity");
+        const rawSeverity = importedSeverityColumn >= 0 ? values[importedSeverityColumn]?.trim() : "";
+        const severity = rawSeverity ? Number(rawSeverity) : 2;
+        if (!Number.isInteger(severity) || severity < 1 || severity > 5) throw new Error(`CSV severity must be an integer from 1 to 5 for asset ${id}.`);
+        const score = 15 + severity * 12;
+        if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,23}$/.test(id)) throw new Error(`Invalid asset ID in CSV: ${id}`);
+        if ([name, type, area, issue].some(value => value.length > 1000)) throw new Error(`A field is too long for asset ${id}.`);
+        if (serviceDate && !/^\d{4}-\d{2}-\d{2}$/.test(serviceDate) && Number.isNaN(Date.parse(serviceDate))) throw new Error(`Invalid service date for asset ${id}.`);
+        return { id, name:name.slice(0, 80), type:type.slice(0, 40), area:area.slice(0, 80), issue:issue.slice(0, 500), serviceDate, severity, score,
+          priority:score >= 65 ? "High" : score >= 38 ? "Medium" : "Low",
+          service:serviceDate ? formatDate(serviceDate) : "Not recorded",
+          recommendation:"Review this imported record and confirm its maintenance history.",
+          evidence:["Imported from CSV", `Default starting severity ${severity}/5; confirm during review`] };
+      });
+    }
+
+    async function importCsv(file) {
+      try {
+        if (file.size > 5 * 1024 * 1024) throw new Error("CSV must be smaller than 5 MB.");
+        const imported = parseCsv(await file.text());
+        if (imported.length > 1000) throw new Error("Import up to 1,000 assets at a time.");
+        const existing = new Set(getAssets().map(asset => asset.id.toLowerCase()));
+        const seen = new Set();
+        for (const asset of imported) {
+          const key = asset.id.toLowerCase();
+          if (existing.has(key) || seen.has(key)) throw new Error(`Duplicate asset ID in import: ${asset.id}`);
+          seen.add(key);
+        }
+        savedState.customAssets.push(...imported);
+        savedState.selectedAssetId = imported[0].id;
+        saveState();
+        selectedId = imported[0].id;
+        renderMetrics();
+        renderRows();
+        announce(`${imported.length} assets imported to this browser workspace.`);
+      } catch (error) { announce(error.message || "Could not import this CSV file."); }
+      finally { document.getElementById("import-file").value = ""; }
+    }
+
+    function backupWorkspace() {
+      const backup = { format:"reliability-desk-backup-v1", exportedAt:new Date().toISOString(), state:savedState };
+      downloadFile(JSON.stringify(backup, null, 2), "reliability-desk-backup.json", "application/json");
+      announce("Workspace backup exported.");
+    }
+
+    async function restoreWorkspace(file) {
+      try {
+        if (file.size > 5 * 1024 * 1024) throw new Error("Backup must be smaller than 5 MB.");
+        const backup = JSON.parse(await file.text());
+        const state = backup?.format === "reliability-desk-backup-v1" ? backup.state : null;
+        if (!state || !Array.isArray(state.customAssets) || !Array.isArray(state.events) || !Array.isArray(state.reviewed) || !state.notes || typeof state.notes !== "object") {
+          throw new Error("This file is not a valid Reliability Desk JSON backup.");
+        }
+        const ids = new Set(assets.map(asset => asset.id.toLowerCase()));
+        const customAssets = state.customAssets.map(asset => {
+          if (!asset || typeof asset.id !== "string" || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,23}$/.test(asset.id) || typeof asset.name !== "string" || !asset.name.trim() || ids.has(asset.id.toLowerCase())) throw new Error("Backup contains an invalid or duplicate asset ID.");
+          ids.add(asset.id.toLowerCase());
+          const priority = ["High", "Medium", "Low"].includes(asset.priority) ? asset.priority : "Medium";
+          const score = Number.isFinite(Number(asset.score)) ? Math.max(0, Math.min(100, Number(asset.score))) : 39;
+          return {
+            id:asset.id, name:String(asset.name).slice(0, 80), type:String(asset.type || "Unknown").slice(0, 40), area:String(asset.area || "Unspecified").slice(0, 80),
+            priority, score, service:String(asset.service || "Not recorded").slice(0, 80), lastServiceDate:String(asset.lastServiceDate || "").slice(0, 20),
+            issue:String(asset.issue || "").slice(0, 500), recommendation:String(asset.recommendation || "Review this asset with the responsible maintenance lead.").slice(0, 500),
+            evidence:Array.isArray(asset.evidence) ? asset.evidence.slice(0, 20).map(item => String(item).slice(0, 300)) : [], severity:Number.isInteger(Number(asset.severity)) ? Math.max(1, Math.min(5, Number(asset.severity))) : 2
+          };
+        });
+        const events = state.events.map(event => {
+          if (!event || !ids.has(String(event.assetId).toLowerCase()) || !/^\d{4}-\d{2}-\d{2}$/.test(event.date) || !["Inspection", "Service", "Repair", "Failure"].includes(event.kind) || !Number.isInteger(Number(event.severity)) || Number(event.severity) < 1 || Number(event.severity) > 5 || typeof event.notes !== "string" || !event.notes.trim()) {
+            throw new Error("Backup contains an invalid maintenance event.");
+          }
+          return { id:String(event.id || `event-${Date.now()}`), assetId:String(event.assetId), date:event.date, kind:event.kind, severity:Number(event.severity), notes:event.notes.slice(0, 1000), createdAt:String(event.createdAt || "") };
+        });
+        const notes = Object.fromEntries(Object.entries(state.notes).filter(([id]) => ids.has(id.toLowerCase())).map(([id, entries]) => [id, Array.isArray(entries) ? entries.filter(note => note && typeof note.text === "string").slice(-100).map(note => ({ text:note.text.slice(0, 500), createdAt:String(note.createdAt || "") })) : []]));
+        savedState = { reviewed:state.reviewed.filter(id => ids.has(String(id).toLowerCase())), notes, customAssets, events, selectedAssetId:String(state.selectedAssetId || "") };
+        saveState();
+        selectedId = getAssets().some(asset => asset.id === savedState.selectedAssetId) ? savedState.selectedAssetId : getAssets()[0]?.id;
+        renderMetrics();
+        renderRows();
+        announce("Workspace backup restored in this browser.");
+      } catch (error) { announce(error.message || "Could not restore this backup."); }
+      finally { document.getElementById("restore-file").value = ""; }
+    }
+
+    function downloadFile(content, filename, type) {
+      const url = URL.createObjectURL(new Blob([content], { type }));
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = filename;
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
     function exportCsv() {
       const rows = getFilteredAssets();
-      const quote = value => `"${String(value).replaceAll('"', '""')}"`;
-      const lines = [["Asset ID","Asset","Area","Priority","Example score","Last service","Review status","Sample signal"], ...rows.map(asset => [asset.id, asset.name, asset.area, asset.priority, asset.score, asset.service, savedState.reviewed.includes(asset.id) ? "Reviewed" : "Needs review", asset.issue])];
+      const quote = value => {
+        const text = String(value);
+        const safe = /^[\t\r ]*[=+\-@]/.test(text) ? `'${text}` : text;
+        return `"${safe.replaceAll('"', '""')}"`;
+      };
+      const lines = [["Asset ID","Asset","Type","Area","Priority","Example score","Last service","Observed severity","Review status","Latest signal"], ...rows.map(asset => [asset.id, asset.name, asset.type, asset.area, asset.priority, asset.score, asset.lastServiceDate, Math.max(0, ...savedState.events.filter(event => event.assetId === asset.id).map(event => Number(event.severity) || 0)) || asset.severity || "", savedState.reviewed.includes(asset.id) ? "Reviewed" : "Needs review", asset.issue])];
       const csv = lines.map(row => row.map(quote).join(",")).join("\r\n");
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(new Blob([csv], { type:"text/csv;charset=utf-8" }));
-      link.download = "hv-maintenance-demo.csv";
-      link.click();
-      URL.revokeObjectURL(link.href);
-      announce(`${rows.length} sample ${rows.length === 1 ? "asset" : "assets"} exported.`);
+      downloadFile(csv, "reliability-desk-assets.csv", "text/csv;charset=utf-8");
+      announce(`${rows.length} workspace ${rows.length === 1 ? "asset" : "assets"} exported.`);
     }
+
+    function resetWorkspace() {
+      if (!window.confirm("Clear all locally saved assets, events, notes, and review marks? This cannot be undone unless you made a JSON backup.")) return;
+      savedState = structuredClone(defaultState);
+      localStorage.removeItem(storageKey);
+      localStorage.removeItem("hv-reliability-demo-v1");
+      selectedId = assets[0].id;
+      renderMetrics();
+      renderRows();
+      announce("Local assets, events, notes, and review marks cleared.");
+    }
+
+    document.getElementById("add-asset-button").addEventListener("click", () => openAssetDialog());
+    document.getElementById("asset-form").addEventListener("submit", event => { event.preventDefault(); saveAsset(event.currentTarget); });
+    document.getElementById("event-form").addEventListener("submit", event => { event.preventDefault(); saveEvent(event.currentTarget); });
+    document.querySelectorAll("[data-close]").forEach(button => button.addEventListener("click", () => document.getElementById(button.dataset.close).close()));
+    document.getElementById("import-button").addEventListener("click", () => document.getElementById("import-file").click());
+    document.getElementById("import-file").addEventListener("change", event => { if (event.target.files[0]) importCsv(event.target.files[0]); });
+    document.getElementById("backup-button").addEventListener("click", backupWorkspace);
+    document.getElementById("restore-button").addEventListener("click", () => document.getElementById("restore-file").click());
+    document.getElementById("restore-file").addEventListener("change", event => { if (event.target.files[0]) restoreWorkspace(event.target.files[0]); });
+    document.getElementById("new-asset-id").addEventListener("input", event => event.target.setCustomValidity(""));
 
     document.getElementById("asset-search").addEventListener("input", renderRows);
     document.getElementById("priority-filter").addEventListener("change", renderRows);
     document.getElementById("status-filter").addEventListener("change", renderRows);
     document.getElementById("export-button").addEventListener("click", exportCsv);
-    document.getElementById("reset-button").addEventListener("click", () => {
-      savedState = structuredClone(defaultState);
-      localStorage.removeItem(storageKey);
-      selectedId = assets[0].id;
-      renderMetrics();
-      renderRows();
-      announce("Demo notes and review marks cleared.");
-    });
+    document.getElementById("reset-button").addEventListener("click", resetWorkspace);
     renderMetrics();
     renderRows();
   </script>
