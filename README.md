@@ -1,4 +1,4 @@
-# Higher Value Teknical
+# Queen Susa Limited
 
 Reliability Desk is an early, local-first maintenance-planning product prototype for industrial maintenance teams. It includes a marketing site and a browser dashboard; it is not a hosted or production system.
 
