@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f3f4ef">
-  <meta name="description" content="Explore the Queen Susa Limited industrial maintenance planning demo using sample equipment data.">
-  <title>Reliability Desk Demo | Queen Susa Limited</title>
+  <meta name="description" content="Explore the Queen SusaStrategy Limited industrial maintenance planning demo using sample equipment data.">
+  <title>Reliability Desk Demo | Queen SusaStrategy Limited</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -17,8 +17,9 @@
     button { cursor:pointer; }
     .app { min-height:100vh; display:grid; grid-template-columns:226px minmax(0,1fr); }
     .sidebar { position:sticky; top:0; height:100vh; padding:22px 15px; display:flex; flex-direction:column; background:#172720; color:#e7eee8; }
-    .brand { padding:3px 8px 28px; display:flex; align-items:center; gap:10px; color:white; text-decoration:none; font:700 13px/1.1 var(--display); }
-    .brand-mark { width:34px; height:34px; display:grid; place-items:center; background:var(--green); color:var(--lime); font-size:14px; }
+    .brand { padding:3px 8px 28px; display:flex; align-items:center; gap:10px; color:white; text-decoration:none; font:700 12px/1.1 var(--display); }
+    .brand-mark { width:34px; height:34px; flex:0 0 34px; display:grid; place-items:center; background:var(--green); }
+    .brand-mark svg { display:block; width:27px; height:27px; }
     .workspace-label { padding:10px 10px 7px; color:#9eafa4; font-size:9px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
     .side-link { min-height:39px; padding:9px 10px; display:flex; align-items:center; gap:10px; color:#d2ddd5; text-decoration:none; font-size:12px; }
     .side-link.active { background:#29453a; color:white; }
@@ -125,7 +126,7 @@
 <body>
   <div class="app">
     <aside class="sidebar" aria-label="Demo navigation">
-      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">HV</span><span>HIGHER VALUE<br>TEKNICAL</span></a>
+      <a class="brand" href="index.html" aria-label="Queen SusaStrategy Limited home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="m6 11 8 7 6-12 6 12 8-7-3 16H9L6 11Z" fill="#d5ed81"/><path d="M12 23h16" stroke="#104b3d" stroke-width="2"/><text x="20" y="35" fill="#104b3d" font-family="Arial,sans-serif" font-size="10" font-weight="700" text-anchor="middle">QS</text></svg></span><span>Queen SusaStrategy<br>Limited</span></a>
       <div class="workspace-label">Reliability workspace</div>
       <nav><a class="side-link active" href="#assets"><span class="side-symbol" aria-hidden="true">A</span>Asset overview</a></nav>
       <div class="side-bottom"><p>Local workspace<br>Changes stay in this browser.</p><a href="index.html">Company site ↗</a></div>
