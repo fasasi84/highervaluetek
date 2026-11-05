@@ -1,27 +1,23 @@
 # Queen SusaStrategy Limited
 
-Reliability Desk is a local-first minimum viable product (MVP) for industrial maintenance workflows. It includes a marketing site and a functional browser dashboard for managing asset records and maintenance history. It is not a hosted, multi-user or production AI system.
+Queen SusaStrategy focuses on helping businesses connect strategy to practical action, with applied AI and machine learning as the starting point for its technology-led startup direction. The AI Opportunity Planner is the current local-first MVP: a browser tool for structuring business challenges, assessing AI readiness and planning responsible next steps. It is not a live AI system or hosted service.
 
 ## Run locally
 
-No build step or package install is required. Open `index.html` in a browser, or open `demo.html` to work directly in the MVP workspace. The company site links to the workspace and includes the same dashboard embedded on the homepage.
+No build step or package install is required. Open `index.html` for the company site, or open `demo.html` to use the AI Opportunity Planner directly. The planner stores saved assessments in this browser only.
 
-## Current MVP workflows
+## AI Opportunity Planner MVP
 
-- Add, edit and delete locally created equipment assets with an ID, type, area, service date and condition note. The six fictional seed assets are immutable.
-- Import an asset catalog from CSV. Required headers: `Asset ID`, `Asset`, `Type`, `Area`. Optional headers: `Last service`, `Latest signal`, `Severity` (integer 1-5). Quoted fields and commas inside quoted values are supported.
-- Record inspections, service, repairs or failures with a date, severity and notes; remove an incorrectly logged event and recalculate its sample priority.
-- Search/filter assets, mark records reviewed, add follow-up notes, and export filtered assets as CSV.
-- Export or restore a JSON workspace backup.
+- Capture a business name, sector, goal, challenge and business function.
+- Assess available data, process consistency, potential impact, team readiness and decision sensitivity.
+- Generate a transparent readiness score, use-case direction, data preparation guidance, evaluation measures and human-oversight notes.
+- Save up to 20 assessments locally, reopen them, print a brief or download it as JSON.
+- Clear saved assessments from the workspace.
 
-The six seeded assets are fictional. All user-entered records, events, notes and review state are stored in browser `localStorage` and are not uploaded. Use JSON backup to move data between browsers. Reset workspace clears local records and activity.
+The planner does not call, train or run a generative AI or machine-learning model. Its score and suggested use-case direction use an explicit rules-based rubric and fixed templates; they are not a technical feasibility study, ROI forecast or guarantee of results. Assessment information remains in browser `localStorage` and is not uploaded. Do not enter personal, confidential, customer-identifying, regulated or otherwise sensitive business information.
 
-## Score behavior
+## Development and deployment boundary
 
-Seed records have illustrative fixed scores. Once a record has logged events, its sample score is recalculated as `min(100, 15 + 12 * highest recorded severity + 8 * min(event count, 5))`. Priority is Low below 38, Medium from 38 through 64, and High from 65. This rule is demonstrative only; it is not validated for equipment-risk decisions and is not AI.
+This repository contains static HTML, CSS and JavaScript. It has no server, authentication, hosted workspace, AI-provider integration, model training or deployed infrastructure. Before handling real business data or offering hosted AI features, add a secured backend, identity and authorization, appropriate data governance, retention/deletion controls, monitoring, tested backups and validated human-reviewed AI workflows.
 
-## Production readiness boundary
-
-The current implementation has no server, authentication, shared workspaces, role-based access, audit-grade history, remote backups, equipment/CMMS integrations, telemetry processing, or deployed AI. Do not enter personal, confidential, or safety-sensitive operational data. Before a production pilot, add a secured backend and database, identity and authorization, tenant isolation, encryption and key management, audited migrations, retention/deletion controls, monitoring, tested backups, data-processing agreements, and validated human-reviewed analysis. AWS, Azure and NVIDIA are only planned evaluation options; no infrastructure is deployed by this repository.
-
-The About, Privacy and Terms pages should be reviewed against the company’s actual legal and hosting arrangements before public launch.
+The About, Privacy and Terms pages should be reviewed against the company's actual legal and hosting arrangements before public launch.

@@ -4,23 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f3f4ef">
-  <meta name="description" content="Use the Reliability Desk local-first MVP to manage equipment records, maintenance events and review workflows with fictional sample data.">
-  <title>Reliability Desk MVP | Queen SusaStrategy Limited</title>
+  <meta name="description" content="Use the Queen SusaStrategy AI Opportunity Planner MVP to assess a business challenge, data readiness and responsible next steps.">
+  <title>AI Opportunity Planner MVP | Queen SusaStrategy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { --ink:#1a2923; --muted:#68766e; --paper:#f3f4ef; --white:#fff; --line:#e2e6df; --green:#176b52; --dark:#124b3d; --lime:#d5ed81; --orange:#db7546; --red:#ae4939; --display:"Space Grotesk",sans-serif; --body:"DM Sans",sans-serif; }
+    :root { --ink:#1a2923; --muted:#68766e; --paper:#f3f4ef; --white:#fff; --line:#e2e6df; --green:#176b52; --dark:#124b3d; --lime:#d5ed81; --orange:#db7546; --display:"Space Grotesk",sans-serif; --body:"DM Sans",sans-serif; }
     * { box-sizing:border-box; }
-    body { min-width:320px; min-height:100vh; margin:0; background:var(--paper); color:var(--ink); font:14px/1.5 var(--body); }
-    button, input, textarea { font:inherit; }
+    body { min-width:320px; min-height:100vh; margin:0; background:var(--paper); color:var(--ink); font:14px/1.55 var(--body); }
+    button,input,select,textarea { font:inherit; }
     button { cursor:pointer; }
-    .app { min-height:100vh; display:grid; grid-template-columns:226px minmax(0,1fr); }
+    .app { min-height:100vh; display:grid; grid-template-columns:224px minmax(0,1fr); }
     .sidebar { position:sticky; top:0; height:100vh; padding:22px 15px; display:flex; flex-direction:column; background:#172720; color:#e7eee8; }
-    .brand { padding:3px 8px 28px; display:flex; align-items:center; gap:10px; color:white; text-decoration:none; font:700 12px/1.1 var(--display); }
-    .brand-mark { width:34px; height:34px; flex:0 0 34px; display:grid; place-items:center; background:var(--green); }
-    .brand-mark svg { display:block; width:27px; height:27px; }
-    .workspace-label { padding:10px 10px 7px; color:#9eafa4; font-size:9px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .brand { padding:3px 8px 26px; display:flex; align-items:center; gap:10px; color:white; text-decoration:none; font:700 12px/1.1 var(--display); }
+    .brand-mark { width:34px; height:34px; flex:0 0 34px; display:grid; place-items:center; background:var(--green); color:var(--lime); font:700 12px var(--display); }
+    .workspace-label { padding:10px; color:#9eafa4; font-size:9px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
     .side-link { min-height:39px; padding:9px 10px; display:flex; align-items:center; gap:10px; color:#d2ddd5; text-decoration:none; font-size:12px; }
     .side-link.active { background:#29453a; color:white; }
     .side-symbol { width:19px; height:19px; display:grid; place-items:center; border:1px solid #53685d; color:var(--lime); font:600 10px var(--display); }
@@ -30,633 +29,293 @@
     .main { min-width:0; }
     .topbar { min-height:62px; padding:0 30px; display:flex; align-items:center; justify-content:space-between; gap:20px; border-bottom:1px solid var(--line); background:rgba(255,255,255,.72); }
     .breadcrumb { color:var(--muted); font-size:11px; }
-    .top-actions { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-    .demo-label { padding:5px 8px; background:#f2e5da; color:#874724; font-size:9px; font-weight:700; text-transform:uppercase; }
-    .back-link { color:var(--green); font-size:11px; font-weight:700; text-decoration:none; }
-    .content { width:min(1320px,100%); margin:auto; padding:27px 30px 50px; }
-    .page-head { display:flex; justify-content:space-between; align-items:flex-end; gap:20px; margin-bottom:21px; }
-    .overline { margin:0 0 6px; color:var(--green); font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
-    h1,h2,h3 { font-family:var(--display); letter-spacing:0; }
-    h1 { margin:0; font-size:28px; line-height:1.15; }
-    .page-subtitle { margin:6px 0 0; color:var(--muted); font-size:12px; }
-    .button { min-height:36px; padding:0 12px; display:inline-flex; justify-content:center; align-items:center; gap:7px; border:1px solid var(--line); background:white; color:var(--ink); font-size:10px; font-weight:700; }
+    .top-link { color:var(--green); font-size:11px; font-weight:700; text-decoration:none; }
+    .content { width:min(1220px,100%); margin:auto; padding:30px; }
+    .page-head { margin-bottom:22px; }
+    .overline { margin:0 0 6px; color:var(--green); font-size:10px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; }
+    h1,h2,h3 { font-family:var(--display); }
+    h1 { margin:0; font-size:clamp(28px,4vw,40px); line-height:1.12; }
+    h2 { margin:0; font-size:18px; }
+    h3 { margin:0; font-size:14px; }
+    .page-subtitle { max-width:760px; margin:9px 0 0; color:var(--muted); font-size:13px; }
+    .notice { margin-bottom:18px; padding:12px 14px; border:1px solid #e3d9af; background:#f9f4df; color:#60572e; font-size:11px; }
+    .notice strong { color:#514922; }
+    .layout { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr); align-items:start; gap:18px; }
+    .panel { min-width:0; border:1px solid var(--line); background:var(--white); }
+    .panel-head { padding:15px 17px; display:flex; align-items:center; justify-content:space-between; gap:12px; border-bottom:1px solid var(--line); }
+    .panel-head p { margin:4px 0 0; color:var(--muted); font-size:10px; }
+    .form-body,.result-body { padding:17px; }
+    .fields { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+    .field { min-width:0; }
+    .field.full { grid-column:1/-1; }
+    label { display:block; margin-bottom:5px; font-size:10px; font-weight:700; }
+    .hint { margin:3px 0 0; color:var(--muted); font-size:9px; }
+    input,select,textarea { width:100%; min-height:38px; padding:8px 10px; border:1px solid var(--line); border-radius:0; background:white; color:var(--ink); font-size:11px; }
+    textarea { min-height:82px; resize:vertical; }
+    input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible { outline:2px solid rgba(23,107,82,.65); outline-offset:2px; }
+    .form-actions,.result-actions { margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; }
+    .button { min-height:37px; padding:0 12px; display:inline-flex; justify-content:center; align-items:center; gap:7px; border:1px solid var(--line); background:white; color:var(--ink); font-size:10px; font-weight:700; }
     .button:hover { border-color:var(--green); }
     .button.primary { border-color:var(--green); background:var(--green); color:white; }
     .button.primary:hover { background:var(--dark); }
-    .button.quiet { border:0; background:transparent; color:var(--green); }
-    .button:disabled { opacity:.55; cursor:default; }
-    .demo-banner { margin-bottom:17px; padding:10px 13px; display:flex; align-items:flex-start; gap:9px; border:1px solid #e3d9af; background:#f9f4df; color:#60572e; font-size:10px; }
-    .demo-banner strong { color:#514922; }
-    .metric-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin-bottom:19px; }
-    .metric { min-height:95px; padding:14px 15px; background:white; border:1px solid var(--line); }
-    .metric-label { color:var(--muted); font-size:10px; }
-    .metric-value { margin-top:7px; display:flex; align-items:baseline; gap:8px; font:600 25px/1 var(--display); }
-    .metric-hint { color:var(--muted); font:400 9px var(--body); }
-    .metric-accent { color:var(--orange); }
-    .workspace { min-height:505px; display:grid; grid-template-columns:minmax(0,1.45fr) minmax(275px,.78fr); background:white; border:1px solid var(--line); }
-    .asset-panel { min-width:0; border-right:1px solid var(--line); }
-    .panel-head { min-height:62px; padding:13px 16px; display:flex; justify-content:space-between; align-items:center; gap:12px; border-bottom:1px solid var(--line); }
-    .panel-head h2 { margin:0; font-size:14px; }
-    .panel-count { color:var(--muted); font-size:10px; }
-    .controls { padding:12px 16px; display:flex; gap:8px; border-bottom:1px solid var(--line); }
-    .search { min-width:0; flex:1; height:34px; padding:0 10px; border:1px solid var(--line); outline:none; color:var(--ink); font-size:11px; }
-    .search:focus, textarea:focus { border-color:var(--green); box-shadow:0 0 0 2px rgba(23,107,82,.11); }
-    .filter { height:34px; padding:0 9px; border:1px solid var(--line); background:white; color:var(--ink); font-size:10px; }
-    .table-wrap { overflow-x:auto; }
-    table { width:100%; border-collapse:collapse; text-align:left; }
-    th { padding:10px 13px; color:var(--muted); background:#fafbf8; font-size:9px; font-weight:700; text-transform:uppercase; white-space:nowrap; }
-    td { padding:13px; border-top:1px solid #edf0eb; font-size:10px; vertical-align:middle; }
-    tbody tr { cursor:pointer; transition:background .12s ease; }
-    tbody tr:hover { background:#f7faf5; }
-    tbody tr.selected { background:#eef5eb; box-shadow:inset 3px 0 var(--green); }
-    .asset-name { display:block; font-size:11px; font-weight:700; white-space:nowrap; }
-    .asset-id { display:block; margin-top:3px; color:var(--muted); font-size:9px; }
-    .pill { padding:4px 6px; display:inline-flex; background:#f7e7df; color:#964b31; font-size:9px; font-weight:700; white-space:nowrap; }
-    .pill.medium { background:#f7f0d8; color:#78651b; }
-    .pill.low { background:#e7f0e7; color:#32664a; }
-    .reviewed-label { color:var(--green); font-weight:700; }
-    .detail { min-width:0; }
-    .detail-body { padding:17px; }
-    .detail-top { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
-    .detail h3 { margin:0 0 4px; font-size:18px; }
-    .detail-id { color:var(--muted); font-size:10px; }
-    .score-row { margin:20px 0 14px; padding:13px 0; display:grid; grid-template-columns:1fr auto; gap:5px; border-block:1px solid var(--line); }
-    .score-row span { color:var(--muted); font-size:10px; }
-    .score-row strong { grid-column:2; grid-row:1 / span 2; align-self:center; color:var(--orange); font:600 24px var(--display); }
-    .detail-section { margin:16px 0 0; }
-    .detail-section h4 { margin:0 0 6px; color:var(--muted); font-size:9px; letter-spacing:.05em; text-transform:uppercase; }
-    .detail-section p { margin:0; color:#46564e; font-size:11px; }
-    .evidence { margin:0; padding-left:16px; color:#46564e; font-size:10px; }
-    .evidence li { margin:5px 0; }
-    .detail-actions { margin-top:18px; display:grid; gap:8px; }
-    .note-label { display:block; margin:15px 0 6px; color:var(--muted); font-size:9px; font-weight:700; text-transform:uppercase; }
-    textarea { width:100%; min-height:64px; padding:9px; resize:vertical; border:1px solid var(--line); outline:none; font-size:10px; }
-    .note-list { margin-top:10px; padding-top:9px; border-top:1px solid var(--line); }
-    .note-entry { padding:7px 0; color:#4c5b53; font-size:10px; border-bottom:1px solid #edf0eb; }
-    .note-entry time { display:block; margin-bottom:3px; color:var(--muted); font-size:8px; }
-    .empty-state { padding:30px 15px; color:var(--muted); text-align:center; font-size:11px; }
-    .method-note { margin-top:14px; color:var(--muted); font-size:9px; }
-    .event-list { margin:8px 0 0; padding:0; list-style:none; }
-    .event-item { padding:8px 0; border-top:1px solid #edf0eb; font-size:10px; }
-    .event-item strong { display:block; margin-bottom:2px; }
-    .event-item span { color:var(--muted); }
-    .event-item-head { display:flex; align-items:center; justify-content:space-between; gap:8px; }
-    .mini-action { padding:3px 6px; border:1px solid var(--line); background:white; color:var(--muted); font-size:9px; }
-    dialog { width:min(480px,calc(100% - 28px)); max-height:calc(100% - 28px); padding:0; border:1px solid var(--line); color:var(--ink); box-shadow:0 20px 70px #17272045; }
-    dialog::backdrop { background:#17272080; }
-    .dialog-head { padding:16px 18px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--line); }
-    .dialog-head h2 { margin:0; font-size:17px; }
-    .dialog-close { width:30px; height:30px; border:1px solid var(--line); background:white; color:var(--ink); font-size:16px; }
-    .form-grid { padding:17px 18px; display:grid; grid-template-columns:1fr 1fr; gap:13px; }
-    .form-field { min-width:0; display:grid; gap:5px; }
-    .form-field.full { grid-column:1 / -1; }
-    .form-field label { color:var(--muted); font-size:10px; font-weight:700; }
-    .form-field input,.form-field select,.form-field textarea { width:100%; min-height:37px; padding:8px; border:1px solid var(--line); background:white; color:var(--ink); font-size:11px; }
-    .form-field textarea { min-height:75px; }
-    .form-actions { grid-column:1 / -1; display:flex; justify-content:flex-end; gap:8px; padding-top:5px; }
-    .toast { position:fixed; right:20px; bottom:20px; z-index:5; max-width:min(340px,calc(100vw - 40px)); padding:12px 16px; background:#172720; color:white; box-shadow:0 6px 22px #17272030; font-size:11px; opacity:0; transform:translateY(8px); pointer-events:none; transition:opacity .18s,transform .18s; }
+    .button:disabled { opacity:.5; cursor:not-allowed; }
+    .empty-state { min-height:310px; padding:28px; display:grid; align-content:center; justify-items:center; text-align:center; color:var(--muted); }
+    .empty-mark { width:48px; height:48px; margin-bottom:13px; display:grid; place-items:center; background:#e8ede5; color:var(--green); font:700 18px var(--display); }
+    .empty-state strong { margin-bottom:5px; color:var(--ink); font:600 16px var(--display); }
+    .empty-state p { max-width:280px; margin:0; font-size:11px; }
+    .results[hidden],.empty-state[hidden] { display:none; }
+    .score-card { padding:14px; display:grid; grid-template-columns:auto 1fr; align-items:center; gap:13px; background:#e8ede5; }
+    .score { width:68px; height:68px; display:grid; place-items:center; border:5px solid var(--green); border-radius:50%; background:white; font:600 21px var(--display); }
+    .score-card p { margin:4px 0 0; color:var(--muted); font-size:10px; }
+    .score-card strong { font:600 14px var(--display); }
+    .result-section { margin-top:17px; }
+    .result-section h3 { margin-bottom:7px; color:var(--green-dark); font-size:11px; }
+    .result-section p { margin:0; color:#46564e; font-size:11px; }
+    .result-list { margin:0; padding:0; list-style:none; }
+    .result-list li { position:relative; margin:6px 0; padding-left:17px; color:#46564e; font-size:10px; }
+    .result-list li::before { position:absolute; left:0; color:var(--green); font-weight:700; content:"+"; }
+    .factor-list { display:grid; gap:7px; }
+    .factor { display:grid; grid-template-columns:1fr auto; gap:3px 8px; align-items:center; font-size:9px; }
+    .factor-track { grid-column:1/-1; height:5px; background:#edf0eb; }
+    .factor-track span { display:block; height:100%; background:var(--green); }
+    .saved { margin-top:18px; }
+    .saved-list { display:grid; gap:6px; }
+    .saved-item { padding:9px 10px; display:flex; align-items:center; justify-content:space-between; gap:8px; border:1px solid var(--line); background:white; text-align:left; }
+    .saved-item:hover { border-color:var(--green); }
+    .saved-item strong { display:block; font-size:10px; }
+    .saved-item span { display:block; margin-top:2px; color:var(--muted); font-size:9px; }
+    .saved-empty { color:var(--muted); font-size:10px; }
+    .footer-note { margin:18px 0 0; color:var(--muted); font-size:9px; }
+    .toast { position:fixed; right:20px; bottom:20px; z-index:5; max-width:min(360px,calc(100% - 40px)); padding:12px 16px; background:#172720; color:white; font-size:11px; opacity:0; pointer-events:none; transform:translateY(8px); transition:opacity .15s,transform .15s; }
     .toast.show { opacity:1; transform:translateY(0); }
-    :focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
-    @media (max-width:1050px) { .app { grid-template-columns:190px minmax(0,1fr); } .content { padding-inline:20px; } .topbar { padding-inline:20px; } .workspace { grid-template-columns:minmax(0,1.2fr) minmax(250px,.8fr); } td,th { padding-inline:9px; } }
-    @media (max-width:760px) { .app { display:block; } .sidebar { position:static; width:100%; height:auto; padding:9px 13px; flex-direction:row; align-items:center; gap:10px; } .brand { padding:0; white-space:nowrap; } .brand-mark { width:30px; height:30px; } .workspace-label,.side-link:not(.active),.side-bottom { display:none; } .side-link.active { min-height:31px; padding:5px 8px; font-size:10px; } .sidebar nav { margin-left:auto; } .topbar { min-height:49px; padding-inline:16px; } .content { padding:20px 16px 36px; } .workspace { grid-template-columns:1fr; } .asset-panel { border-right:0; border-bottom:1px solid var(--line); } .detail-body { display:grid; grid-template-columns:1fr 1fr; gap:0 22px; } .detail-top,.score-row,.detail-actions,.notes-area { grid-column:1 / -1; } .detail-section { min-width:0; } }
-    @media (max-width:520px) { .top-actions { gap:8px; } .breadcrumb { font-size:9px; } .back-link { font-size:10px; } .demo-label { font-size:8px; } .content { padding-inline:12px; } .page-head { align-items:flex-start; flex-direction:column; } .page-head .button { align-self:stretch; } .metric-grid { grid-template-columns:1fr 1fr; gap:8px; } .metric { min-height:82px; padding:11px; } .metric-value { font-size:22px; } .panel-head { padding-inline:11px; } .controls { padding:9px; } .filter { max-width:105px; } .table-wrap { overflow:visible; } table,tbody,tr,td { display:block; width:100%; } thead { display:none; } tbody { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:9px; } tbody tr { position:relative; min-height:117px; padding:10px; border:1px solid var(--line); } tbody tr.selected { border-color:var(--green); box-shadow:inset 0 2px var(--green); } td { padding:3px 0; border:0; } td:nth-child(2) { margin-top:7px; } td:nth-child(3) { position:absolute; right:9px; bottom:8px; width:auto; } td:nth-child(4) { color:var(--muted); font-size:9px; } .detail-body { display:block; padding:14px; } .detail-section { margin-top:16px; } }
-    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; } }
+    @media(max-width:980px) { .layout { grid-template-columns:1fr; } .empty-state { min-height:220px; } }
+    @media(max-width:700px) { .app { display:block; } .sidebar { position:static; width:100%; height:auto; padding:9px 13px; flex-direction:row; align-items:center; gap:10px; } .brand { padding:0; white-space:nowrap; } .brand-mark { width:30px; height:30px; flex-basis:30px; } .workspace-label,.side-bottom { display:none; } .sidebar nav { margin-left:auto; } .side-link.active { min-height:31px; padding:5px 8px; font-size:10px; } .topbar { min-height:49px; padding-inline:16px; } .content { padding:20px 16px 36px; } }
+    @media(max-width:480px) { .content { padding-inline:12px; } .fields { grid-template-columns:1fr; } .field.full { grid-column:auto; } .panel-head,.form-body,.result-body { padding:13px; } .top-link { font-size:10px; } }
+    @media(prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; } }
   </style>
 </head>
 <body>
   <div class="app">
-    <aside class="sidebar" aria-label="Demo navigation">
-      <a class="brand" href="index.html" aria-label="Queen SusaStrategy Limited home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="m6 11 8 7 6-12 6 12 8-7-3 16H9L6 11Z" fill="#d5ed81"/><path d="M12 23h16" stroke="#104b3d" stroke-width="2"/><text x="20" y="35" fill="#104b3d" font-family="Arial,sans-serif" font-size="10" font-weight="700" text-anchor="middle">QS</text></svg></span><span>Queen SusaStrategy<br>Limited</span></a>
-      <div class="workspace-label">Reliability workspace</div>
-      <nav><a class="side-link active" href="#assets"><span class="side-symbol" aria-hidden="true">A</span>Asset overview</a></nav>
-      <div class="side-bottom"><p>Local workspace<br>Changes stay in this browser.</p><a href="index.html">Company site ↗</a></div>
+    <aside class="sidebar" aria-label="Workspace navigation">
+      <a class="brand" href="index.html" aria-label="Queen SusaStrategy home"><span class="brand-mark" aria-hidden="true">QS</span><span>Queen SusaStrategy<br>Limited</span></a>
+      <div class="workspace-label">Business strategy workspace</div>
+      <nav><a class="side-link active" href="#assessment"><span class="side-symbol" aria-hidden="true">AI</span>AI opportunity planner</a></nav>
+      <div class="side-bottom"><p>Private browser workspace<br>Assessments stay on this device.</p><a href="index.html">Company overview ↗</a></div>
     </aside>
 
     <main class="main">
-      <header class="topbar"><span class="breadcrumb">MVP workspace / Asset overview</span><div class="top-actions"><span class="demo-label">Sample data</span><a class="back-link" href="index.html">← Company site</a></div></header>
+      <header class="topbar"><span class="breadcrumb">Business strategy / AI opportunity planner</span><a class="top-link" href="index.html">← Company overview</a></header>
       <div class="content">
-        <div class="page-head"><div><p class="overline">Maintenance planning</p><h1>Asset overview</h1><p class="page-subtitle">Manage a local workspace. CSV requires Asset ID, Asset, Type, and Area; service date, latest signal and severity are optional.</p></div><div class="top-actions"><button class="button" id="import-button" type="button">Import CSV</button><input id="import-file" type="file" accept=".csv,text/csv" hidden><button class="button" id="backup-button" type="button">Backup JSON</button><button class="button" id="restore-button" type="button">Restore JSON</button><input id="restore-file" type="file" accept=".json,application/json" hidden><button class="button" id="reset-button" type="button" title="Clear local assets, notes, events, and review marks">Reset workspace</button><button class="button" id="export-button" type="button" title="Download visible assets as CSV">↓ Export CSV</button></div></div>
+        <div class="page-head"><p class="overline">Queen SusaStrategy · first business AI MVP</p><h1>AI Opportunity Planner</h1><p class="page-subtitle">Turn a business challenge into a structured AI opportunity assessment. Describe the goal, process and available data to get a transparent readiness snapshot and practical next steps.</p></div>
+        <div class="notice" role="note"><strong>Early MVP:</strong> This planner uses a visible rules-based rubric to organize your inputs. It does not call or train an AI model, verify business facts, or provide professional, financial, legal or technical advice. Keep entries non-confidential.</div>
 
-        <div class="demo-banner" role="note"><span aria-hidden="true">i</span><span><strong>Local-first MVP workspace.</strong> The six seeded assets are fictional; assets and events you add or import are stored in this browser only. Priority is an illustrative rules-based aid, not a live AI model, validated risk assessment or safety decision.</span></div>
-
-        <section class="metric-grid" aria-label="Sample workspace summary">
-          <article class="metric"><div class="metric-label">Assets total</div><div class="metric-value" id="metric-total">0</div></article>
-          <article class="metric"><div class="metric-label">High priority</div><div class="metric-value metric-accent" id="metric-high">0</div></article>
-          <article class="metric"><div class="metric-label">Open follow-ups</div><div class="metric-value" id="metric-open">0</div></article>
-          <article class="metric"><div class="metric-label">Reviewed</div><div class="metric-value" id="metric-reviewed">0 <span class="metric-hint">of 0 assets</span></div></article>
-        </section>
-
-        <section class="workspace" id="assets" aria-label="Asset list and selected asset details">
-          <div class="asset-panel">
-            <div class="panel-head"><h2>Maintenance queue</h2><span class="panel-count" id="visible-count" aria-live="polite">0 assets</span><button class="button primary" id="add-asset-button" type="button">+ Add asset</button></div>
-            <div class="controls"><input class="search" id="asset-search" type="search" placeholder="Search assets or equipment type" aria-label="Search assets"><select class="filter" id="priority-filter" aria-label="Filter by priority"><option value="all">All priorities</option><option value="High">High priority</option><option value="Medium">Medium priority</option><option value="Low">Low priority</option></select><select class="filter" id="status-filter" aria-label="Filter by review status"><option value="all">All statuses</option><option value="open">Needs review</option><option value="reviewed">Reviewed</option></select></div>
-            <div class="table-wrap"><table><thead><tr><th scope="col">Asset</th><th scope="col">Priority</th><th scope="col">Score</th><th scope="col">Last service</th></tr></thead><tbody id="asset-rows"></tbody></table></div>
+        <section class="layout" id="assessment" aria-label="Business assessment and AI opportunity report">
+          <div class="panel">
+            <div class="panel-head"><div><h2>Business assessment</h2><p>Complete the fields to prepare an opportunity brief.</p></div></div>
+            <form id="assessment-form" class="form-body">
+              <div class="fields">
+                <div class="field"><label for="business-name">Business or team name</label><input id="business-name" name="businessName" maxlength="80" placeholder="e.g. Northstar Foods" required></div>
+                <div class="field"><label for="sector">Industry or sector</label><input id="sector" name="sector" maxlength="80" placeholder="e.g. Retail, financial services" required></div>
+                <div class="field full"><label for="goal">Business goal</label><input id="goal" name="goal" maxlength="180" placeholder="What business outcome do you want to improve?" required></div>
+                <div class="field full"><label for="challenge">Main challenge</label><textarea id="challenge" name="challenge" maxlength="700" placeholder="Describe the current business problem and who it affects." required></textarea><p class="hint">Do not include personal, confidential, customer-identifying or regulated data.</p></div>
+                <div class="field"><label for="function">Business function</label><select id="function" name="businessFunction" required><option value="">Choose a function</option><option value="customer">Customer service</option><option value="sales">Sales and marketing</option><option value="finance">Finance and administration</option><option value="operations">Operations and delivery</option><option value="people">People and HR</option><option value="knowledge">Research and knowledge work</option></select></div>
+                <div class="field"><label for="data-readiness">Available data</label><select id="data-readiness" name="dataReadiness" required><option value="">Choose the closest fit</option><option value="none">Little or no relevant data</option><option value="scattered">Data exists in files or spreadsheets</option><option value="digital">Mostly digital, across systems</option><option value="organized">Organized, accessible datasets</option></select></div>
+                <div class="field"><label for="process">How consistent is the process?</label><select id="process" name="process" required><option value="">Choose the closest fit</option><option value="ad-hoc">Mostly manual or changes by person</option><option value="partial">Some steps are repeatable</option><option value="standard">Documented and mostly consistent</option></select></div>
+                <div class="field"><label for="readiness">Team readiness</label><select id="readiness" name="teamReadiness" required><option value="">Choose the closest fit</option><option value="exploring">Exploring the problem</option><option value="sponsor">A business owner is engaged</option><option value="ready">Owner and delivery team are identified</option></select></div>
+                <div class="field"><label for="impact">Potential business impact</label><select id="impact" name="impact" required><option value="">Choose the closest fit</option><option value="limited">Helpful improvement, limited scope</option><option value="meaningful">Meaningful time, quality or service gain</option><option value="material">Important business outcome or bottleneck</option></select></div>
+                <div class="field"><label for="risk">Decision sensitivity</label><select id="risk" name="risk" required><option value="">Choose the closest fit</option><option value="low">Internal support or low-impact task</option><option value="moderate">Customer or business workflow</option><option value="high">High-impact, regulated or safety-related</option></select></div>
+              </div>
+              <div class="form-actions"><button class="button primary" type="submit">Build opportunity brief</button><button class="button" id="clear-button" type="reset">Clear form</button></div>
+            </form>
           </div>
-          <aside class="detail" id="asset-detail" aria-label="Selected asset details" aria-live="polite"></aside>
+
+          <div>
+            <section class="panel" aria-live="polite">
+              <div class="panel-head"><div><h2>Opportunity brief</h2><p id="result-subtitle">Your assessment will appear here.</p></div><span class="side-symbol" aria-label="Rules-based assessment">AI</span></div>
+              <div class="empty-state" id="empty-state"><span class="empty-mark" aria-hidden="true">AI</span><strong>Start with a business need</strong><p>Complete the assessment to see an AI-readiness snapshot, a use-case direction and a staged action plan.</p></div>
+              <div class="result-body results" id="results" hidden></div>
+            </section>
+            <section class="saved" aria-labelledby="saved-heading"><div class="panel-head"><div><h2 id="saved-heading">Saved assessments</h2><p>Stored locally in this browser.</p></div><button class="button" id="clear-saved-button" type="button">Clear saved</button></div><div class="saved-list" id="saved-list"><p class="saved-empty">No saved assessments yet.</p></div></section>
+            <p class="footer-note">Readiness score is a discussion aid, not a prediction of ROI, AI success or business performance. Review decisions with qualified people who understand the business, its data and applicable requirements.</p>
+          </div>
         </section>
-        <p class="method-note">Scoring transparency: for assets with logged events, example score = 15 + (12 × highest recorded severity) + (8 × event count, capped at five), up to 100. Priority bands are Low below 38, Medium 38–64, High 65+. Seeded assets use illustrative example scores. This rule is not validated for real equipment.</p>
       </div>
     </main>
   </div>
-  <dialog id="asset-dialog" aria-labelledby="asset-dialog-title">
-    <form id="asset-form"><div class="dialog-head"><h2 id="asset-dialog-title">Add asset</h2><button class="dialog-close" type="button" data-close="asset-dialog" aria-label="Close">×</button></div><div class="form-grid">
-      <div class="form-field"><label for="new-asset-id">Asset ID</label><input id="new-asset-id" name="id" required maxlength="24" autocomplete="off"></div>
-      <div class="form-field"><label for="new-asset-type">Equipment type</label><input id="new-asset-type" name="type" required maxlength="40" placeholder="Pump, motor, valve"></div>
-      <div class="form-field full"><label for="new-asset-name">Asset name</label><input id="new-asset-name" name="name" required maxlength="80"></div>
-      <div class="form-field full"><label for="new-asset-area">Area / location</label><input id="new-asset-area" name="area" required maxlength="80"></div>
-      <div class="form-field"><label for="new-asset-service">Last service date</label><input id="new-asset-service" name="serviceDate" type="date" required></div>
-      <div class="form-field"><label for="new-asset-severity">Initial condition</label><select id="new-asset-severity" name="severity"><option value="1">1 · Routine</option><option value="2">2 · Minor</option><option value="3" selected>3 · Moderate</option><option value="4">4 · Serious</option><option value="5">5 · Critical</option></select></div>
-      <div class="form-field full"><label for="new-asset-issue">Condition note</label><textarea id="new-asset-issue" name="issue" maxlength="500" required></textarea></div>
-      <div class="form-actions"><button class="button" type="button" data-close="asset-dialog">Cancel</button><button class="button primary" id="asset-submit" type="submit">Save asset</button></div>
-    </div></form>
-  </dialog>
-  <dialog id="event-dialog" aria-labelledby="event-dialog-title">
-    <form id="event-form"><div class="dialog-head"><h2 id="event-dialog-title">Log maintenance event</h2><button class="dialog-close" type="button" data-close="event-dialog" aria-label="Close">×</button></div><div class="form-grid">
-      <div class="form-field"><label for="event-date">Event date</label><input id="event-date" name="date" type="date" required></div>
-      <div class="form-field"><label for="event-kind">Event type</label><select id="event-kind" name="kind"><option>Inspection</option><option>Service</option><option>Repair</option><option>Failure</option></select></div>
-      <div class="form-field full"><label for="event-severity">Observed severity</label><select id="event-severity" name="severity"><option value="1">1 · Routine</option><option value="2">2 · Minor</option><option value="3" selected>3 · Moderate</option><option value="4">4 · Serious</option><option value="5">5 · Critical</option></select></div>
-      <div class="form-field full"><label for="event-notes">Findings / work completed</label><textarea id="event-notes" name="notes" maxlength="1000" required></textarea></div>
-      <div class="form-actions"><button class="button" type="button" data-close="event-dialog">Cancel</button><button class="button primary" type="submit">Save event</button></div>
-    </div></form>
-  </dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
   <script>
-    const assets = [
-      { id:"P-04", name:"Cooling water pump", area:"Utilities / North bay", type:"Pump", priority:"High", score:82, service:"12 days ago", issue:"Repeated seal temperature warnings recorded during the last two inspections.", recommendation:"Review recent seal inspection findings and confirm whether a follow-up check is already scheduled.", evidence:["3 related work orders in sample history","Temperature noted above normal in 2 example inspections","Last service recorded 12 days ago"] },
-      { id:"C-12", name:"Air compressor", area:"Compressor house", type:"Compressor", priority:"High", score:74, service:"31 days ago", issue:"Recurring vibration comments appear in consecutive sample service notes.", recommendation:"Compare vibration readings with the asset's normal operating range and review the latest service note.", evidence:["2 similar vibration notes in sample history","Operating hours are synthetic demo values","Last service recorded 31 days ago"] },
-      { id:"M-08", name:"Transfer motor", area:"Line 2 / transfer", type:"Motor", priority:"Medium", score:56, service:"46 days ago", issue:"A single sample note mentions elevated bearing noise.", recommendation:"Confirm the observation at the next planned inspection and record a condition reading.", evidence:["1 bearing-noise note in sample history","No failure event represented","Last service recorded 46 days ago"] },
-      { id:"V-03", name:"Process control valve", area:"Process line / east", type:"Valve", priority:"Medium", score:48, service:"23 days ago", issue:"A sample maintenance entry indicates slower-than-usual valve response.", recommendation:"Check the response-time observation against the site acceptance criteria.", evidence:["1 response-time note in sample history","No real process data is connected","Last service recorded 23 days ago"] },
-      { id:"F-02", name:"Ventilation fan", area:"Workshop / roof level", type:"Fan", priority:"Low", score:24, service:"8 days ago", issue:"No recurring issue is represented in the sample records.", recommendation:"Continue the routine inspection schedule and update the asset history after service.", evidence:["Routine sample service completed","No repeat issue represented","Last service recorded 8 days ago"] },
-      { id:"G-07", name:"Standby generator", area:"Power house", type:"Generator", priority:"Low", score:19, service:"5 days ago", issue:"A routine inspection is logged with no follow-up finding in the sample data.", recommendation:"Retain the existing preventive maintenance interval and verify readings at the next check.", evidence:["Sample inspection marked routine","No open sample work order","Last service recorded 5 days ago"] }
-    ];
-
-    const storageKey = "hv-reliability-workspace-v2";
-    const defaultState = { reviewed: [], notes: {}, customAssets: [], events: [], selectedAssetId: null };
-    let savedState = loadState();
-    let selectedId = savedState.selectedAssetId || assets[0].id;
+    const storageKey = "qs-ai-opportunity-planner-v1";
+    const scoreValues = {
+      dataReadiness: { none:0, scattered:10, digital:20, organized:30 },
+      process: { "ad-hoc":5, partial:15, standard:25 },
+      impact: { limited:8, meaningful:17, material:25 },
+      teamReadiness: { exploring:4, sponsor:12, ready:20 }
+    };
+    const functions = {
+      customer: { name:"Customer service", idea:"Start with a staff-assist knowledge search or draft-response workflow using approved, current business information.", data:"Collect approved FAQs, service policies and a small set of common enquiries. Remove personal and sensitive information before any future testing.", measure:"Track staff handling time, answer correction rate and customer satisfaction in a controlled review." },
+      sales: { name:"Sales and marketing", idea:"Explore research synthesis, campaign content drafting or lead qualification support with a human review step.", data:"Gather approved product information, campaign outcomes and clearly defined lead criteria. Check permissions and data quality.", measure:"Compare review time, qualified conversion and content correction rates against a documented baseline." },
+      finance: { name:"Finance and administration", idea:"Consider document classification, data extraction or exception triage as staff-reviewed assistance; keep approvals and financial controls with authorized people.", data:"Map document types, required fields and exception cases. Use synthetic or properly authorized, de-identified examples during early testing.", measure:"Measure extraction accuracy, exception handling time and human correction rate before considering workflow changes." },
+      operations: { name:"Operations and delivery", idea:"Look for repeatable planning, scheduling, forecasting or work-summary tasks where an AI/ML result could inform—not make—the decision.", data:"Document process steps, relevant historical records, data owners and known gaps. Check that representative examples are available.", measure:"Set a baseline for cycle time, rework or service level and review quality with process owners." },
+      people: { name:"People and HR", idea:"Begin with low-risk internal support, such as policy search or drafting assistance. Avoid automated hiring, performance or employment decisions.", data:"Use approved, current policies and non-personal test questions. Do not process employee records or sensitive attributes in this planner.", measure:"Assess answer accuracy, source traceability and staff usefulness; keep people decisions with qualified staff." },
+      knowledge: { name:"Research and knowledge work", idea:"Explore a source-grounded search or synthesis assistant that helps staff find approved documents and produce reviewable summaries.", data:"Identify authoritative documents, ownership, access rules, update cadence and a small set of questions with known answers.", measure:"Test retrieval relevance, citation accuracy, review time and the rate of unsupported statements." }
+    };
+    let assessments = [];
+    let currentAssessment = null;
     let toastTimer;
-
-    function loadState() {
-      try {
-        const current = localStorage.getItem(storageKey);
-        const value = JSON.parse(current || localStorage.getItem("hv-reliability-demo-v1") || "null");
-        return value && Array.isArray(value.reviewed) && value.notes && typeof value.notes === "object"
-          ? { ...structuredClone(defaultState), ...value, customAssets:Array.isArray(value.customAssets) ? value.customAssets : [], events:Array.isArray(value.events) ? value.events : [] }
-          : structuredClone(defaultState);
-      } catch { return structuredClone(defaultState); }
-    }
-
-    function getAssets() { return [...assets, ...savedState.customAssets]; }
-
-    function normalizeAssetId(value) {
-      return String(value ?? "").trim().toLowerCase();
-    }
-
-    function getAssetSummary(asset) {
-      const history = savedState.events.filter(event => event.assetId === asset.id).sort((left, right) => right.date.localeCompare(left.date));
-      if (!history.length) return { ...asset, lastServiceDate:asset.lastServiceDate || "" };
-      const latest = history[0];
-      const severity = Math.max(...history.map(event => Number(event.severity) || 1));
-      const score = Math.min(100, 15 + severity * 12 + Math.min(history.length, 5) * 8);
-      const priority = score >= 65 ? "High" : score >= 38 ? "Medium" : "Low";
-      const latestService = history.find(event => ["Service", "Repair"].includes(event.kind));
-      return {
-        ...asset,
-        priority,
-        score,
-        service:latestService ? formatDate(latestService.date) : asset.service,
-        lastServiceDate:latestService?.date || asset.lastServiceDate || "",
-        issue:latest.notes,
-        recommendation:`Review the ${latest.kind.toLowerCase()} finding from ${formatDate(latest.date)} with the responsible maintenance lead.`,
-        evidence:history.slice(0, 3).map(event => `${event.kind} · severity ${event.severity}/5 · ${formatDate(event.date)}`)
-      };
-    }
-
-    function formatDate(value) {
-      if (!value) return "Date not recorded";
-      const date = /^\d{4}-\d{2}-\d{2}$/.test(value) ? new Date(`${value}T00:00:00`) : new Date(value);
-      return Number.isNaN(date.valueOf()) ? String(value) : date.toLocaleDateString();
-    }
-
-    function escapeHtml(text) {
-      const node = document.createElement("span");
-      node.textContent = String(text ?? "");
-      return node.innerHTML;
-    }
-
-    function saveState() {
-      try { localStorage.setItem(storageKey, JSON.stringify(savedState)); }
-      catch { announce("Browser storage is unavailable. Changes will last until this page closes."); }
-    }
 
     function announce(message) {
       const toast = document.getElementById("toast");
       toast.textContent = message;
       toast.classList.add("show");
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 3000);
     }
 
-    function getFilteredAssets() {
-      const query = document.getElementById("asset-search").value.trim().toLowerCase();
-      const priority = document.getElementById("priority-filter").value;
-      const status = document.getElementById("status-filter").value;
-      return getAssets().map(getAssetSummary).filter(asset => {
-        const matchesQuery = `${asset.id} ${asset.name} ${asset.type} ${asset.area}`.toLowerCase().includes(query);
-        const matchesPriority = priority === "all" || asset.priority === priority;
-        const isReviewed = savedState.reviewed.includes(asset.id);
-        const matchesStatus = status === "all" || (status === "reviewed" ? isReviewed : !isReviewed);
-        return matchesQuery && matchesPriority && matchesStatus;
-      });
+    function escapeHtml(value) {
+      const node = document.createElement("span");
+      node.textContent = String(value ?? "");
+      return node.innerHTML;
     }
 
-    function renderMetrics() {
-      const records = getAssets().map(getAssetSummary);
-      const reviewedCount = records.filter(asset => savedState.reviewed.includes(asset.id)).length;
-      document.getElementById("metric-total").textContent = records.length;
-      document.getElementById("metric-high").textContent = records.filter(asset => asset.priority === "High").length;
-      document.getElementById("metric-open").textContent = records.length - reviewedCount;
-      document.getElementById("metric-reviewed").innerHTML = `${reviewedCount} <span class="metric-hint">of ${records.length} assets</span>`;
-    }
-
-    function renderRows() {
-      const filtered = getFilteredAssets();
-      document.getElementById("visible-count").textContent = `${filtered.length} ${filtered.length === 1 ? "asset" : "assets"}`;
-      const rows = document.getElementById("asset-rows");
-      if (!filtered.length) {
-        rows.innerHTML = '<tr><td colspan="4"><div class="empty-state">No assets match these filters.</div></td></tr>';
-        if (!filtered.some(asset => asset.id === selectedId)) document.getElementById("asset-detail").innerHTML = '<div class="empty-state">Select a matching asset to inspect its sample details.</div>';
-        return;
+    function loadAssessments() {
+      try {
+        const stored = localStorage.getItem(storageKey);
+        if (!stored) return [];
+        const parsed = JSON.parse(stored);
+        if (!Array.isArray(parsed)) throw new Error("Saved assessments have an invalid format.");
+        return parsed.filter(item => item && typeof item.id === "string" && item.inputs && typeof item.inputs.businessName === "string" && Number.isFinite(item.score));
+      } catch (error) {
+        announce(`Could not load saved assessments: ${error.message}`);
+        return [];
       }
-      if (!filtered.some(asset => asset.id === selectedId)) selectedId = filtered[0].id;
-      rows.innerHTML = filtered.map(asset => {
-        const reviewed = savedState.reviewed.includes(asset.id);
-        const priorityClass = asset.priority.toLowerCase();
-        return `<tr tabindex="0" role="button" aria-label="Select ${escapeHtml(asset.name)}, ${asset.priority} priority" aria-pressed="${asset.id === selectedId}" class="${asset.id === selectedId ? "selected" : ""}" data-asset="${escapeHtml(asset.id)}">
-          <td><span class="asset-name">${escapeHtml(asset.name)}</span><span class="asset-id">${escapeHtml(asset.id)} · ${escapeHtml(asset.area)}</span></td>
-          <td><span class="pill ${priorityClass}">${asset.priority}</span></td>
-          <td><strong>${asset.score}</strong>${reviewed ? ' <span class="reviewed-label" title="Reviewed">✓</span>' : ""}</td>
-          <td>${escapeHtml(asset.service)}</td>
-        </tr>`;
-      }).join("");
-      rows.querySelectorAll("tr[data-asset]").forEach(row => {
-        const select = () => { selectedId = row.dataset.asset; savedState.selectedAssetId = selectedId; saveState(); renderRows(); renderDetail(); };
-        row.addEventListener("click", select);
-        row.addEventListener("keydown", event => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); select(); } });
-      });
-      renderDetail();
     }
 
-    function renderDetail() {
-      const storedAsset = getAssets().find(item => item.id === selectedId);
-      if (!storedAsset) return;
-      const asset = getAssetSummary(storedAsset);
-      const reviewed = savedState.reviewed.includes(storedAsset.id);
-      const notes = savedState.notes[asset.id] || [];
-      const history = savedState.events.filter(event => event.assetId === asset.id).sort((left, right) => right.date.localeCompare(left.date));
-      document.getElementById("asset-detail").innerHTML = `<div class="panel-head"><h2>Asset details</h2><span class="panel-count">${assets.some(item => item.id === asset.id) ? "Example record" : "Workspace record"}</span></div>
-        <div class="detail-body">
-          <div class="detail-top"><div><h3>${escapeHtml(asset.name)}</h3><span class="detail-id">${escapeHtml(asset.id)} · ${escapeHtml(asset.area)}</span></div><span class="pill ${asset.priority.toLowerCase()}">${asset.priority}</span></div>
-          <div class="score-row"><span>Example priority score</span><span>Rule-based sample</span><strong>${asset.score}</strong></div>
-          <div class="detail-section"><h4>${history.length ? "Latest maintenance finding" : "Condition note"}</h4><p>${escapeHtml(asset.issue)}</p></div>
-          <div class="detail-section"><h4>${history.length ? "Recent event evidence" : "Example evidence"}</h4><ul class="evidence">${asset.evidence.map(item => `<li>${escapeHtml(item)}</li>`).join("")}</ul></div>
-          <div class="detail-section"><h4>Suggested human review</h4><p>${escapeHtml(asset.recommendation)}</p></div>
-          <div class="detail-section"><h4>Maintenance history (${history.length})</h4>${history.length ? `<ul class="event-list">${history.map(event => `<li class="event-item"><div class="event-item-head"><strong>${escapeHtml(event.kind)} · severity ${escapeHtml(event.severity)}/5</strong><button class="mini-action" type="button" data-delete-event="${escapeHtml(event.id)}" aria-label="Delete ${escapeHtml(event.kind)} event">Remove</button></div><span>${escapeHtml(formatDate(event.date))} · ${escapeHtml(event.notes)}</span></li>`).join("")}</ul>` : '<p>No events logged for this asset.</p>'}</div>
-          <div class="detail-actions">${assets.some(item => item.id === storedAsset.id) ? "" : '<button class="button" id="edit-asset-button" type="button">Edit asset</button><button class="button" id="delete-asset-button" type="button">Delete asset</button>'}<button class="button primary" id="event-button" type="button">+ Log maintenance event</button><button class="button" id="review-button" type="button">${reviewed ? "✓ Reviewed" : "Mark reviewed"}</button></div>
-          <div class="notes-area"><label class="note-label" for="maintenance-note">Add a follow-up note</label><textarea id="maintenance-note" maxlength="500" placeholder="Record a follow-up thought for this asset"></textarea><button class="button" id="save-note" type="button" style="margin-top:7px">Save note</button><div class="note-list" aria-label="Saved follow-up notes">${notes.length ? [...notes].reverse().map(note => `<div class="note-entry"><time>${new Date(note.createdAt).toLocaleString()}</time>${escapeHtml(note.text)}</div>`).join("") : '<div class="panel-count">No notes for this asset yet.</div>'}</div></div>
-        </div>`;
-      document.getElementById("event-button").addEventListener("click", () => openEventDialog(storedAsset));
-      document.getElementById("review-button").addEventListener("click", () => toggleReviewed(storedAsset.id));
-      document.querySelectorAll("[data-delete-event]").forEach(button => button.addEventListener("click", () => deleteEvent(button.dataset.deleteEvent)));
-      if (!assets.some(item => item.id === storedAsset.id)) {
-        document.getElementById("edit-asset-button").addEventListener("click", () => openAssetDialog(storedAsset));
-        document.getElementById("delete-asset-button").addEventListener("click", () => deleteAsset(storedAsset.id));
+    function persistAssessments() {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify(assessments));
+        return true;
+      } catch (error) {
+        announce(`Could not save assessments in this browser: ${error.message}`);
+        return false;
       }
-      document.getElementById("save-note").addEventListener("click", () => addNote(asset.id));
     }
 
-    function toggleReviewed(id) {
-      savedState.reviewed = savedState.reviewed.includes(id) ? savedState.reviewed.filter(item => item !== id) : [...savedState.reviewed, id];
-      saveState();
-      renderMetrics();
-      renderRows();
-      announce(savedState.reviewed.includes(id) ? "Asset marked reviewed in this browser." : "Review mark removed.");
-    }
-
-    function addNote(id) {
-      const input = document.getElementById("maintenance-note");
-      const text = input.value.trim();
-      if (!text) { input.focus(); announce("Enter a note before saving."); return; }
-      savedState.notes[id] = [...(savedState.notes[id] || []), { text, createdAt: new Date().toISOString() }];
-      saveState();
-      renderDetail();
-      announce("Demo note saved in this browser.");
-    }
-
-    function openEventDialog(asset) {
-      document.getElementById("event-form").dataset.assetId = asset.id;
-      document.getElementById("event-date").value = new Date().toISOString().slice(0, 10);
-      document.getElementById("event-form").reset();
-      document.getElementById("event-date").value = new Date().toISOString().slice(0, 10);
-      document.getElementById("event-dialog").showModal();
-    }
-
-    function saveAsset(form) {
+    function collectInputs(form) {
       const values = Object.fromEntries(new FormData(form).entries());
-      const id = values.id.trim();
-      const editingId = form.dataset.editingId || "";
-      if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,23}$/.test(id)) {
-        document.getElementById("new-asset-id").setCustomValidity("Use 1-24 letters, numbers, dots, underscores, or hyphens.");
-        document.getElementById("new-asset-id").reportValidity();
-        return;
+      for (const key of ["businessName","sector","goal","challenge","businessFunction","dataReadiness","process","teamReadiness","impact","risk"]) {
+        if (typeof values[key] !== "string" || !values[key].trim()) throw new Error("Complete all fields before building the brief.");
+        values[key] = values[key].trim();
       }
-      const duplicateId = getAssets().find(asset => normalizeAssetId(asset.id) === normalizeAssetId(id) && normalizeAssetId(asset.id) !== normalizeAssetId(editingId));
-      if (duplicateId) {
-        document.getElementById("new-asset-id").setCustomValidity("An asset with this ID already exists.");
-        document.getElementById("new-asset-id").reportValidity();
-        return;
-      }
-      document.getElementById("new-asset-id").setCustomValidity("");
-      const severity = Number(values.severity);
-      const score = Math.min(100, 15 + severity * 12);
-      const asset = {
-        id,
-        name:values.name.trim(),
-        area:values.area.trim(),
-        type:values.type.trim(),
-        priority:score >= 65 ? "High" : score >= 38 ? "Medium" : "Low",
+      return values;
+    }
+
+    function buildAssessment(inputs) {
+      const score = scoreValues.dataReadiness[inputs.dataReadiness] + scoreValues.process[inputs.process] + scoreValues.impact[inputs.impact] + scoreValues.teamReadiness[inputs.teamReadiness];
+      const tier = score >= 70 ? "Pilot candidate to investigate" : score >= 40 ? "Prepare the foundations" : "Explore and define the problem";
+      const readiness = inputs.dataReadiness === "none"
+        ? "First map where relevant information is created and who is authorized to use it."
+        : inputs.dataReadiness === "scattered"
+          ? "Consolidate a small, representative sample and document its source, quality and permissions."
+          : inputs.dataReadiness === "digital"
+            ? "Map system ownership, access constraints, format consistency and update frequency."
+            : "Confirm dataset coverage, representativeness, quality, access rights and a suitable test set.";
+      const riskNote = inputs.risk === "high"
+        ? "High-impact or safety-related context selected: do not automate decisions. Seek domain, legal and safety review before any experiment."
+        : inputs.risk === "moderate"
+          ? "Customer or business workflow selected: include privacy, fairness, accuracy and human escalation checks in any future test."
+          : "Start with a reversible, low-impact workflow and keep a person responsible for reviewing outputs.";
+      const useCase = functions[inputs.businessFunction];
+      return {
+        id: globalThis.crypto?.randomUUID?.() || `assessment-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+        createdAt: new Date().toISOString(),
+        inputs,
         score,
-        severity,
-        service:formatDate(values.serviceDate),
-        lastServiceDate:values.serviceDate,
-        issue:values.issue.trim(),
-        recommendation:"Review the recorded condition and set a follow-up appropriate to site procedures.",
-        evidence:[`Initial condition severity ${severity}/5`, `Asset added ${formatDate(new Date().toISOString().slice(0, 10))}`]
+        tier,
+        useCase,
+        readiness,
+        riskNote,
+        factors: [
+          { label:"Data readiness", score:scoreValues.dataReadiness[inputs.dataReadiness], max:30 },
+          { label:"Process consistency", score:scoreValues.process[inputs.process], max:25 },
+          { label:"Potential business impact", score:scoreValues.impact[inputs.impact], max:25 },
+          { label:"Team readiness", score:scoreValues.teamReadiness[inputs.teamReadiness], max:20 }
+        ]
       };
-      if (editingId) {
-        savedState.customAssets = savedState.customAssets.map(existing => normalizeAssetId(existing.id) === normalizeAssetId(editingId) ? asset : existing);
-        if (normalizeAssetId(editingId) !== normalizeAssetId(id)) {
-          savedState.events = savedState.events.map(event => normalizeAssetId(event.assetId) === normalizeAssetId(editingId) ? { ...event, assetId:id } : event);
-          if (savedState.notes[editingId]) { savedState.notes[id] = savedState.notes[editingId]; delete savedState.notes[editingId]; }
-          savedState.reviewed = savedState.reviewed.map(reviewedId => normalizeAssetId(reviewedId) === normalizeAssetId(editingId) ? id : reviewedId);
-        }
-      } else {
-        savedState.customAssets.push(asset);
+    }
+
+    function renderAssessment(assessment) {
+      currentAssessment = assessment;
+      document.getElementById("empty-state").hidden = true;
+      const results = document.getElementById("results");
+      results.hidden = false;
+      document.getElementById("result-subtitle").textContent = `${assessment.inputs.businessName} · ${assessment.useCase.name}`;
+      const factorMarkup = assessment.factors.map(factor => `<div class="factor"><span>${escapeHtml(factor.label)}</span><strong>${factor.score}/${factor.max}</strong><div class="factor-track" aria-label="${factor.score} out of ${factor.max}"><span style="width:${Math.round(factor.score/factor.max*100)}%"></span></div></div>`).join("");
+      results.innerHTML = `<div class="score-card"><div class="score" aria-label="Readiness score ${assessment.score} out of 100">${assessment.score}</div><div><strong>${escapeHtml(assessment.tier)}</strong><p>Initial AI opportunity readiness · ${new Date(assessment.createdAt).toLocaleDateString()}</p></div></div>
+        <section class="result-section"><h3>Business snapshot</h3><p><strong>${escapeHtml(assessment.inputs.sector)}</strong>: ${escapeHtml(assessment.inputs.challenge)} Goal: ${escapeHtml(assessment.inputs.goal)}</p></section>
+        <section class="result-section"><h3>Opportunity direction · ${escapeHtml(assessment.useCase.name)}</h3><p>${escapeHtml(assessment.useCase.idea)}</p></section>
+        <section class="result-section"><h3>Readiness factors</h3><div class="factor-list">${factorMarkup}</div></section>
+        <section class="result-section"><h3>Recommended first steps</h3><ul class="result-list"><li>Confirm the business owner, users and a baseline for: ${escapeHtml(assessment.inputs.goal)}</li><li>${escapeHtml(assessment.readiness)}</li><li>${escapeHtml(assessment.useCase.data)}</li><li>${escapeHtml(assessment.useCase.measure)}</li></ul></section>
+        <section class="result-section"><h3>Risk and oversight</h3><p>${escapeHtml(assessment.riskNote)}</p></section>
+        <section class="result-section"><h3>Assessment boundary</h3><p>This rules-based snapshot organizes your self-reported answers. It is not an AI-generated recommendation, technical feasibility study, ROI forecast or guarantee of results.</p></section>
+        <div class="result-actions"><button class="button primary" id="save-assessment" type="button">Save assessment</button><button class="button" id="export-assessment" type="button">Download brief</button><button class="button" id="print-assessment" type="button">Print</button></div>`;
+      document.getElementById("save-assessment").addEventListener("click", saveAssessment);
+      document.getElementById("export-assessment").addEventListener("click", exportAssessment);
+      document.getElementById("print-assessment").addEventListener("click", () => window.print());
+    }
+
+    function saveAssessment() {
+      if (!currentAssessment) return;
+      if (assessments.some(item => item.id === currentAssessment.id)) { announce("This assessment is already saved."); return; }
+      assessments = [currentAssessment, ...assessments].slice(0, 20);
+      if (persistAssessments()) {
+        renderSaved();
+        announce("Assessment saved in this browser.");
       }
-      savedState.selectedAssetId = id;
-      delete form.dataset.editingId;
-      saveState();
-      selectedId = id;
-      form.reset();
-      document.getElementById("asset-dialog").close();
-      renderMetrics();
-      renderRows();
-      announce("Asset added to this browser workspace.");
     }
 
-    function openAssetDialog(asset = null) {
-      const form = document.getElementById("asset-form");
-      form.reset();
-      document.getElementById("asset-dialog-title").textContent = asset ? "Edit asset" : "Add asset";
-      document.getElementById("asset-submit").textContent = asset ? "Save changes" : "Save asset";
-      if (asset) {
-        form.dataset.editingId = asset.id;
-        for (const field of ["id", "name", "type", "area", "issue"]) form.elements[field].value = asset[field] || "";
-        form.elements.serviceDate.value = asset.lastServiceDate || "";
-        form.elements.severity.value = String(asset.severity || 3);
-      } else {
-        delete form.dataset.editingId;
-        form.elements.serviceDate.value = new Date().toISOString().slice(0, 10);
+    function renderSaved() {
+      const list = document.getElementById("saved-list");
+      if (!assessments.length) {
+        list.innerHTML = '<p class="saved-empty">No saved assessments yet.</p>';
+        return;
       }
-      document.getElementById("asset-dialog").showModal();
+      list.innerHTML = assessments.map(item => `<button class="saved-item" type="button" data-assessment-id="${escapeHtml(item.id)}"><span><strong>${escapeHtml(item.inputs.businessName)}</strong><span>${escapeHtml(item.useCase?.name || "Business assessment")} · ${new Date(item.createdAt).toLocaleDateString()}</span></span><strong>${Number(item.score)}/100</strong></button>`).join("");
+      list.querySelectorAll("[data-assessment-id]").forEach(button => button.addEventListener("click", () => {
+        const assessment = assessments.find(item => item.id === button.dataset.assessmentId);
+        if (assessment) renderAssessment(assessment);
+      }));
     }
 
-    function deleteAsset(id) {
-      const asset = savedState.customAssets.find(item => item.id === id);
-      if (!asset || !window.confirm(`Delete ${asset.name} and its local events and notes?`)) return;
-      savedState.customAssets = savedState.customAssets.filter(item => item.id !== id);
-      savedState.events = savedState.events.filter(event => event.assetId !== id);
-      savedState.reviewed = savedState.reviewed.filter(item => item !== id);
-      delete savedState.notes[id];
-      const nextAsset = getAssets().find(item => item.id !== id) || assets[0];
-      savedState.selectedAssetId = nextAsset?.id || null;
-      selectedId = nextAsset?.id || assets[0].id;
-      saveState();
-      renderMetrics();
-      renderRows();
-      announce("Asset and related local history deleted.");
-    }
-
-    function deleteEvent(eventId) {
-      const event = savedState.events.find(item => item.id === eventId);
-      if (!event || !window.confirm("Remove this maintenance event? Its priority score will be recalculated.")) return;
-      savedState.events = savedState.events.filter(item => item.id !== eventId);
-      savedState.reviewed = savedState.reviewed.filter(id => id !== event.assetId);
-      saveState();
-      renderMetrics();
-      renderRows();
-      announce("Maintenance event removed and sample priority recalculated.");
-    }
-
-    function saveEvent(form) {
-      const values = Object.fromEntries(new FormData(form).entries());
-      const assetId = form.dataset.assetId;
-      const asset = getAssets().find(item => item.id === assetId);
-      if (!asset) { announce("This asset is no longer available."); return; }
-      savedState.events.push({
-        id:globalThis.crypto?.randomUUID?.() || `event-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-        assetId,
-        date:values.date,
-        kind:values.kind,
-        severity:Number(values.severity),
-        notes:values.notes.trim(),
-        createdAt:new Date().toISOString()
-      });
-      savedState.reviewed = savedState.reviewed.filter(id => id !== assetId);
-      saveState();
-      form.reset();
-      document.getElementById("event-dialog").close();
-      renderMetrics();
-      renderRows();
-      announce("Maintenance event saved; sample priority recalculated.");
-    }
-
-    function parseCsv(text) {
-      const rows = [];
-      let row = [];
-      let field = "";
-      let quoted = false;
-      for (let index = 0; index < text.length; index += 1) {
-        const character = text[index];
-        if (quoted && character === '"' && text[index + 1] === '"') { field += '"'; index += 1; }
-        else if (character === '"') quoted = !quoted;
-        else if (character === "," && !quoted) { row.push(field.trim()); field = ""; }
-        else if ((character === "\n" || character === "\r") && !quoted) {
-          if (character === "\r" && text[index + 1] === "\n") index += 1;
-          row.push(field.trim());
-          if (row.some(value => value !== "")) rows.push(row);
-          row = [];
-          field = "";
-        } else field += character;
-      }
-      if (quoted) throw new Error("CSV contains an unclosed quoted field.");
-      row.push(field.trim());
-      if (row.some(value => value !== "")) rows.push(row);
-      if (rows.length < 2) throw new Error("CSV must contain a header and at least one asset row.");
-      const headers = rows[0].map(value => value.toLowerCase().replaceAll(/[^a-z0-9]/g, ""));
-      const column = (...names) => headers.findIndex(header => names.includes(header));
-      const idColumn = column("assetid", "id", "tag", "equipmentid");
-      const nameColumn = column("asset", "assetname", "name", "equipmentname");
-      const typeColumn = column("type", "equipmenttype", "assettype");
-      const areaColumn = column("area", "location", "sitearea");
-      const serviceColumn = column("lastservice", "lastservicedate", "servicedate");
-      const issueColumn = column("issue", "condition", "conditionnote", "notes", "latestsignal");
-      if ([idColumn, nameColumn, typeColumn, areaColumn].some(index => index < 0)) {
-        throw new Error("CSV needs Asset ID, Asset, Type, and Area columns.");
-      }
-      return rows.slice(1).map(values => {
-        const id = values[idColumn]?.trim();
-        const name = values[nameColumn]?.trim();
-        const type = values[typeColumn]?.trim();
-        const area = values[areaColumn]?.trim();
-        const issue = issueColumn >= 0 ? values[issueColumn]?.trim() : "Imported asset; add an inspection finding when available.";
-        const serviceDate = serviceColumn >= 0 ? values[serviceColumn]?.trim() : "";
-        if (!id || !name || !type || !area) throw new Error("Each CSV row must include an asset ID, name, type, and area.");
-        const importedSeverityColumn = column("severity", "observedseverity");
-        const rawSeverity = importedSeverityColumn >= 0 ? values[importedSeverityColumn]?.trim() : "";
-        const severity = rawSeverity ? Number(rawSeverity) : 2;
-        if (!Number.isInteger(severity) || severity < 1 || severity > 5) throw new Error(`CSV severity must be an integer from 1 to 5 for asset ${id}.`);
-        const score = 15 + severity * 12;
-        if (!/^[A-Za-z0-9][A-Za-z0-9._-]{0,23}$/.test(id)) throw new Error(`Invalid asset ID in CSV: ${id}`);
-        if ([name, type, area, issue].some(value => value.length > 1000)) throw new Error(`A field is too long for asset ${id}.`);
-        if (serviceDate && !/^\d{4}-\d{2}-\d{2}$/.test(serviceDate) && Number.isNaN(Date.parse(serviceDate))) throw new Error(`Invalid service date for asset ${id}.`);
-        return { id, name:name.slice(0, 80), type:type.slice(0, 40), area:area.slice(0, 80), issue:issue.slice(0, 500), serviceDate, severity, score,
-          priority:score >= 65 ? "High" : score >= 38 ? "Medium" : "Low",
-          service:serviceDate ? formatDate(serviceDate) : "Not recorded",
-          recommendation:"Review this imported record and confirm its maintenance history.",
-          evidence:["Imported from CSV", `Default starting severity ${severity}/5; confirm during review`] };
-      });
-    }
-
-    async function importCsv(file) {
-      try {
-        if (file.size > 5 * 1024 * 1024) throw new Error("CSV must be smaller than 5 MB.");
-        const imported = parseCsv(await file.text());
-        if (imported.length > 1000) throw new Error("Import up to 1,000 assets at a time.");
-        const existing = new Set(getAssets().map(asset => asset.id.toLowerCase()));
-        const seen = new Set();
-        for (const asset of imported) {
-          const key = asset.id.toLowerCase();
-          if (existing.has(key) || seen.has(key)) throw new Error(`Duplicate asset ID in import: ${asset.id}`);
-          seen.add(key);
-        }
-        savedState.customAssets.push(...imported);
-        savedState.selectedAssetId = imported[0].id;
-        saveState();
-        selectedId = imported[0].id;
-        renderMetrics();
-        renderRows();
-        announce(`${imported.length} assets imported to this browser workspace.`);
-      } catch (error) { announce(error.message || "Could not import this CSV file."); }
-      finally { document.getElementById("import-file").value = ""; }
-    }
-
-    function backupWorkspace() {
-      const backup = { format:"reliability-desk-backup-v1", exportedAt:new Date().toISOString(), state:savedState };
-      downloadFile(JSON.stringify(backup, null, 2), "reliability-desk-backup.json", "application/json");
-      announce("Workspace backup exported.");
-    }
-
-    async function restoreWorkspace(file) {
-      try {
-        if (file.size > 5 * 1024 * 1024) throw new Error("Backup must be smaller than 5 MB.");
-        const backup = JSON.parse(await file.text());
-        const state = backup?.format === "reliability-desk-backup-v1" ? backup.state : null;
-        if (!state || !Array.isArray(state.customAssets) || !Array.isArray(state.events) || !Array.isArray(state.reviewed) || !state.notes || typeof state.notes !== "object") {
-          throw new Error("This file is not a valid Reliability Desk JSON backup.");
-        }
-        const ids = new Set(assets.map(asset => asset.id.toLowerCase()));
-        const customAssets = state.customAssets.map(asset => {
-          if (!asset || typeof asset.id !== "string" || !/^[A-Za-z0-9][A-Za-z0-9._-]{0,23}$/.test(asset.id) || typeof asset.name !== "string" || !asset.name.trim() || ids.has(asset.id.toLowerCase())) throw new Error("Backup contains an invalid or duplicate asset ID.");
-          ids.add(asset.id.toLowerCase());
-          const priority = ["High", "Medium", "Low"].includes(asset.priority) ? asset.priority : "Medium";
-          const score = Number.isFinite(Number(asset.score)) ? Math.max(0, Math.min(100, Number(asset.score))) : 39;
-          return {
-            id:asset.id, name:String(asset.name).slice(0, 80), type:String(asset.type || "Unknown").slice(0, 40), area:String(asset.area || "Unspecified").slice(0, 80),
-            priority, score, service:String(asset.service || "Not recorded").slice(0, 80), lastServiceDate:String(asset.lastServiceDate || "").slice(0, 20),
-            issue:String(asset.issue || "").slice(0, 500), recommendation:String(asset.recommendation || "Review this asset with the responsible maintenance lead.").slice(0, 500),
-            evidence:Array.isArray(asset.evidence) ? asset.evidence.slice(0, 20).map(item => String(item).slice(0, 300)) : [], severity:Number.isInteger(Number(asset.severity)) ? Math.max(1, Math.min(5, Number(asset.severity))) : 2
-          };
-        });
-        const events = state.events.map(event => {
-          if (!event || !ids.has(String(event.assetId).toLowerCase()) || !/^\d{4}-\d{2}-\d{2}$/.test(event.date) || !["Inspection", "Service", "Repair", "Failure"].includes(event.kind) || !Number.isInteger(Number(event.severity)) || Number(event.severity) < 1 || Number(event.severity) > 5 || typeof event.notes !== "string" || !event.notes.trim()) {
-            throw new Error("Backup contains an invalid maintenance event.");
-          }
-          return { id:String(event.id || `event-${Date.now()}`), assetId:String(event.assetId), date:event.date, kind:event.kind, severity:Number(event.severity), notes:event.notes.slice(0, 1000), createdAt:String(event.createdAt || "") };
-        });
-        const notes = Object.fromEntries(Object.entries(state.notes).filter(([id]) => ids.has(id.toLowerCase())).map(([id, entries]) => [id, Array.isArray(entries) ? entries.filter(note => note && typeof note.text === "string").slice(-100).map(note => ({ text:note.text.slice(0, 500), createdAt:String(note.createdAt || "") })) : []]));
-        savedState = { reviewed:state.reviewed.filter(id => ids.has(String(id).toLowerCase())), notes, customAssets, events, selectedAssetId:String(state.selectedAssetId || "") };
-        saveState();
-        selectedId = getAssets().some(asset => asset.id === savedState.selectedAssetId) ? savedState.selectedAssetId : getAssets()[0]?.id;
-        renderMetrics();
-        renderRows();
-        announce("Workspace backup restored in this browser.");
-      } catch (error) { announce(error.message || "Could not restore this backup."); }
-      finally { document.getElementById("restore-file").value = ""; }
-    }
-
-    function downloadFile(content, filename, type) {
-      const url = URL.createObjectURL(new Blob([content], { type }));
+    function exportAssessment() {
+      if (!currentAssessment) return;
+      const content = JSON.stringify({ format:"queen-susastrategy-ai-opportunity-brief-v1", ...currentAssessment }, null, 2);
+      const url = URL.createObjectURL(new Blob([content], { type:"application/json" }));
       const link = document.createElement("a");
       link.href = url;
-      link.download = filename;
+      link.download = `${currentAssessment.inputs.businessName.trim().replace(/[^A-Za-z0-9_-]+/g,"-").replace(/^-|-$/g,"") || "business"}-ai-opportunity-brief.json`;
       link.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000);
+      announce("Opportunity brief downloaded.");
     }
 
-    function exportCsv() {
-      const rows = getFilteredAssets();
-      const quote = value => {
-        const text = String(value);
-        const safe = /^[\t\r ]*[=+\-@]/.test(text) ? `'${text}` : text;
-        return `"${safe.replaceAll('"', '""')}"`;
-      };
-      const lines = [["Asset ID","Asset","Type","Area","Priority","Example score","Last service","Observed severity","Review status","Latest signal"], ...rows.map(asset => [asset.id, asset.name, asset.type, asset.area, asset.priority, asset.score, asset.lastServiceDate, Math.max(0, ...savedState.events.filter(event => event.assetId === asset.id).map(event => Number(event.severity) || 0)) || asset.severity || "", savedState.reviewed.includes(asset.id) ? "Reviewed" : "Needs review", asset.issue])];
-      const csv = lines.map(row => row.map(quote).join(",")).join("\r\n");
-      downloadFile(csv, "reliability-desk-assets.csv", "text/csv;charset=utf-8");
-      announce(`${rows.length} workspace ${rows.length === 1 ? "asset" : "assets"} exported.`);
-    }
-
-    function resetWorkspace() {
-      if (!window.confirm("Clear all locally saved assets, events, notes, and review marks? This cannot be undone unless you made a JSON backup.")) return;
-      savedState = structuredClone(defaultState);
-      localStorage.removeItem(storageKey);
-      localStorage.removeItem("hv-reliability-demo-v1");
-      selectedId = assets[0].id;
-      renderMetrics();
-      renderRows();
-      announce("Local assets, events, notes, and review marks cleared.");
-    }
-
-    document.getElementById("add-asset-button").addEventListener("click", () => openAssetDialog());
-    document.getElementById("asset-form").addEventListener("submit", event => { event.preventDefault(); saveAsset(event.currentTarget); });
-    document.getElementById("event-form").addEventListener("submit", event => { event.preventDefault(); saveEvent(event.currentTarget); });
-    document.querySelectorAll("[data-close]").forEach(button => button.addEventListener("click", () => document.getElementById(button.dataset.close).close()));
-    document.getElementById("import-button").addEventListener("click", () => document.getElementById("import-file").click());
-    document.getElementById("import-file").addEventListener("change", event => { if (event.target.files[0]) importCsv(event.target.files[0]); });
-    document.getElementById("backup-button").addEventListener("click", backupWorkspace);
-    document.getElementById("restore-button").addEventListener("click", () => document.getElementById("restore-file").click());
-    document.getElementById("restore-file").addEventListener("change", event => { if (event.target.files[0]) restoreWorkspace(event.target.files[0]); });
-    document.getElementById("new-asset-id").addEventListener("input", event => event.target.setCustomValidity(""));
-
-    document.getElementById("asset-search").addEventListener("input", renderRows);
-    document.getElementById("priority-filter").addEventListener("change", renderRows);
-    document.getElementById("status-filter").addEventListener("change", renderRows);
-    document.getElementById("export-button").addEventListener("click", exportCsv);
-    document.getElementById("reset-button").addEventListener("click", resetWorkspace);
-    renderMetrics();
-    renderRows();
+    document.getElementById("assessment-form").addEventListener("submit", event => {
+      event.preventDefault();
+      try {
+        renderAssessment(buildAssessment(collectInputs(event.currentTarget)));
+      } catch (error) {
+        announce(error.message);
+      }
+    });
+    document.getElementById("clear-button").addEventListener("click", () => {
+      setTimeout(() => { document.getElementById("result-subtitle").textContent = "Your assessment will appear here."; document.getElementById("results").hidden = true; document.getElementById("empty-state").hidden = false; currentAssessment = null; }, 0);
+    });
+    document.getElementById("clear-saved-button").addEventListener("click", () => {
+      if (!assessments.length || !window.confirm("Delete all locally saved assessments from this browser?")) return;
+      assessments = [];
+      if (persistAssessments()) { renderSaved(); announce("Saved assessments cleared."); }
+    });
+    assessments = loadAssessments();
+    renderSaved();
   </script>
 </body>
 </html>
