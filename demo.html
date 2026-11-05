@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f3f4ef">
-  <meta name="description" content="Explore the Queen SusaStrategy Limited industrial maintenance planning demo using sample equipment data.">
-  <title>Reliability Desk Demo | Queen SusaStrategy Limited</title>
+  <meta name="description" content="Use the Reliability Desk local-first MVP to manage equipment records, maintenance events and review workflows with fictional sample data.">
+  <title>Reliability Desk MVP | Queen SusaStrategy Limited</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -133,11 +133,11 @@
     </aside>
 
     <main class="main">
-      <header class="topbar"><span class="breadcrumb">Demo workspace / Asset overview</span><div class="top-actions"><span class="demo-label">Sample data</span><a class="back-link" href="index.html">← Company site</a></div></header>
+      <header class="topbar"><span class="breadcrumb">MVP workspace / Asset overview</span><div class="top-actions"><span class="demo-label">Sample data</span><a class="back-link" href="index.html">← Company site</a></div></header>
       <div class="content">
         <div class="page-head"><div><p class="overline">Maintenance planning</p><h1>Asset overview</h1><p class="page-subtitle">Manage a local workspace. CSV requires Asset ID, Asset, Type, and Area; service date, latest signal and severity are optional.</p></div><div class="top-actions"><button class="button" id="import-button" type="button">Import CSV</button><input id="import-file" type="file" accept=".csv,text/csv" hidden><button class="button" id="backup-button" type="button">Backup JSON</button><button class="button" id="restore-button" type="button">Restore JSON</button><input id="restore-file" type="file" accept=".json,application/json" hidden><button class="button" id="reset-button" type="button" title="Clear local assets, notes, events, and review marks">Reset workspace</button><button class="button" id="export-button" type="button" title="Download visible assets as CSV">↓ Export CSV</button></div></div>
 
-        <div class="demo-banner" role="note"><span aria-hidden="true">i</span><span><strong>Local-first product prototype.</strong> The six seeded assets are fictional; assets and events you add or import are stored in this browser only. Priority is an illustrative rules-based aid, not an AI model, validated risk assessment or safety decision.</span></div>
+        <div class="demo-banner" role="note"><span aria-hidden="true">i</span><span><strong>Local-first MVP workspace.</strong> The six seeded assets are fictional; assets and events you add or import are stored in this browser only. Priority is an illustrative rules-based aid, not a live AI model, validated risk assessment or safety decision.</span></div>
 
         <section class="metric-grid" aria-label="Sample workspace summary">
           <article class="metric"><div class="metric-label">Assets total</div><div class="metric-value" id="metric-total">0</div></article>
@@ -208,6 +208,10 @@
     }
 
     function getAssets() { return [...assets, ...savedState.customAssets]; }
+
+    function normalizeAssetId(value) {
+      return String(value ?? "").trim().toLowerCase();
+    }
 
     function getAssetSummary(asset) {
       const history = savedState.events.filter(event => event.assetId === asset.id).sort((left, right) => right.date.localeCompare(left.date));
@@ -367,7 +371,8 @@
         document.getElementById("new-asset-id").reportValidity();
         return;
       }
-      if (getAssets().some(asset => asset.id.toLowerCase() === id.toLowerCase() && asset.id !== editingId)) {
+      const duplicateId = getAssets().find(asset => normalizeAssetId(asset.id) === normalizeAssetId(id) && normalizeAssetId(asset.id) !== normalizeAssetId(editingId));
+      if (duplicateId) {
         document.getElementById("new-asset-id").setCustomValidity("An asset with this ID already exists.");
         document.getElementById("new-asset-id").reportValidity();
         return;
@@ -390,11 +395,11 @@
         evidence:[`Initial condition severity ${severity}/5`, `Asset added ${formatDate(new Date().toISOString().slice(0, 10))}`]
       };
       if (editingId) {
-        savedState.customAssets = savedState.customAssets.map(existing => existing.id === editingId ? asset : existing);
-        if (editingId !== id) {
-          savedState.events = savedState.events.map(event => event.assetId === editingId ? { ...event, assetId:id } : event);
+        savedState.customAssets = savedState.customAssets.map(existing => normalizeAssetId(existing.id) === normalizeAssetId(editingId) ? asset : existing);
+        if (normalizeAssetId(editingId) !== normalizeAssetId(id)) {
+          savedState.events = savedState.events.map(event => normalizeAssetId(event.assetId) === normalizeAssetId(editingId) ? { ...event, assetId:id } : event);
           if (savedState.notes[editingId]) { savedState.notes[id] = savedState.notes[editingId]; delete savedState.notes[editingId]; }
-          savedState.reviewed = savedState.reviewed.map(reviewedId => reviewedId === editingId ? id : reviewedId);
+          savedState.reviewed = savedState.reviewed.map(reviewedId => normalizeAssetId(reviewedId) === normalizeAssetId(editingId) ? id : reviewedId);
         }
       } else {
         savedState.customAssets.push(asset);
@@ -434,8 +439,9 @@
       savedState.events = savedState.events.filter(event => event.assetId !== id);
       savedState.reviewed = savedState.reviewed.filter(item => item !== id);
       delete savedState.notes[id];
-      savedState.selectedAssetId = assets[0].id;
-      selectedId = assets[0].id;
+      const nextAsset = getAssets().find(item => item.id !== id) || assets[0];
+      savedState.selectedAssetId = nextAsset?.id || null;
+      selectedId = nextAsset?.id || assets[0].id;
       saveState();
       renderMetrics();
       renderRows();

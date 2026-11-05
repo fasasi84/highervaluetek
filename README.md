@@ -1,12 +1,12 @@
 # Queen SusaStrategy Limited
 
-Reliability Desk is an early, local-first maintenance-planning product prototype for industrial maintenance teams. It includes a marketing site and a browser dashboard; it is not a hosted or production system.
+Reliability Desk is a local-first minimum viable product (MVP) for industrial maintenance workflows. It includes a marketing site and a functional browser dashboard for managing asset records and maintenance history. It is not a hosted, multi-user or production AI system.
 
 ## Run locally
 
-No build step or package install is required. Open `index.html` in a browser, or open `demo.html` to work directly in the dashboard. The company site links to the demo and includes the same dashboard embedded on the homepage.
+No build step or package install is required. Open `index.html` in a browser, or open `demo.html` to work directly in the MVP workspace. The company site links to the workspace and includes the same dashboard embedded on the homepage.
 
-## Current prototype workflows
+## Current MVP workflows
 
 - Add, edit and delete locally created equipment assets with an ID, type, area, service date and condition note. The six fictional seed assets are immutable.
 - Import an asset catalog from CSV. Required headers: `Asset ID`, `Asset`, `Type`, `Area`. Optional headers: `Last service`, `Latest signal`, `Severity` (integer 1-5). Quoted fields and commas inside quoted values are supported.
