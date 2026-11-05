@@ -1,6 +1,8 @@
 # Queen SusaStrategy Limited
 
-Queen SusaStrategy focuses on helping businesses connect strategy to practical action, with applied AI and machine learning as the starting point for its technology-led startup direction. The AI Opportunity Planner is the current local-first MVP: a browser tool for structuring business challenges, assessing AI readiness and planning responsible next steps. It is not a live AI system or hosted service.
+Queen SusaStrategy is building an AI-led business strategy company to help teams find practical solutions to challenges across customer service, sales, finance, operations and decision-making. AI and machine learning are intended to sit at the centre of the strategy, grounded in business outcomes, suitable data, responsible design and human judgment.
+
+The AI Opportunity Planner is the current local-first MVP and first step in that direction: a browser tool for structuring business challenges, assessing AI readiness and planning next steps. It is not a complete business-solution platform, live AI system or hosted service.
 
 ## Run locally
 
