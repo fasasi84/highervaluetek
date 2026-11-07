@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="theme-color" content="#f5f4ef">
-	<meta name="description" content="Queen SusaStrategy is building an AI business-insights MVP for Nigerian small businesses.">
-	<title>About | Queen SusaStrategy AI Business Insights</title>
+	<meta name="description" content="Learn about Queen SusaStrategy's AI-powered business and financial intelligence platform for Nigerian SMEs, its MVP, leadership, market strategy, and planned Azure use.">
+	<title>Company & Platform | Queen SusaStrategy</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -34,6 +34,7 @@
 		.two-col { display:grid; grid-template-columns:1fr 1fr; gap:34px; }
 		.info { padding-top:17px; border-top:2px solid var(--green); }
 		.info p { margin-bottom:0; color:var(--muted); font-size:14px; }
+		.service-list { margin:12px 0 0; padding-left:19px; display:grid; gap:9px; color:var(--muted); font-size:13px; }
 		.team { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1px; border:1px solid var(--line); background:var(--line); }
 		.person { min-height:160px; padding:22px; background:var(--paper); }
 		.role { margin:0 0 7px; color:var(--green); font-size:10px; font-weight:700; text-transform:uppercase; }
@@ -49,20 +50,25 @@
 <body>
 	<header><nav class="wrap" aria-label="Main navigation">
 		<a class="brand" href="index.html" aria-label="Queen SusaStrategy Limited home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="m6 11 8 7 6-12 6 12 8-7-3 16H9L6 11Z" fill="#d5ed81"/><path d="M12 23h16" stroke="#104b3d" stroke-width="2"/><text x="20" y="35" fill="#104b3d" font-family="Arial,sans-serif" font-size="10" font-weight="700" text-anchor="middle">QS</text></svg></span><span>Queen SusaStrategy<br>Limited</span></a>
-		<div class="nav-links"><a href="index.html#product">Product</a><a href="index.html#technology">AI Technology</a><a href="index.html#infrastructure">Infrastructure</a><a href="index.html#team">Team</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+		<div class="nav-links"><a href="get-started.html">Get started</a><a href="dashboard.html">Workspace</a><a href="about.html#leadership">Leadership</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
 	</nav></header>
 	<main class="wrap">
-		<p class="eyebrow">AI business insights · MVP stage</p>
-		<h1>Building a clearer way for small businesses to use data.</h1>
-		<p class="intro">Queen SusaStrategy Limited is a Nigerian company building an AI-powered business-insights MVP for small-business owners and managers. The product focuses on helping users review authorized sales, customer-feedback and operations data, surface useful patterns and make informed decisions with human oversight.</p>
-		<div class="status"><strong>Product status:</strong> Interactive browser prototype. It includes a local linear-regression revenue trend model and deterministic financial signals. It is not a hosted, multi-customer application; supported workflows, pilot activity and measured results should be confirmed with the team.</div>
+		<p class="eyebrow">Queen SusaStrategy · Nigeria-first</p>
+		<h1>AI-powered business and financial intelligence for SMEs.</h1>
+		<p class="intro">Queen SusaStrategy is developing a centralized workspace to help small and growing businesses in Nigeria make smarter, faster, and more informed financial and operational decisions. Owners can bring performance, cash flow, growth questions, and workforce expenses into one clearer view, without needing a dedicated finance team to get started.</p>
+		<div class="status"><strong>Current stage:</strong> Functional sample-workspace MVP and market validation. Users can review financial snapshots, test hypothetical scenarios, and export reports in CSV or print-ready PDF. Subscription billing, automated payments, and full commercial onboarding are planned for later development; they are not live today.</div>
 
 		<section class="section two-col" aria-label="MVP product and AI approach">
-			<article class="info"><p class="eyebrow">Product</p><h2>Business and financial intelligence</h2><p>The prototype covers financial performance, revenue trends, cash-flow planning, business recommendations, workforce-cost signals and business reports.</p></article>
-			<article class="info"><p class="eyebrow">Responsible ML</p><h2>Decision support with human review</h2><p>A transparent linear-regression model estimates a revenue trend from user-entered history. The recommendations use deterministic rules; users should check all assumptions and context before acting.</p></article>
+			<article class="info"><p class="eyebrow">MVP workspace</p><h2>Know what is happening in the business.</h2><p>Explore monthly revenue, operating costs, profitability, cash flow, business growth, and workforce expenses in one sample dashboard. Try what-if scenarios to see how changed assumptions affect the outlook, then export a business performance report.</p></article>
+			<article class="info"><p class="eyebrow">AI and decision support</p><h2>Make analysis easier to review.</h2><p>The current sample uses a local linear-regression trend for entered revenue history and deterministic business rules for recommendations. AI-assisted analysis, richer forecasting, and scenario guidance are planned; outputs should be checked against business context before decisions.</p></article>
 		</section>
 
-		<section class="section">
+		<section class="section two-col" aria-label="Business model">
+			<article class="info"><p class="eyebrow">SME subscriptions</p><h2>Monthly SaaS plans for growing teams.</h2><p>The intended model offers monthly subscriptions sized to SME needs, with accessible financial visibility and business reporting. Pricing, hosted accounts, and subscription billing are not yet available.</p></article>
+			<article class="info"><p class="eyebrow">Enterprise packages</p><h2>More context for larger organizations.</h2><p>Enterprise packages are planned for larger businesses that need enhanced reporting, team-level financial intelligence, and additional analytics tailored to their organization.</p></article>
+		</section>
+
+		<section class="section" id="leadership">
 			<p class="eyebrow">Leadership</p><h2>Company team</h2>
 			<div class="team">
 				<article class="person"><p class="role">Founder / Chief Executive Officer</p><h3>Susan Onyowoicho O.</h3><p>Leads company strategy, business development and the direction of Queen SusaStrategy Limited.</p></article>
@@ -72,12 +78,25 @@
 			<p style="max-width:720px;margin-top:14px;color:var(--muted);font-size:12px">A named software or AI technical lead has not yet been confirmed. Technical development roles remain to be established.</p>
 		</section>
 
-		<section class="section two-col" aria-label="Target users and infrastructure plans">
-			<article class="info"><p class="eyebrow">Target users</p><h2>Nigerian small-business owners and managers</h2><p>The product is focused on businesses that need to review sales, customer feedback or day-to-day operations. Market size and willingness to pay remain to be validated.</p></article>
-			<article class="info"><p class="eyebrow">Technology direction</p><h2>Cloud and accelerated computing under evaluation</h2><p>No cloud provider or GPU technology has been confirmed for the product. These options will be evaluated as deployment, data safeguards, workload and costs are refined.</p></article>
+		<section class="section two-col" aria-label="Target market and expansion strategy">
+			<article class="info"><p class="eyebrow">Target market</p><h2>For Nigerian SMEs without dedicated finance teams.</h2><p>Start with small and growing businesses that need accessible tools for financial analysis, operational visibility, and strategic decisions without a sophisticated finance department.</p></article>
+			<article class="info"><p class="eyebrow">Market entry</p><h2>Begin in Abuja, then grow across Nigeria.</h2><p>The company plans to validate the product through pilot discussions in Abuja, expand across Nigeria, and later serve international organizations seeking consolidated business intelligence and team-level reporting.</p></article>
 		</section>
 
-		<section class="section contact"><div><h2>Talk about the product</h2><p>Abuja, FCT, Nigeria · +234 810 352 0082</p><p><a style="color:#d5ed81" href="mailto:susana.onyowoicho@susastrategy.space">susana.onyowoicho@susastrategy.space</a></p></div><a href="index.html#contact">Contact the team ↗</a></section>
+		<section class="section" aria-labelledby="azureHeading">
+			<p class="eyebrow">Planned infrastructure · subject to credit approval</p><h2 id="azureHeading">Use Azure credits to build the cloud foundation.</h2>
+			<p class="intro">If awarded, Microsoft Azure startup credits would support development and deployment of the hosted SaaS product, its data protections, and future AI capabilities. The services below are planned; they are not currently deployed.</p>
+			<div class="two-col">
+				<article class="info"><h3>Cloud, data, and access</h3><ul class="service-list"><li>Scalable hosting for reliable customer access.</li><li>Secure databases and storage for financial, operational, and reporting data.</li><li>Authentication, role-based access, and organization-level permissions.</li></ul></article>
+				<article class="info"><h3>AI and financial decision support</h3><ul class="service-list"><li>Planned Azure OpenAI integration for business insights, trend analysis, and recommendations.</li><li>Predictive revenue, expense, cash-flow, and profitability forecasting.</li><li>AI-assisted what-if simulations to compare decisions and financial outcomes.</li></ul></article>
+			</div>
+		</section>
+
+		<section class="section">
+			<article class="info"><p class="eyebrow">Long-term vision</p><h2>Make confident, data-informed growth more accessible.</h2><p>Queen SusaStrategy aims to become a trusted business and financial intelligence platform for SMEs and growing organizations across Africa and beyond, combining financial visibility, predictive analytics, and useful AI-powered recommendations in one accessible workspace.</p></article>
+		</section>
+
+		<section class="section contact"><div><h2>Talk about the product</h2><p>Abuja, FCT, Nigeria · +234 810 352 0082</p><p><a style="color:#d5ed81" href="mailto:susana.onyowoicho@susastrategy.space">susana.onyowoicho@susastrategy.space</a></p></div><a href="mailto:susana.onyowoicho@susastrategy.space?subject=Business%20intelligence%20enquiry">Contact the team ↗</a></section>
 	</main>
 	<footer><div class="wrap">© 2026 Queen SusaStrategy Limited · <a href="privacy.html">Privacy policy</a> · <a href="terms.html">Terms of use</a></div></footer>
 </body>

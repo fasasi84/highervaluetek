@@ -1,6 +1,6 @@
 # Queen SusaStrategy Limited
 
-Queen SusaStrategy is exploring a business and financial intelligence product for small-business owners and managers. The browser-only dashboard prototype includes an ordinary least-squares linear-regression revenue trend model trained on user-entered monthly history, deterministic recommendations, financial analysis, cash-flow scenarios, people-cost signals, and report exports.
+Queen SusaStrategy is developing an AI-powered business and financial intelligence workspace for SMEs in Nigeria. The functional sample-workspace MVP includes a financial snapshot, what-if scenarios, a local ordinary least-squares revenue trend, deterministic recommendations, cash-flow scenarios, people-cost signals, and CSV/print-to-PDF reports.
 
 The dashboard uses editable sample figures and deterministic rules. It is not a live AI service, accounting system, hosted application, or source of financial advice. It has no accounts, data upload, backend, persistence, or payment processing.
 
@@ -10,10 +10,12 @@ No build step or package install is required. Open `index.html` for the Get Star
 
 ## Product overview
 
-- Target users: small-business owners and managers, initially in Nigeria.
+- Target users: Nigerian SMEs without dedicated finance teams; planned market entry in Abuja, followed by expansion across Nigeria and later international markets.
 - Prototype focus: editable monthly revenue, costs, payroll, cash balance, and team-size assumptions.
 - Outputs: gross margin, operating profit, a locally trained regression forecast, rule-based recommendations, people-cost signals, and CSV/print reports.
-- Intended commercial model: recurring monthly B2B SaaS subscriptions and enterprise packages; pricing and billing are not configured.
+- Intended commercial model: monthly B2B SaaS subscriptions and enterprise packages with enhanced reporting and team-level intelligence. Pricing, onboarding, and billing are not configured.
+- Market stage: MVP development and validation through SME pilot discussions; no commercial deployment is claimed.
+- Planned Azure use, subject to credits and deployment: SaaS hosting, secure data storage, authentication and organization/role permissions, Azure OpenAI, forecasting, and scenario analysis.
 
 ## Microsoft startup criteria readiness
 
@@ -32,6 +34,6 @@ The criteria below are evidence notes, not a claim of Microsoft eligibility or a
 
 ## Infrastructure and data boundary
 
-The dashboard runs locally in the browser. Scenario changes are held in page memory only and are discarded on reload. There is no AI integration, cloud storage, account system, uploaded data, or payment connection. Do not enter confidential or personal data.
+The dashboard runs locally in the browser. Scenario changes are held in page memory only and are discarded on reload. There is no hosted account system, uploaded data, production AI integration, cloud storage, or payment connection. Azure services and Azure OpenAI are planned, not deployed. Do not enter confidential or personal data.
 
 The About, Privacy and Terms pages should be reviewed against the company's actual legal and hosting arrangements before publication.
