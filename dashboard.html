@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f5ef">
+  <meta name="description" content="A practical AI and financial intelligence workspace for SME performance, growth planning, cash flow, and team costs.">
+  <title>SME Intelligence Workspace | Queen SusaStrategy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1c2924;
+      --muted: #718078;
+      --paper: #f3f5ef;
+      --surface: #fff;
+      --line: #e3e8e1;
+      --green: #176b52;
+      --green-dark: #104b3d;
+      --green-soft: #e7f2eb;
+      --orange: #e4774a;
+      --orange-soft: #fcf0e9;
+      --yellow: #e5bf5a;
+      --display: "Space Grotesk", sans-serif;
+      --body: "DM Sans", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 26px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 14px/1.5 var(--body); }
+    button, input, select { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; }
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #e5bf5a; outline-offset: 3px; }
+    .app { min-height: 100vh; }
+    .sidebar { position: fixed; inset: 0 auto 0 0; z-index: 4; width: 238px; padding: 26px 16px 18px; display: flex; flex-direction: column; border-right: 1px solid var(--line); background: #fbfcf9; }
+    .brand { display: flex; align-items: center; gap: 10px; padding: 0 9px; color: var(--ink); font: 700 12px/1.15 var(--display); text-decoration: none; }
+    .brand-mark { width: 34px; height: 34px; display: grid; flex: 0 0 34px; place-items: center; background: var(--green); }
+    .brand-mark svg { width: 27px; height: 27px; }
+    .workspace-label { margin: 38px 10px 11px; color: #909b93; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    .side-nav { display: grid; gap: 4px; }
+    .side-nav a { min-height: 40px; padding: 0 11px; display: flex; align-items: center; gap: 11px; border-left: 2px solid transparent; color: #5e6b64; font-size: 12px; font-weight: 600; text-decoration: none; }
+    .side-nav a:hover { background: #f0f3ed; color: var(--ink); }
+    .side-nav a[aria-current="location"] { border-left-color: var(--green); background: var(--green-soft); color: var(--green-dark); }
+    .nav-icon { width: 19px; color: currentColor; font: 600 12px var(--display); text-align: center; }
+    .sidebar-bottom { margin-top: auto; }
+    .plan-note { padding: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+    .plan-note strong { display: block; margin-bottom: 4px; color: var(--ink); font: 600 12px var(--display); }
+    .company-link { display: block; padding: 13px 10px 0; color: var(--green); font-size: 11px; font-weight: 700; text-decoration: none; }
+    .main { width: min(1380px, calc(100% - 238px)); margin-left: 238px; padding: 0 42px 60px; }
+    .topbar { min-height: 77px; display: flex; align-items: center; justify-content: space-between; gap: 18px; border-bottom: 1px solid var(--line); }
+    .crumb { color: var(--muted); font-size: 11px; }
+    .top-actions { display: flex; align-items: center; gap: 10px; }
+    .sample-label { display: inline-flex; align-items: center; gap: 7px; color: #586860; font-size: 10px; font-weight: 700; }
+    .sample-label::before { width: 7px; height: 7px; border-radius: 50%; background: var(--yellow); content: ""; }
+    .icon-button, .primary-button, .secondary-button { min-height: 36px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; font-size: 11px; font-weight: 700; text-decoration: none; transition: background .16s ease, border-color .16s ease; }
+    .icon-button:hover, .secondary-button:hover { border-color: #9eafa3; background: #f7faf6; }
+    .primary-button { border-color: var(--green); background: var(--green); color: white; }
+    .primary-button:hover { border-color: var(--green-dark); background: var(--green-dark); }
+    .main-content { max-width: 1160px; margin: 0 auto; }
+    .page-heading { padding: 27px 0 23px; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+    .eyebrow { margin: 0 0 6px; color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: var(--display); letter-spacing: 0; }
+    h1 { margin-bottom: 4px; font-size: 29px; line-height: 1.18; }
+    .page-subtitle { margin: 0; color: var(--muted); font-size: 12px; }
+    .heading-actions { display: flex; align-items: center; gap: 8px; }
+    .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .metric { min-width: 0; padding: 17px 17px 15px; border: 1px solid var(--line); background: var(--surface); }
+    .metric-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 10px; font-weight: 600; }
+    .metric-symbol { color: #98a39c; font: 700 12px var(--display); }
+    .metric-value { margin: 12px 0 2px; font: 600 23px/1.15 var(--display); letter-spacing: 0; overflow-wrap: anywhere; }
+    .metric-foot { margin: 0; color: var(--muted); font-size: 10px; }
+    .good { color: var(--green); }
+    .attention { color: #b45b32; }
+    .section-heading { margin: 0 0 15px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .section-heading h2 { margin: 0; font-size: 15px; }
+    .section-heading > a { color: var(--green); font-size: 10px; font-weight: 700; text-decoration: none; }
+    .content-grid { margin-top: 14px; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(240px, .75fr); gap: 14px; align-items: stretch; }
+    .panel { min-width: 0; padding: 19px; border: 1px solid var(--line); background: var(--surface); }
+    .panel-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .panel-title-row h2 { margin: 0 0 3px; font-size: 15px; }
+    .panel-title-row p { margin: 0; color: var(--muted); font-size: 10px; }
+    .select { min-height: 32px; padding: 0 26px 0 9px; border: 1px solid var(--line); border-radius: 0; background: white; color: var(--ink); font-size: 10px; }
+    .chart-legend { margin-top: 21px; display: flex; gap: 18px; color: var(--muted); font-size: 9px; }
+    .legend-item { display: inline-flex; align-items: center; gap: 6px; }
+    .legend-swatch { width: 8px; height: 8px; display: inline-block; background: var(--green); }
+    .legend-swatch.projected { background: var(--orange); }
+    .model-badge { margin-top: 14px; padding: 11px 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-left: 2px solid var(--green); background: #f3f7f2; }
+    .model-badge strong { display: block; font-size: 10px; }
+    .model-badge small { display: block; margin-top: 2px; color: var(--muted); font-size: 9px; }
+    .model-score { flex: 0 0 auto; color: var(--green-dark); font: 600 10px var(--display); text-align: right; }
+    .chart-wrap { margin-top: 8px; overflow: hidden; }
+    #cashflowChart { width: 100%; height: auto; overflow: visible; }
+    .chart-gridline { stroke: #e9ede8; stroke-width: 1; }
+    .chart-label { fill: #8a968e; font: 9px var(--body); }
+    .chart-actual { fill: none; stroke: var(--green); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.5; }
+    .chart-projection { fill: none; stroke: var(--orange); stroke-dasharray: 4 5; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2.5; }
+    .chart-point { fill: white; stroke: var(--green); stroke-width: 2.5; }
+    .chart-projected-point { fill: white; stroke: var(--orange); stroke-width: 2.5; }
+    .mix-list { margin-top: 17px; display: grid; gap: 16px; }
+    .mix-row { display: grid; grid-template-columns: 1fr auto; gap: 6px 12px; align-items: center; }
+    .mix-row span { color: #58675f; font-size: 10px; }
+    .mix-row strong { font: 600 10px var(--display); }
+    .mix-track { grid-column: 1 / -1; height: 5px; background: #edf0ec; }
+    .mix-fill { height: 100%; min-width: 2px; background: var(--green); }
+    .mix-row:nth-child(2) .mix-fill { background: var(--orange); }
+    .mix-row:nth-child(3) .mix-fill { background: #7d9787; }
+    .insight-section { margin-top: 14px; }
+    .insight-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .insight-card { min-height: 124px; padding: 14px; border: 1px solid var(--line); background: var(--surface); }
+    .insight-index { margin-bottom: 12px; display: block; color: var(--orange); font: 700 9px var(--display); }
+    .insight-card h3 { margin: 0 0 5px; font-size: 12px; }
+    .insight-card p { margin: 0; color: var(--muted); font-size: 10px; }
+    .lower-grid { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .activity-list { margin: 8px 0 0; padding: 0; list-style: none; }
+    .activity-list li { padding: 11px 0; display: grid; grid-template-columns: 31px 1fr auto; gap: 9px; align-items: center; border-top: 1px solid #edf0ec; }
+    .activity-icon { width: 29px; height: 29px; display: grid; place-items: center; background: var(--green-soft); color: var(--green); font: 700 10px var(--display); }
+    .activity-copy strong { display: block; font-size: 10px; }
+    .activity-copy small { color: var(--muted); font-size: 9px; }
+    .activity-amount { font: 600 10px var(--display); }
+    .payroll-summary { margin: 15px 0 0; display: grid; grid-template-columns: 1fr auto; gap: 10px; }
+    .payroll-summary span { color: var(--muted); font-size: 10px; }
+    .payroll-summary strong { font: 600 11px var(--display); }
+    .payroll-meter { margin-top: 14px; height: 6px; background: #edf0ec; }
+    .payroll-meter span { height: 100%; display: block; background: var(--orange); transition: width .2s ease; }
+    .note { margin: 12px 0 0; color: #8a968e; font-size: 9px; }
+    .feature-section { margin-top: 30px; padding-top: 23px; border-top: 1px solid var(--line); }
+    .forecast-highlight { margin: 17px 0; padding: 17px; display: flex; justify-content: space-between; gap: 20px; background: #edf4ed; }
+    .forecast-highlight span { color: var(--muted); font-size: 10px; }
+    .forecast-highlight strong { display: block; margin-top: 4px; color: var(--green-dark); font: 600 23px var(--display); }
+    .forecast-highlight .highlight-aside { text-align: right; }
+    .projection-table { width: 100%; border-collapse: collapse; text-align: left; }
+    .projection-table th { padding: 9px 8px; border-bottom: 1px solid var(--line); color: #859189; font-size: 9px; font-weight: 700; text-transform: uppercase; }
+    .projection-table td { padding: 10px 8px; border-bottom: 1px solid #edf0ec; font-size: 10px; }
+    .projection-table td:not(:first-child) { font-variant-numeric: tabular-nums; }
+    .projection-table th:last-child, .projection-table td:last-child { text-align: right; }
+    .people-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .people-kpi { margin: 19px 0 14px; font: 600 28px var(--display); }
+    .signal-box { margin-top: 13px; padding: 12px; border-left: 2px solid var(--orange); background: var(--orange-soft); color: #675449; font-size: 10px; }
+    .report-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+    .report-line { padding: 11px 0; display: flex; justify-content: space-between; gap: 14px; border-bottom: 1px solid #edf0ec; font-size: 10px; }
+    .report-line span { color: var(--muted); }
+    .report-line strong { text-align: right; font: 600 11px var(--display); }
+    .report-actions { margin-top: 17px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .commercial-note { margin-top: 14px; padding: 14px; border: 1px solid var(--line); background: #fbfcf9; }
+    .commercial-note strong { display: block; margin-bottom: 4px; font: 600 11px var(--display); }
+    .commercial-note p { margin: 0; color: var(--muted); font-size: 10px; }
+    .plan-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .plan-card { min-width: 0; padding: 19px; display: flex; flex-direction: column; align-items: flex-start; border: 1px solid var(--line); background: var(--surface); }
+    .plan-card h3 { margin: 0 0 6px; font-size: 18px; }
+    .plan-card .eyebrow { margin-bottom: 10px; }
+    .plan-description { min-height: 34px; margin: 0; color: var(--muted); font-size: 10px; }
+    .plan-card ul { margin: 17px 0 20px; padding-left: 16px; display: grid; gap: 8px; color: #58675f; font-size: 10px; }
+    .plan-card li::marker { color: var(--green); }
+    .plan-card a { width: 100%; margin-top: auto; }
+    .plan-featured { border-top: 3px solid var(--orange); background: #fffdfa; }
+    .footer-note { margin-top: 28px; padding: 15px 0 0; border-top: 1px solid var(--line); color: #859189; font-size: 9px; }
+    dialog { width: min(480px, calc(100% - 28px)); max-height: min(90vh, 760px); padding: 0; border: 1px solid var(--line); background: var(--surface); color: var(--ink); }
+    dialog::backdrop { background: rgba(18, 35, 29, .45); }
+    .dialog-head { padding: 20px 21px 14px; border-bottom: 1px solid var(--line); }
+    .dialog-head-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .dialog-head h2 { margin: 0 0 4px; font: 600 18px var(--display); }
+    .dialog-head p { margin: 0; color: var(--muted); font-size: 10px; }
+    .close-button { width: 30px; height: 30px; border: 1px solid var(--line); background: white; cursor: pointer; font-size: 17px; }
+    .assumption-form { padding: 17px 21px 20px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 13px 14px; }
+    .field { display: grid; gap: 5px; }
+    .field label { color: #55635b; font-size: 10px; font-weight: 700; }
+    .field input, .field select, .field textarea { width: 100%; min-height: 38px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 0; background: white; color: var(--ink); font-size: 12px; }
+    .field textarea { min-height: 76px; resize: vertical; line-height: 1.5; }
+    .field-hint { color: #8a968e; font-size: 9px; }
+    .field-error { margin: 0; color: #a33e28; font-size: 10px; }
+    .form-actions { margin-top: 18px; display: flex; justify-content: space-between; gap: 8px; }
+    .toast { position: fixed; right: 22px; bottom: 22px; z-index: 7; max-width: min(360px, calc(100% - 44px)); padding: 12px 15px; border: 1px solid var(--line); background: var(--ink); color: white; font-size: 11px; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .2s ease, transform .2s ease; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    @media (max-width: 1050px) {
+      .sidebar { width: 205px; }
+      .main { width: calc(100% - 205px); margin-left: 205px; padding-inline: 25px; }
+      .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .insight-list { grid-template-columns: 1fr; }
+      .insight-card { min-height: 0; }
+    }
+    @media (max-width: 740px) {
+      .sidebar { position: sticky; inset: 0 0 auto; width: 100%; height: auto; padding: 10px 14px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+      .brand { padding: 0 4px 10px; }
+      .brand-mark { width: 30px; height: 30px; flex-basis: 30px; }
+      .workspace-label, .sidebar-bottom { display: none; }
+      .side-nav { padding-bottom: 9px; display: flex; overflow-x: auto; gap: 3px; scrollbar-width: thin; }
+      .side-nav a { min-height: 34px; padding: 0 9px; flex: 0 0 auto; border-left: 0; border-bottom: 2px solid transparent; font-size: 10px; }
+      .side-nav a[aria-current="location"] { border-bottom-color: var(--green); }
+      .main { width: 100%; margin-left: 0; padding: 0 18px 42px; }
+      .topbar { min-height: 55px; }
+      .content-grid, .lower-grid, .people-grid { grid-template-columns: 1fr; }
+      .plan-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .insight-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .insight-card { min-height: 135px; }
+      .page-heading { padding-top: 22px; }
+    }
+    @media (max-width: 500px) {
+      .main { padding-inline: 14px; }
+      .sample-label { font-size: 9px; }
+      .top-actions { gap: 6px; }
+      .topbar { padding-block: 9px; align-items: stretch; flex-direction: column; gap: 7px; }
+      .top-actions { justify-content: space-between; }
+      .top-actions .icon-button { min-height: 32px; padding-inline: 8px; font-size: 10px; }
+      .page-heading { align-items: flex-start; flex-direction: column; gap: 12px; }
+      .heading-actions { width: 100%; }
+      .heading-actions button { flex: 1; }
+      h1 { font-size: 26px; }
+      .metrics { gap: 8px; }
+      .metric { padding: 13px 12px; }
+      .metric-value { font-size: 20px; }
+      .metric-top { font-size: 9px; }
+      .panel { padding: 15px; }
+      .insight-list { grid-template-columns: 1fr; }
+      .insight-card { min-height: 0; }
+      .report-summary { grid-template-columns: 1fr; }
+      .plan-grid { grid-template-columns: 1fr; }
+      .forecast-highlight { padding: 13px; }
+      .forecast-highlight strong { font-size: 19px; }
+      .projection-table th, .projection-table td { padding-inline: 4px; font-size: 9px; }
+    }
+    @media print {
+      body { background: white; }
+      .sidebar, .topbar, .heading-actions, .select, .report-actions, .toast, .footer-note, #insights, #cashflow, #people, #activity { display: none !important; }
+      .main { width: 100%; margin: 0; padding: 0; }
+      .page-heading { padding-top: 0; }
+      .panel, .metric, .insight-card { break-inside: avoid; border-color: #ccc; }
+      .metrics { grid-template-columns: repeat(4, 1fr); }
+      #reports { margin-top: 22px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a class="brand" href="index.html" aria-label="Queen SusaStrategy home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="m6 11 8 7 6-12 6 12 8-7-3 16H9L6 11Z" fill="#d5ed81"/><path d="M12 23h16" stroke="#104b3d" stroke-width="2"/><text x="20" y="35" fill="#104b3d" font-family="Arial,sans-serif" font-size="10" font-weight="700" text-anchor="middle">QS</text></svg></span>
+        <span>Queen SusaStrategy<br>Business intelligence</span>
+      </a>
+      <p class="workspace-label">Workspace</p>
+      <nav class="side-nav" aria-label="Workspace sections">
+        <a href="#overview" aria-current="location"><span class="nav-icon" aria-hidden="true">01</span>Overview</a>
+        <a href="#cashflow"><span class="nav-icon" aria-hidden="true">02</span>Cash flow</a>
+        <a href="#people"><span class="nav-icon" aria-hidden="true">03</span>People costs</a>
+        <a href="#insights"><span class="nav-icon" aria-hidden="true">04</span>Recommendations</a>
+        <a href="#reports"><span class="nav-icon" aria-hidden="true">05</span>Reports</a>
+        <a href="#plans"><span class="nav-icon" aria-hidden="true">06</span>Plans</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="plan-note"><strong>B2B SaaS model</strong>Planned monthly business subscriptions and enterprise packages. Pricing, hosted accounts, and billing are not live.</div>
+        <a class="company-link" href="data-services.html">About the product <span aria-hidden="true">↗</span></a>
+      </div>
+    </aside>
+
+    <main class="main" id="overview">
+      <div class="topbar">
+        <span class="crumb">Workspace <span aria-hidden="true">/</span> Business overview</span>
+        <div class="top-actions"><span class="sample-label">Sample business data</span><button class="icon-button" id="editTopButton" type="button">Edit assumptions</button></div>
+      </div>
+      <div class="main-content">
+        <header class="page-heading">
+          <div><p class="eyebrow" id="currentPeriod">AI & FINANCIAL INTELLIGENCE · NOVEMBER 2026</p><h1>Business overview</h1><p class="page-subtitle">Make your numbers easier to understand, question, and act on.</p></div>
+          <div class="heading-actions"><button class="secondary-button" id="exportTopButton" type="button"><span aria-hidden="true">↓</span> Export report</button><button class="primary-button" id="editButton" type="button"><span aria-hidden="true">＋</span> Update figures</button></div>
+        </header>
+
+        <section class="metrics" aria-label="Financial summary">
+          <article class="metric"><div class="metric-top"><span>Monthly revenue</span><span class="metric-symbol" aria-hidden="true">↗</span></div><p class="metric-value" id="metricRevenue">₦12.80m</p><p class="metric-foot" id="revenueFoot">Sample estimate · editable below</p></article>
+          <article class="metric"><div class="metric-top"><span>Operating profit</span><span class="metric-symbol" aria-hidden="true">∑</span></div><p class="metric-value" id="metricProfit">₦1.45m</p><p class="metric-foot" id="profitFoot">After payroll and overhead</p></article>
+          <article class="metric"><div class="metric-top"><span>Cash on hand</span><span class="metric-symbol" aria-hidden="true">₦</span></div><p class="metric-value" id="metricCash">₦9.20m</p><p class="metric-foot" id="runwayFoot">Cash runway</p></article>
+          <article class="metric"><div class="metric-top"><span>Gross margin</span><span class="metric-symbol" aria-hidden="true">%</span></div><p class="metric-value" id="metricMargin">52.3%</p><p class="metric-foot">Revenue after direct costs</p></article>
+        </section>
+
+        <div class="content-grid">
+          <section class="panel" aria-labelledby="forecastHeading">
+            <div class="panel-title-row"><div><h2 id="forecastHeading">Cash position</h2><p>Operating projection with a locally trained trend model</p></div><label class="field-hint" for="forecastMonths">Forecast <select class="select" id="forecastMonths" aria-label="Forecast duration"><option value="3">3 months</option><option value="6" selected>6 months</option><option value="12">12 months</option></select></label></div>
+            <div class="chart-legend"><span class="legend-item"><span class="legend-swatch"></span>Current cash</span><span class="legend-item"><span class="legend-swatch projected"></span>Projected cash</span></div>
+            <div class="chart-wrap"><svg id="cashflowChart" viewBox="0 0 640 215" role="img" aria-label="Cash balance forecast chart"></svg></div>
+            <div class="model-badge" aria-live="polite"><div><strong>Revenue trend model</strong><small id="modelStatus">Linear regression · trained on 12 sample months</small></div><span class="model-score" id="modelScore">R² 0.00</span></div>
+          </section>
+          <section class="panel" aria-labelledby="costMixHeading">
+            <div class="panel-title-row"><div><h2 id="costMixHeading">Where revenue goes</h2><p>Monthly costs compared with revenue</p></div></div>
+            <div class="mix-list">
+              <div class="mix-row"><span>Direct costs</span><strong id="mixDirect">₦6.10m</strong><div class="mix-track"><div class="mix-fill" id="barDirect"></div></div></div>
+              <div class="mix-row"><span>Team costs</span><strong id="mixPayroll">₦2.80m</strong><div class="mix-track"><div class="mix-fill" id="barPayroll"></div></div></div>
+              <div class="mix-row"><span>Other operating costs</span><strong id="mixOverhead">₦2.45m</strong><div class="mix-track"><div class="mix-fill" id="barOverhead"></div></div></div>
+            </div>
+            <p class="note">Cost categories are user-provided assumptions, not verified accounting records.</p>
+          </section>
+        </div>
+
+        <section class="insight-section" id="insights" aria-labelledby="insightHeading">
+          <div class="section-heading"><h2 id="insightHeading">Signals to consider</h2><a href="#reports">View report <span aria-hidden="true">↗</span></a></div>
+          <div class="insight-list" id="recommendations" aria-live="polite"></div>
+        </section>
+
+        <div class="lower-grid" id="activity">
+          <section class="panel" aria-labelledby="activityHeading">
+            <div class="section-heading"><h2 id="activityHeading">Monthly snapshot</h2><a href="#reports">Full summary <span aria-hidden="true">↗</span></a></div>
+            <ul class="activity-list">
+              <li><span class="activity-icon" aria-hidden="true">R</span><span class="activity-copy"><strong>Revenue</strong><small>Current monthly estimate</small></span><strong class="activity-amount" id="activityRevenue">₦12.80m</strong></li>
+              <li><span class="activity-icon" aria-hidden="true">D</span><span class="activity-copy"><strong>Direct costs</strong><small>Materials, inventory, delivery</small></span><strong class="activity-amount" id="activityDirect">₦6.10m</strong></li>
+              <li><span class="activity-icon" aria-hidden="true">T</span><span class="activity-copy"><strong>Payroll</strong><small>Monthly team costs</small></span><strong class="activity-amount" id="activityPayroll">₦2.80m</strong></li>
+            </ul>
+          </section>
+          <section class="panel" id="people" aria-labelledby="peopleHeading">
+            <div class="section-heading"><h2 id="peopleHeading">People cost check</h2><a href="#peopleDetail">Details <span aria-hidden="true">↓</span></a></div>
+            <p class="page-subtitle">A planning signal, not an assessment of individual employees.</p>
+            <div class="payroll-summary"><span>Team cost as share of revenue</span><strong id="payrollRatio">21.9%</strong><span>Estimated team size</span><strong id="staffCount">14 people</strong></div>
+            <div class="payroll-meter" role="meter" aria-label="Payroll share of revenue" aria-valuemin="0" aria-valuemax="100" aria-valuenow="22"><span id="payrollMeter"></span></div>
+            <p class="note" id="payrollNote">Context matters: compare costs with workload, service quality, and local pay expectations.</p>
+          </section>
+        </div>
+
+        <section class="feature-section" id="cashflow" aria-labelledby="cashflowHeading">
+          <div class="section-heading"><h2 id="cashflowHeading">Cash-flow forecast</h2><a href="#overview">Back to overview <span aria-hidden="true">↑</span></a></div>
+          <div class="panel">
+            <div class="panel-title-row"><div><h2>Projected month-end cash</h2><p>Scenario based on the assumptions you entered</p></div><span class="sample-label">Directional estimate</span></div>
+            <div class="forecast-highlight"><div><span>Balance after <b id="forecastSpan">6 months</b></span><strong id="finalCash">₦0</strong></div><div class="highlight-aside"><span>Average monthly operating result</span><strong id="averageResult">₦0</strong></div></div>
+            <div style="overflow-x:auto"><table class="projection-table"><thead><tr><th>Month</th><th>Revenue</th><th>Operating costs</th><th>Net movement</th><th>Closing cash</th></tr></thead><tbody id="projectionRows"></tbody></table></div>
+            <p class="note">Projection holds collection timing and other financing movements constant. It is not a guarantee or a substitute for a cash-flow review.</p>
+          </div>
+        </section>
+
+        <section class="feature-section" id="peopleDetail" aria-labelledby="peopleDetailHeading">
+          <div class="section-heading"><h2 id="peopleDetailHeading">Team cost planning</h2><a href="#insights">Related signals <span aria-hidden="true">↗</span></a></div>
+          <div class="people-grid">
+            <article class="panel"><div class="panel-title-row"><div><h2>Monthly payroll profile</h2><p>Business-level planning view only</p></div></div><p class="people-kpi" id="averageCostPerPerson">₦200,000</p><p class="page-subtitle">Estimated monthly payroll per team member</p><div class="payroll-summary"><span>Payroll / revenue</span><strong id="detailPayrollRatio">21.9%</strong><span>Team size entered</span><strong id="detailStaffCount">14 people</strong></div></article>
+            <article class="panel"><div class="panel-title-row"><div><h2>Efficiency review</h2><p>Questions to discuss with your team</p></div></div><p class="signal-box" id="peopleSignal">Compare team costs with workload, delivery quality, and seasonal demand before changing staffing or compensation.</p><p class="note">This tool does not evaluate individuals, recommend layoffs, or replace local employment and HR advice.</p></article>
+          </div>
+        </section>
+
+        <section class="feature-section" id="plans" aria-labelledby="plansHeading">
+          <div class="section-heading"><h2 id="plansHeading">Plans for growing businesses</h2><span class="sample-label">Pilot packaging</span></div>
+          <div class="plan-grid">
+            <article class="plan-card"><p class="eyebrow">SME · MONTHLY</p><h3>Essentials</h3><p class="plan-description">A clear monthly view of core business performance.</p><ul><li>Financial performance snapshot</li><li>Cash-flow scenarios</li><li>Monthly CSV and PDF-ready reports</li></ul><a class="secondary-button" href="mailto:susana.onyowoichoo@susastrategy.space?subject=SME%20Essentials%20plan%20enquiry">Enquire about Essentials <span aria-hidden="true">↗</span></a></article>
+            <article class="plan-card plan-featured"><p class="eyebrow">SME · MONTHLY</p><h3>Growth</h3><p class="plan-description">More context for owners managing growth and team costs.</p><ul><li>Everything in Essentials</li><li>Revenue trend and growth signals</li><li>People-cost planning view</li></ul><a class="primary-button" href="mailto:susana.onyowoichoo@susastrategy.space?subject=SME%20Growth%20plan%20enquiry">Enquire about Growth <span aria-hidden="true">↗</span></a></article>
+            <article class="plan-card"><p class="eyebrow">MULTI-TEAM · ENTERPRISE</p><h3>Enterprise</h3><p class="plan-description">A tailored package for organizations with multiple teams or entities.</p><ul><li>Packaging scoped to organization needs</li><li>Enterprise service requirements discussed</li><li>Commercial terms agreed directly</li></ul><a class="secondary-button" href="mailto:susana.onyowoichoo@susastrategy.space?subject=Enterprise%20business%20intelligence%20enquiry">Discuss enterprise <span aria-hidden="true">↗</span></a></article>
+          </div>
+          <p class="note">Proposed monthly subscription and enterprise packages. Pricing, product access, accounts, and billing are not yet live; enquiries do not create a subscription.</p>
+        </section>
+
+        <section class="feature-section" id="reports" aria-labelledby="reportHeading">
+          <div class="section-heading"><h2 id="reportHeading">Business performance report</h2><span class="sample-label">Prepared from current inputs</span></div>
+          <div class="panel">
+            <div class="panel-title-row"><div><h2 id="reportTitle">Monthly business review</h2><p id="reportDate">Sample scenario · November 2026</p></div><div class="report-actions"><button class="secondary-button" id="exportButton" type="button">↓ Download CSV</button><button class="primary-button" id="printButton" type="button">Print / save PDF</button></div></div>
+            <div class="report-summary" style="margin-top:15px">
+              <div class="report-line"><span>Revenue</span><strong id="reportRevenue">₦12.80m</strong></div><div class="report-line"><span>Direct costs</span><strong id="reportDirect">₦6.10m</strong></div>
+              <div class="report-line"><span>Gross profit</span><strong id="reportGross">₦6.70m</strong></div><div class="report-line"><span>Operating costs</span><strong id="reportOperatingCosts">₦5.25m</strong></div>
+              <div class="report-line"><span>Operating profit</span><strong id="reportProfit">₦1.45m</strong></div><div class="report-line"><span>Operating margin</span><strong id="reportMargin">11.3%</strong></div>
+              <div class="report-line"><span>Cash on hand</span><strong id="reportCash">₦9.20m</strong></div><div class="report-line"><span>Cash after forecast</span><strong id="reportForecastCash">₦0</strong></div>
+            </div>
+            <div class="commercial-note"><strong>Intended B2B SaaS model</strong><p>Recurring monthly business subscriptions with enterprise packages. Pricing, hosted accounts, billing, security, and service levels need validation before launch.</p></div>
+          </div>
+        </section>
+        <p class="footer-note">Prototype only. The revenue estimate uses ordinary least-squares linear regression trained on the entered history; the recommendations are deterministic rules. This is not generative AI, accounting advice, a credit decision, or verified performance. Data stays in page memory and is not saved or sent to a service.</p>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="assumptionsDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-head"><div class="dialog-head-row"><div><h2 id="dialogTitle">Business assumptions</h2><p>Update figures to recalculate this local scenario.</p></div><button class="close-button" id="closeDialog" type="button" aria-label="Close assumptions">×</button></div></div>
+    <form class="assumption-form" id="assumptionForm">
+      <div class="form-grid">
+        <div class="field"><label for="inputRevenue">Monthly revenue (NGN)</label><input id="inputRevenue" name="revenue" type="number" min="0" step="50000" required><span class="field-hint">Sales and other operating income</span></div>
+        <div class="field"><label for="inputDirect">Direct costs (NGN)</label><input id="inputDirect" name="direct" type="number" min="0" step="50000" required><span class="field-hint">Inventory, materials, delivery</span></div>
+        <div class="field"><label for="inputOverhead">Other operating costs (NGN)</label><input id="inputOverhead" name="overhead" type="number" min="0" step="50000" required><span class="field-hint">Rent, utilities, operating expenses</span></div>
+        <div class="field"><label for="inputPayroll">Monthly payroll (NGN)</label><input id="inputPayroll" name="payroll" type="number" min="0" step="50000" required><span class="field-hint">Total team compensation costs</span></div>
+        <div class="field"><label for="inputCash">Cash on hand (NGN)</label><input id="inputCash" name="cash" type="number" min="0" step="50000" required><span class="field-hint">Starting balance for the forecast</span></div>
+        <div class="field"><label for="inputStaff">Team size</label><input id="inputStaff" name="staff" type="number" min="1" step="1" required><span class="field-hint">Used only for average cost per person</span></div>
+        <div class="field"><label for="inputCostGrowth">Monthly cost change (%)</label><input id="inputCostGrowth" name="costGrowth" type="number" min="-50" max="100" step="0.1" required><span class="field-hint">Planning assumption for operating costs</span></div>
+        <div class="field" style="grid-column:1 / -1"><label for="inputRevenueHistory">Historical monthly revenue (NGN)</label><textarea id="inputRevenueHistory" name="revenueHistory" required></textarea><span class="field-hint">Enter at least 3 monthly values from oldest to newest, separated by commas or new lines. This history trains a local linear-regression model.</span><p class="field-error" id="historyError" role="alert" hidden>Enter at least 3 valid, non-negative monthly revenue values.</p></div>
+      </div>
+      <div class="form-actions"><button class="secondary-button" id="resetButton" type="button">Reset sample</button><button class="primary-button" type="submit">Train model & update</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      const sample = { revenue: 12800000, direct: 6100000, overhead: 2450000, payroll: 2800000, cash: 9200000, staff: 14, costGrowth: 1.2, revenueHistory: [9400000, 9800000, 9600000, 10100000, 10300000, 10200000, 10800000, 11000000, 11300000, 11200000, 12100000, 12800000] };
+      let assumptions = { ...sample };
+      const currency = new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN", maximumFractionDigits: 0 });
+      const compactCurrency = new Intl.NumberFormat("en-NG", { style: "currency", currency: "NGN", notation: "compact", maximumFractionDigits: 2 });
+      const percent = new Intl.NumberFormat("en-NG", { maximumFractionDigits: 1 });
+      const byId = (id) => document.getElementById(id);
+      const formatMoney = (value) => currency.format(value);
+      const formatCompact = (value) => compactCurrency.format(value).replace("NGN", "₦");
+      const formatPercent = (value) => `${percent.format(value)}%`;
+      const safe = (value) => Number.isFinite(value) ? value : 0;
+      const monthName = (date) => date.toLocaleDateString("en-NG", { month: "short" });
+      let toastTimer;
+
+      function trainRevenueModel(history) {
+        const averageX = (history.length - 1) / 2;
+        const averageY = history.reduce((total, value) => total + value, 0) / history.length;
+        let numerator = 0;
+        let denominator = 0;
+        history.forEach((value, index) => {
+          numerator += (index - averageX) * (value - averageY);
+          denominator += (index - averageX) ** 2;
+        });
+        const slope = denominator ? numerator / denominator : 0;
+        const intercept = averageY - slope * averageX;
+        const residuals = history.reduce((total, value, index) => total + (value - (intercept + slope * index)) ** 2, 0);
+        const totalVariance = history.reduce((total, value) => total + (value - averageY) ** 2, 0);
+        return { slope, rSquared: totalVariance ? Math.max(0, 1 - residuals / totalVariance) : 1, observations: history.length };
+      }
+
+      function getProjection(months, model) {
+        let balance = assumptions.cash;
+        let costs = assumptions.direct + assumptions.overhead + assumptions.payroll;
+        const costGrowth = assumptions.costGrowth / 100;
+        const start = new Date();
+        const rows = [];
+        for (let month = 1; month <= months; month += 1) {
+          const revenue = Math.max(0, assumptions.revenue + model.slope * month);
+          costs *= 1 + costGrowth;
+          const movement = revenue - costs;
+          balance += movement;
+          const labelDate = new Date(start.getFullYear(), start.getMonth() + month, 1);
+          rows.push({ label: monthName(labelDate), revenue, costs, movement, balance });
+        }
+        return rows;
+      }
+
+      function getRecommendations(profit, margin, payrollShare, projection) {
+        const suggestions = [];
+        if (profit < 0) {
+          suggestions.push(["01 / PROTECT MARGIN", "Review cost drivers", "Current operating costs exceed revenue. Review direct cost, overhead, and pricing assumptions before committing to new spending."]);
+        } else if (margin < 10) {
+          suggestions.push(["01 / PROFITABILITY", "Test a margin improvement", "Operating margin is below 10% in this scenario. Compare supplier terms and unit economics; verify service quality before changing prices."]);
+        } else {
+          suggestions.push(["01 / PROFITABILITY", "Protect what is working", `This scenario shows a ${formatPercent(margin)} operating margin. Track contribution by product or service to understand where it comes from.`]);
+        }
+        const finalBalance = projection[projection.length - 1]?.balance ?? assumptions.cash;
+        if (finalBalance < 0 || (profit < 0 && assumptions.cash / Math.abs(profit) < 3)) {
+          suggestions.push(["02 / CASH FLOW", "Plan near-term cash needs", "The current scenario could put cash under pressure. Check customer collection dates, supplier commitments, and a short weekly cash plan."]);
+        } else if (profit > 0) {
+          suggestions.push(["02 / CASH FLOW", "Stress-test your forecast", "The projection is positive under the current assumptions. Try slower collections or a lower revenue-growth scenario before planning a major purchase."]);
+        } else {
+          suggestions.push(["02 / CASH FLOW", "Model recovery scenarios", "The current scenario has no monthly operating surplus. Explore realistic changes to revenue timing and costs with a qualified adviser."]);
+        }
+        if (payrollShare > 35) {
+          suggestions.push(["03 / PEOPLE COSTS", "Review workload and coverage", "Team costs are a high share of revenue in this scenario. Compare workload, service levels, and seasonal demand; do not make staffing decisions from this ratio alone."]);
+        } else if (payrollShare < 10) {
+          suggestions.push(["03 / PEOPLE COSTS", "Check team capacity", "Team costs are a small share of revenue in this scenario. Confirm that coverage, workload, and delivery quality remain sustainable."]);
+        } else {
+          suggestions.push(["03 / PEOPLE COSTS", "Review cost alongside output", `Team costs are ${formatPercent(payrollShare)} of revenue. Compare this with workload, service quality, and pay expectations for your business.`]);
+        }
+        return suggestions;
+      }
+
+      function drawChart(projection) {
+        const svg = byId("cashflowChart");
+        const width = 640;
+        const height = 215;
+        const left = 44;
+        const right = 12;
+        const top = 14;
+        const bottom = 28;
+        const values = [assumptions.cash, ...projection.map((row) => row.balance)];
+        const minValue = Math.min(0, ...values);
+        const maxValue = Math.max(...values, 1);
+        const range = maxValue - minValue || 1;
+        const x = (index) => left + index * (width - left - right) / (values.length - 1 || 1);
+        const y = (value) => top + (maxValue - value) * (height - top - bottom) / range;
+        const points = values.map((value, index) => `${x(index)},${y(value)}`).join(" ");
+        const actualPoint = `${x(0)},${y(values[0])}`;
+        const gridValues = [0, 1, 2, 3].map((step) => maxValue - (range * step / 3));
+        const grid = gridValues.map((value) => `<line class="chart-gridline" x1="${left}" x2="${width - right}" y1="${y(value)}" y2="${y(value)}"/><text class="chart-label" x="0" y="${y(value) + 3}">${formatCompact(value)}</text>`).join("");
+        const labels = [monthName(new Date()), ...projection.map((row) => row.label)].map((label, index) => `<text class="chart-label" text-anchor="middle" x="${x(index)}" y="${height - 5}">${label}</text>`).join("");
+        svg.innerHTML = `${grid}<polyline class="chart-actual" points="${actualPoint} ${x(1)},${y(values[1] ?? values[0])}"/><polyline class="chart-projection" points="${points}"/>${values.map((value, index) => `<circle class="${index ? "chart-projected-point" : "chart-point"}" cx="${x(index)}" cy="${y(value)}" r="3.5"/>`).join("")}${labels}`;
+      }
+
+      function render() {
+        const months = Number(byId("forecastMonths").value);
+        const model = trainRevenueModel(assumptions.revenueHistory);
+        const grossProfit = assumptions.revenue - assumptions.direct;
+        const operatingCosts = assumptions.overhead + assumptions.payroll;
+        const profit = grossProfit - operatingCosts;
+        const margin = assumptions.revenue ? profit / assumptions.revenue * 100 : 0;
+        const grossMargin = assumptions.revenue ? grossProfit / assumptions.revenue * 100 : 0;
+        const payrollShare = assumptions.revenue ? assumptions.payroll / assumptions.revenue * 100 : 0;
+        const monthlyOutflow = assumptions.direct + operatingCosts;
+        const runway = profit < 0 ? assumptions.cash / Math.abs(profit) : assumptions.cash / Math.max(monthlyOutflow - profit, 1);
+        const projection = getProjection(months, model);
+        const finalBalance = projection[projection.length - 1]?.balance ?? assumptions.cash;
+        const averageResult = projection.reduce((total, row) => total + row.movement, 0) / Math.max(projection.length, 1);
+        const moneyIds = { metricRevenue: assumptions.revenue, metricProfit: profit, metricCash: assumptions.cash, mixDirect: assumptions.direct, mixPayroll: assumptions.payroll, mixOverhead: assumptions.overhead, activityRevenue: assumptions.revenue, activityDirect: assumptions.direct, activityPayroll: assumptions.payroll, reportRevenue: assumptions.revenue, reportDirect: assumptions.direct, reportGross: grossProfit, reportOperatingCosts: operatingCosts, reportProfit: profit, reportCash: assumptions.cash, reportForecastCash: finalBalance, finalCash: finalBalance, averageResult };
+        for (const [id, value] of Object.entries(moneyIds)) byId(id).textContent = formatCompact(value);
+        byId("metricMargin").textContent = formatPercent(grossMargin);
+        byId("profitFoot").textContent = profit >= 0 ? "After payroll and overhead" : "Costs exceed monthly revenue";
+        byId("profitFoot").className = `metric-foot ${profit >= 0 ? "good" : "attention"}`;
+        byId("runwayFoot").textContent = profit < 0 ? `About ${percent.format(runway)} months at this loss` : "Current balance · monthly estimate";
+        byId("runwayFoot").className = `metric-foot ${profit < 0 && runway < 3 ? "attention" : "good"}`;
+        byId("reportMargin").textContent = formatPercent(margin);
+        byId("payrollRatio").textContent = formatPercent(payrollShare);
+        byId("detailPayrollRatio").textContent = formatPercent(payrollShare);
+        byId("staffCount").textContent = `${assumptions.staff} ${assumptions.staff === 1 ? "person" : "people"}`;
+        byId("detailStaffCount").textContent = `${assumptions.staff} ${assumptions.staff === 1 ? "person" : "people"}`;
+        byId("averageCostPerPerson").textContent = formatMoney(assumptions.payroll / assumptions.staff);
+        byId("payrollMeter").style.width = `${Math.min(payrollShare, 100)}%`;
+        byId("payrollMeter").parentElement.setAttribute("aria-valuenow", String(Math.round(Math.min(payrollShare, 100))));
+        byId("barDirect").style.width = `${Math.max(0, Math.min(assumptions.direct / Math.max(assumptions.revenue, 1) * 100, 100))}%`;
+        byId("barPayroll").style.width = `${Math.max(0, Math.min(payrollShare, 100))}%`;
+        byId("barOverhead").style.width = `${Math.max(0, Math.min(assumptions.overhead / Math.max(assumptions.revenue, 1) * 100, 100))}%`;
+        byId("payrollNote").textContent = payrollShare > 35 ? "This share is elevated in the sample scenario. Review workload and service quality before making any people decisions." : "Context matters: compare costs with workload, service quality, and local pay expectations.";
+        byId("forecastSpan").textContent = `${months} months`;
+        byId("modelStatus").textContent = `Linear regression · ${model.observations} monthly observations · browser only`;
+        byId("modelScore").textContent = `R² ${model.rSquared.toFixed(2)} in-sample · ${formatCompact(model.slope)}/mo`;
+        const dateLabel = new Date().toLocaleDateString("en-NG", { month: "long", year: "numeric" });
+        byId("currentPeriod").textContent = `BUSINESS INTELLIGENCE · ${dateLabel.toUpperCase()}`;
+        byId("reportDate").textContent = `Sample scenario · ${dateLabel}`;
+        byId("reportTitle").textContent = `Monthly business review · ${dateLabel}`;
+        byId("projectionRows").innerHTML = projection.map((row) => `<tr><td>${row.label}</td><td>${formatCompact(row.revenue)}</td><td>${formatCompact(row.costs)}</td><td class="${row.movement >= 0 ? "good" : "attention"}">${formatCompact(row.movement)}</td><td>${formatCompact(row.balance)}</td></tr>`).join("");
+        byId("recommendations").innerHTML = getRecommendations(profit, margin, payrollShare, projection).map(([index, title, copy]) => `<article class="insight-card"><span class="insight-index">${index}</span><h3>${title}</h3><p>${copy}</p></article>`).join("");
+        byId("peopleSignal").textContent = payrollShare > 35 ? "Team costs are high relative to revenue in this scenario. Review seasonal workload, delivery quality, and process capacity with your team before considering changes." : "Compare team costs with workload, delivery quality, and seasonal demand before changing staffing or compensation.";
+        drawChart(projection);
+      }
+
+      function showToast(message) {
+        const toast = byId("toast");
+        toast.textContent = message;
+        toast.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove("show"), 2800);
+      }
+
+      function openDialog() {
+        const form = byId("assumptionForm");
+        for (const [key, value] of Object.entries(assumptions)) form.elements[key].value = key === "revenueHistory" ? value.join(", ") : value;
+        byId("assumptionsDialog").showModal();
+      }
+
+      function exportCsv() {
+        const months = Number(byId("forecastMonths").value);
+        const model = trainRevenueModel(assumptions.revenueHistory);
+        const projection = getProjection(months, model);
+        const profit = assumptions.revenue - assumptions.direct - assumptions.overhead - assumptions.payroll;
+        const rows = [
+          ["Queen SusaStrategy business intelligence prototype"],
+          ["Illustrative scenario only; not verified financial advice"],
+          ["Metric", "Value (NGN or percent)"],
+          ["Monthly revenue", assumptions.revenue], ["Direct costs", assumptions.direct], ["Gross profit", assumptions.revenue - assumptions.direct],
+          ["Payroll", assumptions.payroll], ["Other operating costs", assumptions.overhead], ["Operating profit", profit],
+          ["Gross margin (%)", assumptions.revenue ? (assumptions.revenue - assumptions.direct) / assumptions.revenue * 100 : 0],
+          ["Cash on hand", assumptions.cash], ["Team size", assumptions.staff], ["Revenue trend model", "Linear regression"], ["Training observations", model.observations], ["Revenue trend per month", Math.round(model.slope)], ["Model R-squared", model.rSquared], ["Monthly cost change assumption (%)", assumptions.costGrowth],
+          [], ["Forecast month", "Revenue", "Operating costs", "Net movement", "Closing cash"],
+          ...projection.map((row) => [row.label, Math.round(row.revenue), Math.round(row.costs), Math.round(row.movement), Math.round(row.balance)])
+        ];
+        const csv = rows.map((row) => row.map((cell) => `"${String(cell ?? "").replaceAll('"', '""')}"`).join(",")).join("\r\n");
+        const blob = new Blob(["\ufeff", csv], { type: "text/csv;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `business-review-${new Date().toISOString().slice(0, 10)}.csv`;
+        document.body.append(link);
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(url);
+        showToast("Your sample scenario report was downloaded.");
+      }
+
+      byId("editButton").addEventListener("click", openDialog);
+      byId("editTopButton").addEventListener("click", openDialog);
+      byId("closeDialog").addEventListener("click", () => byId("assumptionsDialog").close());
+      byId("assumptionsDialog").addEventListener("click", (event) => { if (event.target === byId("assumptionsDialog")) byId("assumptionsDialog").close(); });
+      byId("assumptionForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const updated = Object.fromEntries(new FormData(form).entries());
+        const historyValues = updated.revenueHistory.split(/[,;\n]/).map((value) => value.trim()).filter(Boolean).map(Number);
+        const validHistory = historyValues.length >= 3 && historyValues.every((value) => Number.isFinite(value) && value >= 0);
+        byId("historyError").hidden = validHistory;
+        if (!validHistory) return;
+        delete updated.revenueHistory;
+        assumptions = {
+          ...Object.fromEntries(Object.entries(updated).map(([key, value]) => [key, safe(Number(value))])),
+          revenueHistory: historyValues
+        };
+        if (!assumptions.staff) assumptions.staff = 1;
+        render();
+        byId("assumptionsDialog").close();
+        showToast("Model retrained. Figures remain in this page only.");
+      });
+      byId("resetButton").addEventListener("click", () => {
+        assumptions = { ...sample };
+        render();
+        openDialog();
+        showToast("Sample assumptions restored.");
+      });
+      byId("forecastMonths").addEventListener("change", render);
+      byId("exportButton").addEventListener("click", exportCsv);
+      byId("exportTopButton").addEventListener("click", exportCsv);
+      byId("printButton").addEventListener("click", () => window.print());
+      document.querySelectorAll(".side-nav a").forEach((link) => link.addEventListener("click", () => {
+        document.querySelectorAll(".side-nav a").forEach((item) => item.removeAttribute("aria-current"));
+        link.setAttribute("aria-current", "location");
+      }));
+      render();
+    })();
+  </script>
+</body>
+</html>
