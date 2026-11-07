@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f5ef">
+  <meta name="description" content="Get started with Queen SusaStrategy's SME business and financial intelligence workspace.">
+  <title>Get Started | Queen SusaStrategy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1c2924;
+      --muted: #718078;
+      --paper: #f3f5ef;
+      --surface: #fff;
+      --line: #e3e8e1;
+      --green: #176b52;
+      --green-dark: #104b3d;
+      --green-soft: #e7f2eb;
+      --orange: #e4774a;
+      --lime: #d5ed81;
+      --display: "Space Grotesk", sans-serif;
+      --body: "DM Sans", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.6 var(--body); }
+    a { color: inherit; }
+    a:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; }
+    .wrap { width: min(1120px, calc(100% - 44px)); margin-inline: auto; }
+    .topbar { min-height: 76px; display: flex; justify-content: space-between; align-items: center; gap: 20px; border-bottom: 1px solid var(--line); }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font: 700 12px/1.15 var(--display); text-decoration: none; }
+    .brand-mark { width: 34px; height: 34px; display: grid; flex: 0 0 34px; place-items: center; background: var(--green); }
+    .brand-mark svg { width: 27px; height: 27px; }
+    .top-links { display: flex; align-items: center; gap: 22px; }
+    .top-links a { color: #536159; font-size: 11px; font-weight: 700; text-decoration: none; }
+    .top-links a:hover { color: var(--green); }
+    main { padding: 45px 0 60px; }
+    .breadcrumb { margin: 0 0 29px; color: var(--muted); font-size: 10px; }
+    .breadcrumb a { color: var(--green); text-decoration: none; }
+    .intro-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, .75fr); gap: clamp(35px, 7vw, 100px); align-items: center; padding-bottom: 50px; border-bottom: 1px solid var(--line); }
+    .eyebrow { margin: 0 0 13px; color: var(--green); font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-family: var(--display); letter-spacing: 0; }
+    h1 { max-width: 650px; margin-bottom: 16px; font-size: clamp(38px, 5vw, 61px); line-height: 1.04; }
+    .intro-copy { max-width: 590px; margin-bottom: 23px; color: #59665f; font-size: 14px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 9px; }
+    .button { min-height: 43px; padding: 0 15px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 1px solid var(--green); background: var(--green); color: white; font-size: 11px; font-weight: 700; text-decoration: none; transition: background .16s ease, transform .16s ease; }
+    .button:hover { background: var(--green-dark); transform: translateY(-1px); }
+    .button.secondary { border-color: #cbd6ce; background: transparent; color: var(--ink); }
+    .button.secondary:hover { border-color: var(--green); background: var(--green-soft); }
+    .intro-note { margin: 17px 0 0; color: #7a867e; font-size: 10px; }
+    .steps { padding: 22px; border: 1px solid #d5dfd6; border-top: 3px solid var(--orange); background: var(--surface); }
+    .steps h2 { margin: 0 0 3px; font-size: 17px; }
+    .steps > p { margin: 0 0 18px; color: var(--muted); font-size: 10px; }
+    .step { padding: 13px 0; display: grid; grid-template-columns: 31px 1fr; gap: 12px; border-top: 1px solid var(--line); }
+    .step-number { color: var(--orange); font: 600 11px var(--display); }
+    .step h3 { margin: 0 0 3px; font-size: 11px; }
+    .step p { margin: 0; color: var(--muted); font-size: 10px; }
+    .section { padding-top: 37px; }
+    .section-heading { margin-bottom: 20px; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+    .section-heading .eyebrow { margin-bottom: 6px; }
+    .section-heading h2 { margin: 0; font-size: 23px; }
+    .section-heading > p { max-width: 400px; margin: 0; color: var(--muted); font-size: 10px; }
+    .pathways { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+    .path { min-height: 152px; padding: 17px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(255,255,255,.55); }
+    .path-number { margin-bottom: 14px; display: block; color: var(--green); font: 600 10px var(--display); }
+    .path h3 { margin: 0 0 5px; font-size: 13px; }
+    .path p { margin: 0; color: var(--muted); font-size: 10px; }
+    .privacy-band { margin-top: 30px; padding: 17px 20px; display: grid; grid-template-columns: 1fr 1.6fr; gap: 22px; align-items: start; background: var(--green-dark); color: white; }
+    .privacy-band h2 { margin: 0; font-size: 14px; }
+    .privacy-band p { margin: 0; color: #d4e2d9; font-size: 10px; }
+    .footer { margin-top: 27px; padding-top: 17px; display: flex; justify-content: space-between; gap: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 9px; }
+    .footer a { color: var(--green); text-decoration: none; }
+    @media (max-width: 760px) {
+      .intro-grid { grid-template-columns: 1fr; gap: 25px; }
+      .steps { max-width: none; }
+      .pathways { grid-template-columns: 1fr; }
+      .path { min-height: 0; }
+      .privacy-band { grid-template-columns: 1fr; gap: 8px; }
+    }
+    @media (max-width: 520px) {
+      .wrap { width: min(100% - 32px, 1120px); }
+      .topbar { min-height: 68px; }
+      .top-links { gap: 12px; }
+      .top-links a { font-size: 10px; }
+      main { padding-top: 27px; }
+      .breadcrumb { margin-bottom: 20px; }
+      .intro-grid { padding-bottom: 31px; }
+      h1 { font-size: 39px; }
+      .section-heading { align-items: flex-start; flex-direction: column; }
+      .button { flex: 1; }
+      .footer { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="topbar wrap">
+    <a class="brand" href="index.html" aria-label="Queen SusaStrategy home">
+      <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="m6 11 8 7 6-12 6 12 8-7-3 16H9L6 11Z" fill="#d5ed81"/><path d="M12 23h16" stroke="#104b3d" stroke-width="2"/><text x="20" y="35" fill="#104b3d" font-family="Arial,sans-serif" font-size="10" font-weight="700" text-anchor="middle">QS</text></svg></span>
+      <span>Queen SusaStrategy<br>Business intelligence</span>
+    </a>
+    <nav class="top-links" aria-label="Main navigation"><a href="index.html">Workspace</a><a href="about.html">Company</a></nav>
+  </header>
+  <main class="wrap">
+    <p class="breadcrumb"><a href="index.html">Workspace</a> <span aria-hidden="true">/</span> Get started</p>
+    <section class="intro-grid" aria-labelledby="pageTitle">
+      <div>
+        <p class="eyebrow">A practical first look · SME intelligence</p>
+        <h1 id="pageTitle">Start with a clearer view of your business.</h1>
+        <p class="intro-copy">Queen SusaStrategy helps small and growing businesses make sense of financial performance, cash flow, growth, and team costs. Begin with the sample workspace, then decide whether a pilot conversation makes sense for your business.</p>
+        <div class="actions"><a class="button" href="dashboard.html">Explore the sample workspace <span aria-hidden="true">→</span></a><a class="button secondary" href="mailto:info@highervalueteknical.com?subject=Business%20intelligence%20pilot%20enquiry">Request a pilot conversation <span aria-hidden="true">↗</span></a></div>
+        <p class="intro-note">No account or payment is needed to explore the sample workspace.</p>
+      </div>
+      <aside class="steps" aria-labelledby="stepsHeading">
+        <h2 id="stepsHeading">Your first few minutes</h2>
+        <p>Start in the sample. No business data required.</p>
+        <div class="step"><span class="step-number">01</span><div><h3>Review the snapshot</h3><p>See how revenue, costs, profit, and cash fit together.</p></div></div>
+        <div class="step"><span class="step-number">02</span><div><h3>Test a scenario</h3><p>Edit sample figures and enter monthly revenue history to retrain the local trend model.</p></div></div>
+        <div class="step"><span class="step-number">03</span><div><h3>Take away a report</h3><p>Export the current scenario as CSV or print it to PDF.</p></div></div>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="pathsHeading">
+      <div class="section-heading"><div><p class="eyebrow">Choose your path</p><h2 id="pathsHeading">A useful next step for every stage.</h2></div><p>Monthly SME subscriptions and enterprise packages are planned; product access and billing are not yet live.</p></div>
+      <div class="pathways">
+        <article class="path"><span class="path-number">01 / EXPLORE</span><h3>Try the sample</h3><p>Use the prototype with illustrative figures. Changes stay in your browser tab and disappear when you leave.</p></article>
+        <article class="path"><span class="path-number">02 / VALIDATE</span><h3>Discuss an SME pilot</h3><p>Share the business questions you need to answer and ask the team about a future pilot.</p></article>
+        <article class="path"><span class="path-number">03 / ENTERPRISE</span><h3>Discuss an organization package</h3><p>Talk through teams, reporting needs, service requirements, and commercial scope.</p></article>
+      </div>
+    </section>
+
+    <aside class="privacy-band" aria-label="Data and product status">
+      <h2>Keep confidential data out of this prototype.</h2>
+      <p>The workspace has no sign-in, secure upload, cloud storage, AI service connection, or live subscription billing. Its forecast is a simple local regression model and its recommendations are rules-based. Do not enter personal or confidential company information.</p>
+    </aside>
+    <footer class="footer"><span>Queen SusaStrategy Limited · Abuja, FCT, Nigeria · <a href="tel:+2348103520082">+234 810 352 0082</a></span><span><a href="mailto:info@highervalueteknical.com">Contact the team</a> · <a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span></footer>
+  </main>
+</body>
+</html>

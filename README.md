@@ -6,7 +6,7 @@ The dashboard uses editable sample figures and deterministic rules. It is not a 
 
 ## Run locally
 
-No build step or package install is required. Open `index.html` for the SME intelligence workspace, `dashboard.html` for the same interactive financial intelligence prototype, or `data-services.html` for the product overview. The legacy `demo.html` URL redirects to the dashboard.
+No build step or package install is required. Open `index.html` for the SME intelligence workspace, `get-started.html` for the onboarding page, `dashboard.html` for the interactive financial intelligence prototype, or `data-services.html` for the product overview. The legacy `demo.html` URL redirects to the dashboard.
 
 ## Product overview
 
